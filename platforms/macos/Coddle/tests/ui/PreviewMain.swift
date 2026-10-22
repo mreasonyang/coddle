@@ -437,6 +437,35 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
         case keepAwakeExpanded
     }
 
+    /// Hosted runners can expose SwiftUI accessibility after the first layout
+    /// pass. Activate the native window and wait for the same positive geometry
+    /// required by the audit, without accepting missing or clipped controls.
+    private func waitForAccessibleControls(_ identifiers: [String], in view: NSView) async throws {
+        guard let window = view.window else {
+            throw NSError(domain: "CoddleUIReview", code: 43,
+                userInfo: [NSLocalizedDescriptionKey: "Accessibility readiness requires a mounted host"])
+        }
+        window.makeKeyAndOrderFront(nil)
+        NSApplication.shared.activate(ignoringOtherApps: true)
+        var lastError = "No accessibility geometry was available"
+        for _ in 0..<100 {
+            try await Task.sleep(nanoseconds: 50_000_000)
+            view.layoutSubtreeIfNeeded()
+            view.displayIfNeeded()
+            do {
+                _ = try controlGeometry(identifiers, in: view, requireVisible: false)
+                return
+            } catch { lastError = error.localizedDescription }
+        }
+        let available = Set(accessibilityNodes(in: view).compactMap {
+            attribute("accessibilityIdentifier", of: $0)
+        }).sorted()
+        throw NSError(domain: "CoddleUIReview", code: 44,
+            userInfo: [NSLocalizedDescriptionKey:
+                "Accessibility readiness timed out: \(lastError). Required: \(identifiers); available: \(available); "
+                + "keyWindow=\(window.isKeyWindow), appActive=\(NSApplication.shared.isActive)"])
+    }
+
     private func controlGeometry(_ identifiers: [String], in view: NSView,
                                  requireVisible: Bool) throws -> [[String: Any]] {
         guard let window = view.window else {
@@ -2315,8 +2344,6 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
         }
         let popoverWindow = makePopoverWindow(session: session, dark: dark)
         self.window = popoverWindow
-        popoverWindow.orderFront(nil)
-        try await Task.sleep(nanoseconds: 150_000_000)
         let expectOverrideKey: String?
         switch override {
         case .none: expectOverrideKey = nil
@@ -2327,6 +2354,8 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
             throw NSError(domain: "CoddleUIReview", code: 5,
                 userInfo: [NSLocalizedDescriptionKey: "Popover window had no content view"])
         }
+        try await waitForAccessibleControls(
+            ["energy-mode-0", "keep-awake-menu-entry", "keep-awake-master", "open-settings"], in: popoverContent)
         let audit = try fittingAudit(session: session, in: popoverContent,
                                      expectPackLabels: packReadings, expectOverrideKey: expectOverrideKey)
         var top = try capture(popoverContent, to: output.appendingPathComponent(name + "-top.png"))
@@ -2372,12 +2401,12 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
 
         let settingsWindow = makeSettingsWindow(session: session, dark: dark)
         self.window = settingsWindow
-        settingsWindow.orderFront(nil)
-        try await Task.sleep(nanoseconds: 120_000_000)
         guard let settingsContent = settingsWindow.contentView else {
             throw NSError(domain: "CoddleUIReview", code: 5,
                 userInfo: [NSLocalizedDescriptionKey: "Settings window had no content view"])
         }
+        try await waitForAccessibleControls(CoddleSettingsTab.allCases.map { "settings-tab-" + $0.rawValue },
+                                            in: settingsContent)
         var settingsImages: [[String: Any]] = []
         for tab in CoddleSettingsTab.allCases {
             try press("settings-tab-" + tab.rawValue, in: settingsContent)

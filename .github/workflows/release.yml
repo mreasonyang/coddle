@@ -19,6 +19,7 @@ jobs:
     timeout-minutes: 35
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+      CODDLE_TEST_FAILURE_DIR: ${{ runner.temp }}/coddle-test-failure
     permissions:
       contents: write
     steps:
@@ -74,3 +75,10 @@ jobs:
           NOTES
           python3 tools/release_publish.py --tag "$RELEASE_TAG" \
             --assets-dir "$RUNNER_TEMP/coddle-release" --notes-file "$RUNNER_TEMP/coddle-release-notes.txt"
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: release-ui-failure-${{ github.run_id }}
+          path: ${{ runner.temp }}/coddle-test-failure
+          if-no-files-found: ignore
+          retention-days: 7

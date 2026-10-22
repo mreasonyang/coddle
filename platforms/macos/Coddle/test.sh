@@ -9,6 +9,14 @@ cleanup() {
   if [ "$result" -ne 0 ] && [ -f "$RUN/ui-review/coddle-ui-evidence/render-failure.txt" ]; then
     cat "$RUN/ui-review/coddle-ui-evidence/render-failure.txt" >&2
   fi
+  if [ "$result" -ne 0 ] && [ -n "${CODDLE_TEST_FAILURE_DIR:-}" ]; then
+    mkdir -p "$CODDLE_TEST_FAILURE_DIR"
+    for evidence in "$RUN/ui-review/coddle-ui-evidence" "$RUN/onboarding-review/onboarding-evidence"; do
+      if [ -d "$evidence" ]; then
+        /usr/bin/ditto "$evidence" "$CODDLE_TEST_FAILURE_DIR/$(basename "$evidence")"
+      fi
+    done
+  fi
   rm -rf "$RUN"
   exit "$result"
 }
