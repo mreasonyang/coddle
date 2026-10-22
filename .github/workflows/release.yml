@@ -1,0 +1,76 @@
+name: release
+
+on:
+  push:
+    tags: ['v*.*.*']
+
+permissions:
+  contents: read
+
+# A newer tag must not overtake a release that is still being prepared.
+concurrency:
+  group: coddle-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'MrEasonYang/coddle'
+    runs-on: macos-15
+    timeout-minutes: 35
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: validate repository and release logic
+        run: |
+          python3 tools/check_repository.py
+          python3 -m unittest discover -s tools/tests -v
+      - name: build and test
+        working-directory: platforms/macos/Coddle
+        run: |
+          ./build.sh
+          ./test.sh
+      - name: build universal application
+        run: platforms/macos/Coddle/package.sh "$RUNNER_TEMP/coddle-package"
+      - name: read the current published feed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/coddle-previous"
+          gh api --paginate repos/MrEasonYang/coddle/releases --jq '.[] | select(.draft == false and .prerelease == false) | .tag_name' > "$RUNNER_TEMP/coddle-previous/tags"
+          if [ -s "$RUNNER_TEMP/coddle-previous/tags" ]; then
+            gh release download --repo MrEasonYang/coddle --pattern appcast.xml --dir "$RUNNER_TEMP/coddle-previous"
+          fi
+      - name: sign and validate update assets
+        env:
+          SPARKLE_PRIVATE_KEY: ${{ secrets.SPARKLE_PRIVATE_KEY }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          SPARKLE_DIR="$(platforms/macos/Coddle/scripts/fetch-sparkle.sh)"
+          PREVIOUS=()
+          if [ -f "$RUNNER_TEMP/coddle-previous/appcast.xml" ]; then
+            PREVIOUS=(--previous-appcast "$RUNNER_TEMP/coddle-previous/appcast.xml")
+          fi
+          python3 tools/release.py --tag "$RELEASE_TAG" \
+            --package-dir "$RUNNER_TEMP/coddle-package" --sparkle-dir "$SPARKLE_DIR" \
+            --output-dir "$RUNNER_TEMP/coddle-release" "${PREVIOUS[@]}"
+      - name: publish verified GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          cat > "$RUNNER_TEMP/coddle-release-notes.txt" <<'NOTES'
+          Universal macOS preview for Apple Silicon and Intel (macOS 13+).
+
+          Download the versioned ZIP, extract Coddle.app, and move it to /Applications. This preview is ad-hoc signed and is not Developer ID signed or notarized by Apple. See https://coddle.kyun.si/install.html for first-launch guidance.
+
+          Coddle 0.1.0 users need one manual upgrade to 0.2.0 or later. Subsequent updates use Sparkle, a signed appcast, and a signed archive hosted in GitHub Releases. Use Check for Updates in Settings, enable automatic update checks, or opt into automatic download and installation (normally completed when Coddle quits).
+
+          SHA256SUMS.txt contains download checksums. Automated build, signature, and upload verification do not replace installed-app update or physical-device acceptance.
+          NOTES
+          python3 tools/release_publish.py --tag "$RELEASE_TAG" \
+            --assets-dir "$RUNNER_TEMP/coddle-release" --notes-file "$RUNNER_TEMP/coddle-release-notes.txt"

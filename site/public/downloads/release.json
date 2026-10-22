@@ -1,0 +1,29 @@
+{
+  "product": "Coddle",
+  "channel": "preview",
+  "version": "0.1.0",
+  "build": "1",
+  "releaseDate": "2026-10-22",
+  "sourceRevision": "6b610dd4d0b133f8dd5775696a91831425722261",
+  "sourceIncludesPreservedWorkingTreeInputs": true,
+  "architectures": [
+    "arm64",
+    "x86_64"
+  ],
+  "minimumDeploymentTarget": "macOS 13.0",
+  "signing": "ad-hoc",
+  "developerIdSigned": false,
+  "appleNotarized": false,
+  "license": "MIT",
+  "compatibility": "Features are capability checked at runtime. Intel and macOS 13 runtime validation remain open.",
+  "downloads": {
+    "Coddle-preview-universal.zip": {
+      "bytes": 3044724,
+      "sha256": "0cbef33ca61b882fb81da689d2c276a1b7783bf3fc8b2a7a5f51ada50391faec"
+    },
+    "Coddle-source-preview.tar.gz": {
+      "bytes": 727284,
+      "sha256": "bb425cc31a60917debba214401a9cd39e6b9d28ac9fcc32ed662cd228e21f146"
+    }
+  }
+}

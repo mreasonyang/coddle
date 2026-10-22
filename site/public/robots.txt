@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://coddle.kyun.si/sitemap.xml

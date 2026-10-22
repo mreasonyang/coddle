@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="energy" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#58E4CB"/>
+      <stop offset="1" stop-color="#24B978"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Continuous rounded tile, inset for the macOS icon safe area. -->
+  <path d="M288 80H736C884 80 944 140 944 288V752C944 900 884 960 736 960H288C140 960 80 900 80 752V288C80 140 140 80 288 80Z" fill="#073F35" opacity=".12"/>
+  <path d="M288 64H736C884 64 944 124 944 272V736C944 884 884 944 736 944H288C140 944 80 884 80 736V272C80 124 140 64 288 64Z" fill="url(#energy)"/>
+  <path d="M288 72H736C880 72 936 128 936 272V736C936 880 880 936 736 936H288C144 936 88 880 88 736V272C88 128 144 72 288 72Z" fill="none" stroke="url(#rim)" stroke-width="8"/>
+  <!-- The raised plus is also the cell's positive terminal. -->
+  <g fill="#083E36">
+    <rect x="480" y="208" width="64" height="160"/>
+    <rect x="432" y="256" width="160" height="64"/>
+  </g>
+  <rect x="304" y="392" width="416" height="400" rx="72" fill="#083E36"/>
+  <!-- One uninterrupted full charge, with a generous, small-size-safe rim. -->
+  <rect x="368" y="456" width="288" height="272" rx="20" fill="#F0FFF7"/>
+</svg>

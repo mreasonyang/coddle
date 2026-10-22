@@ -1,0 +1,53 @@
+# Local editor and Python files.
+.DS_Store
+__pycache__/
+*.py[cod]
+*.swp
+*.swo
+*~
+*.tmp
+*.log
+*.patch
+*.sarif
+*-report.json
+*-manifest.json
+
+# Build products, compiler caches, and final local delivery packages.
+build/
+.build/
+dist/
+module-cache*/
+*.app/
+AppIcon.iconset/
+/platforms/macos/Coddle/main
+
+# Historical notes, design exploration, and intermediate acceptance outputs.
+/docs/
+/design/
+/reports/
+/artifacts/
+/site/evidence/
+**/coddle-ui-evidence/
+**/onboarding-evidence/
+
+# Keep project documentation in the two root READMEs only.
+*.md
+*.markdown
+*.mdx
+*.rst
+*.adoc
+*.doc
+*.docx
+*.pdf
+*.txt
+!/README.md
+!/README.en.md
+!/site/public/robots.txt
+!/site/public/downloads/SHA256SUMS.txt
+
+# Local tooling state and credentials are never source inputs.
+.env
+.env.*
+.wrangler/
+.venv/
+node_modules/

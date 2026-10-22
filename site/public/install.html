@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f1">
+  <title>Installation guide — Coddle</title>
+  <meta name="description" content="Before you try the Coddle macOS preview: compatibility, signing, installation, and source code.">
+  <link rel="canonical" href="https://coddle.kyun.si/install.html">
+  <link rel="icon" type="image/png" href="/assets/coddle-icon.png">
+  <link rel="stylesheet" href="/styles.css?v=2c3f425b4543">
+  <script src="/app.js?v=fdfa0e5b69b1" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+<div class="page-shell">
+  <header class="header">
+    <a class="brand" href="/" aria-label="Coddle home"><img src="/assets/coddle-icon.png" width="38" height="38" alt=""><span>Coddle<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Main navigation"><a href="/#features" data-i18n="navFeatures">Features</a><a href="/#faq" data-i18n="navFaq">FAQ</a></nav>
+    <div class="header-actions"><button id="language" class="language" aria-label="切换为中文">中文 <span aria-hidden="true">↗</span></button><a class="button button-small" href="/#download"><span data-i18n="navDownload">Get Coddle</span><span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main id="main" class="document">
+    <article data-locale="en">
+      <p class="eyebrow">INSTALLATION GUIDE</p>
+      <h1>Before you install</h1>
+      <p>Coddle 0.1.0 is an early macOS preview, available free under MIT. This download includes the app for both Apple Silicon and Intel.</p>
+      <div class="notice"><p><strong>This preview is ad-hoc signed. It is not Developer ID signed or notarized by Apple.</strong> macOS may block it from opening. If you prefer a notarized app, wait for a future release. Review the source and the notes below before deciding to use this preview.</p></div>
+      <a class="button" href="/downloads/Coddle-preview-universal.zip" download>Download the Mac preview <span aria-hidden="true">↗</span></a>
+      <p>Version 0.1.0 · Build 1 · Universal · About 3.0 MB</p>
+      <h2>Will it work on my Mac?</h2>
+      <p>The app is built with a macOS 13 minimum deployment target. That build target does not mean every feature is available on every Mac. Coddle checks the battery, native charge-limit support, and lid capabilities at runtime.</p>
+      <p>Current real-device validation covers Apple Silicon on recent macOS. Intel and macOS 13 runtime testing, the complete lid and external-display device matrix, and full VoiceOver validation remain open. Sleep prevention and battery display are separate from native charge-limit support.</p>
+      <h2>Install and choose your routine</h2>
+      <ol>
+        <li>Download and unzip the preview, then move <strong>Coddle.app</strong> to your Applications folder.</li>
+        <li>Open Coddle. If macOS blocks it because it cannot verify the developer, stop and review your choice; this download does not include Apple notarization.</li>
+        <li>In the setup window, choose your charging routine and whether long tasks should keep running. Coddle checks the result when it applies a power setting.</li>
+        <li>Use the menu bar to change your plan. You can reopen the setup guide from Settings, or quit the app from its panel.</li>
+      </ol>
+      <h2>Which permissions are needed?</h2>
+      <p>Charge control and ordinary prevention of automatic sleep do not require a privileged helper, Accessibility access, or Screen Recording access. Notifications and launch at login are optional choices.</p>
+      <p>Running with the lid closed requires Coddle’s optional helper and a macOS administrator approval. The helper installs only when you explicitly select Install in setup or Settings. Installing it does not itself turn on lid-closed operation. A system power-mode change can also require administrator authorization.</p>
+      <p>When you turn Sleep Prevention off, Coddle stops its Mac, display, and lid-closed controls while keeping your display and lid preferences for next time. If a stop cannot be confirmed, the app keeps that state visible. Turn off lid-closed operation before explicitly putting the Mac to sleep.</p>
+      <h2>Inspect the download</h2>
+      <p>Compare the ZIP against the published <a href="/downloads/SHA256SUMS.txt?v=3f8fde30d08a">SHA-256 checksums</a>. These identify the bytes of this preview; they do not replace Apple signing or notarization. <a href="/downloads/release.json?v=f9842a83e1aa">Release metadata</a> records the version and source revision.</p>
+      <p>The <a href="/downloads/Coddle-source-preview.tar.gz?v=bb425cc31a60" download>source archive</a> contains the frozen macOS app source, the MIT license, and build instructions. Building requires a Mac with Apple development tools. The packaged preview includes the disabled-option and scroll-boundary fixes accepted on 22 October 2026.</p>
+      <p><a href="/">← Back to Coddle</a></p>
+    </article>
+    <article data-locale="zh-CN" lang="zh-CN" hidden>
+      <p class="eyebrow">安装指南</p>
+      <h1>安装前须知</h1>
+      <p>Coddle 0.1.0 是免费的 macOS 早期预览版，采用 MIT 许可。下载包同时包含 Apple Silicon 和 Intel 版本。</p>
+      <div class="notice"><p><strong>本预览版采用临时签名，尚未使用 Developer ID 签名，也未经过 Apple 公证。</strong>macOS 可能会阻止打开。如果你希望使用经过公证的应用，可以等待后续版本。请在决定使用前阅读源码和以下说明。</p></div>
+      <a class="button" href="/downloads/Coddle-preview-universal.zip" download>下载 macOS 预览版 <span aria-hidden="true">↗</span></a>
+      <p>版本 0.1.0 · Build 1 · Universal · 约 3.0 MB</p>
+      <h2>我的 Mac 可以使用吗？</h2>
+      <p>应用以 macOS 13 作为最低构建目标。这不代表每台 Mac 都能使用所有功能。Coddle 会在运行时检查电池、原生限充和合盖功能的支持情况。</p>
+      <p>当前真机验证覆盖近期 macOS 上的 Apple Silicon。Intel 与 macOS 13 真机测试、完整的合盖及外接显示器设备覆盖、完整 VoiceOver 验证仍待完成。防止休眠、电池状态展示与原生限充是不同的能力。</p>
+      <h2>安装并选择你的使用习惯</h2>
+      <ol>
+        <li>下载并解压预览版，将 <strong>Coddle.app</strong> 移至“应用程序”文件夹。</li>
+        <li>打开 Coddle。如果 macOS 因无法验证开发者而阻止打开，请先停下来重新评估是否使用；此下载包尚未经过 Apple 公证。</li>
+        <li>在引导窗口中选择充电习惯，以及是否让长任务持续运行。Coddle 应用电源设置后会检查实际结果。</li>
+        <li>日后可从菜单栏调整计划，也可以从“设置”重新打开使用引导，或在面板中退出应用。</li>
+      </ol>
+      <h2>需要哪些权限？</h2>
+      <p>限充和普通防止自动休眠不需要特权辅助组件，也不需要辅助功能或屏幕录制权限。通知和登录时启动均由你选择。</p>
+      <p>合盖后继续运行需要可选辅助组件，以及 macOS 管理员授权。只有你在引导或设置中明确选择“安装”，组件才会安装；安装本身不会开启合盖运行。切换系统电源模式也可能需要管理员授权。</p>
+      <p>关闭“防止休眠”时，Coddle 会停止它管理的电脑、屏幕及合盖保活，并保留屏幕与合盖偏好，供下次使用。若无法确认停止结果，应用会持续显示该状态。主动让 Mac 进入睡眠之前，请先关闭合盖运行。</p>
+      <h2>核对下载内容</h2>
+      <p>你可以使用公开的 <a href="/downloads/SHA256SUMS.txt?v=3f8fde30d08a">SHA-256 校验值</a>核对 ZIP 内容。校验值用于确认文件字节，并不代替 Apple 签名或公证。<a href="/downloads/release.json?v=f9842a83e1aa">版本信息</a>记录了版本与源码修订。</p>
+      <p><a href="/downloads/Coddle-source-preview.tar.gz?v=bb425cc31a60" download>源码压缩包</a>包含冻结的 macOS 应用源码、MIT 许可证和构建说明。自行构建需要 Mac 和 Apple 开发工具。此预览包包含 2026 年 10 月 22 日验收的灰色子项操作限制与滚动边界修复。</p>
+      <p><a href="/">← 返回 Coddle</a></p>
+    </article>
+  </main>
+  <footer class="footer"><a class="brand" href="/"><img src="/assets/coddle-icon.png" width="30" height="30" alt=""><span>Coddle<span class="brand-dot">.</span></span></a><span data-i18n="footerNote">A little care for your Mac.</span><div><a href="/privacy.html" data-i18n="privacyLink">Privacy</a><a href="/downloads/Coddle-source-preview.tar.gz?v=bb425cc31a60" data-i18n="footerSource">Open source ↗</a><span>© 2026 Coddle</span></div></footer>
+</div>
+</body>
+</html>

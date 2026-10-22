@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Build + test the macOS SwiftUI app and its privileged helper.
+  macos-app:
+    runs-on: macos-15
+    timeout-minutes: 30
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: repository hygiene
+        run: python3 tools/check_repository.py
+      - name: release integrity regression tests
+        run: python3 -m unittest discover -s tools/tests -v
+      - name: build Coddle.app + helper
+        run: cd platforms/macos/Coddle && ./build.sh
+      - name: logic, lifecycle, display, network and read-only smoke tests
+        run: cd platforms/macos/Coddle && ./test.sh
+      - name: compile minimum supported OS for both architectures
+        run: |
+          cd platforms/macos/Coddle
+          SPARKLE_DIR="$(./scripts/fetch-sparkle.sh)"
+          for arch in arm64 x86_64; do
+            swiftc -typecheck -parse-as-library -target "$arch-apple-macos13.0" -module-cache-path module-cache -F "$SPARKLE_DIR" -import-objc-header PowerUI.h Sources/*.swift
+          done
+      - name: universal preview package
+        run: platforms/macos/Coddle/package.sh "$RUNNER_TEMP/coddle-package"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Coddle-universal-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/coddle-package/Coddle-universal.zip
+            ${{ runner.temp }}/coddle-package/Coddle-universal.zip.sha256
+          if-no-files-found: error
+          retention-days: 14

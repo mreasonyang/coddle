@@ -1,0 +1,3306 @@
+{
+  "app.name": {
+    "en": "Coddle",
+    "zh-Hans": "Coddle",
+    "zh-Hant": "Coddle",
+    "ja": "Coddle",
+    "ko": "Coddle",
+    "es": "Coddle"
+  },
+  "state.noBattery": {
+    "en": "No battery",
+    "zh-Hans": "无电池",
+    "zh-Hant": "無電池",
+    "ja": "バッテリーなし",
+    "ko": "배터리 없음",
+    "es": "Sin batería"
+  },
+  "state.charging": {
+    "en": "Charging",
+    "zh-Hans": "充电中",
+    "zh-Hant": "充電中",
+    "ja": "充電中",
+    "ko": "충전 중",
+    "es": "Cargando"
+  },
+  "state.charged": {
+    "en": "Fully charged",
+    "zh-Hans": "已充满",
+    "zh-Hant": "已充滿",
+    "ja": "満充電",
+    "ko": "완전 충전됨",
+    "es": "Carga completa"
+  },
+  "state.notCharging": {
+    "en": "Plugged in",
+    "zh-Hans": "已接通电源",
+    "zh-Hant": "已接通電源",
+    "ja": "電源接続中",
+    "ko": "전원 연결됨",
+    "es": "Enchufado"
+  },
+  "state.holding": {
+    "en": "Holding at {n}%",
+    "zh-Hans": "保持在 {n}%",
+    "zh-Hant": "保持在 {n}%",
+    "ja": "{n}% で保持",
+    "ko": "{n}% 유지",
+    "es": "Límite {n}%"
+  },
+  "state.holdingBelow": {
+    "en": "Charged to the {n}% limit and now resting at {n}%. macOS tops it up again after a small drop, so this gap is expected.",
+    "zh-Hans": "已充到 {n}% 上限，当前停在 {n}%。小幅回落后 macOS 会自动补电，所以这个差值正常。",
+    "zh-Hant": "已充到 {n}% 上限，目前停在 {n}%。小幅回落後 macOS 會自動補電，因此這個差值正常。",
+    "ja": "{n}% の上限まで充電済みで、現在は {n}% で待機しています。少し下がると macOS が再充電するため、この差は正常です。",
+    "ko": "{n}% 상한까지 충전했고 현재 {n}%에서 유지 중입니다. 조금 떨어지면 macOS가 다시 충전하므로 이 차이는 정상입니다.",
+    "es": "Cargado hasta el límite del {n}% y ahora en reposo al {n}%. macOS vuelve a cargar tras una pequeña bajada, así que esta diferencia es normal."
+  },
+  "state.chargingToFull": {
+    "en": "Charging to 100%",
+    "zh-Hans": "正在充电至 100%",
+    "zh-Hant": "正在充電至 100%",
+    "ja": "100% まで充電中",
+    "ko": "100%까지 충전 중",
+    "es": "Cargando al 100%"
+  },
+  "state.chargingToFullDetail": {
+    "en": "macOS is charging to 100% on purpose to calibrate the battery. Your {n}% limit resumes automatically afterwards.",
+    "zh-Hans": "macOS 正在有意充到 100% 以校准电池。之后会自动恢复 {n}% 的上限。",
+    "zh-Hant": "macOS 正在刻意充到 100% 以校準電池。之後會自動恢復 {n}% 的上限。",
+    "ja": "macOS はバッテリーを校正するため意図的に 100% まで充電しています。終了後は {n}% の上限に自動で戻ります。",
+    "ko": "macOS가 배터리 보정을 위해 의도적으로 100%까지 충전하고 있습니다. 완료되면 {n}% 제한이 자동으로 다시 적용됩니다.",
+    "es": "macOS está cargando al 100% a propósito para calibrar la batería. Tu límite del {n}% se reanuda automáticamente después."
+  },
+  "state.chargingPastLimit": {
+    "en": "Charging past your limit",
+    "zh-Hans": "充电已超过上限",
+    "zh-Hant": "充電已超過上限",
+    "ja": "上限を超えて充電中",
+    "ko": "상한을 초과해 충전 중",
+    "es": "Cargando por encima del límite"
+  },
+  "state.chargingPastLimitDetail": {
+    "en": "The battery is charging past your {n}% limit. macOS may be topping it up to calibrate it.",
+    "zh-Hans": "电池正在充电并已超过 {n}% 的上限。macOS 可能正在为校准将电量补满。",
+    "zh-Hant": "電池正在充電並已超過 {n}% 的上限。macOS 可能正在為校準將電量補滿。",
+    "ja": "バッテリーは {n}% の上限を超えて充電されています。macOS が校正のために満充電にしている可能性があります。",
+    "ko": "배터리가 {n}% 상한을 초과해 충전 중입니다. macOS가 보정을 위해 완충 중일 수 있습니다.",
+    "es": "La batería se está cargando por encima de tu límite del {n}%. Puede que macOS esté completándola para calibrarla."
+  },
+  "state.onBattery": {
+    "en": "On battery",
+    "zh-Hans": "使用电池",
+    "zh-Hant": "使用電池",
+    "ja": "バッテリー駆動",
+    "ko": "배터리 사용",
+    "es": "Con batería"
+  },
+  "state.discharging": {
+    "en": "Discharging",
+    "zh-Hans": "放电中",
+    "zh-Hant": "放電中",
+    "ja": "放電中",
+    "ko": "방전 중",
+    "es": "Descargando"
+  },
+  "label.health": {
+    "en": "Health",
+    "zh-Hans": "健康度",
+    "zh-Hant": "健康度",
+    "ja": "最大容量",
+    "ko": "성능 최대치",
+    "es": "Salud"
+  },
+  "label.cycles": {
+    "en": "Cycles",
+    "zh-Hans": "循环次数",
+    "zh-Hant": "循環次數",
+    "ja": "サイクル数",
+    "ko": "사이클 수",
+    "es": "Ciclos"
+  },
+  "label.onAC": {
+    "en": "On AC",
+    "zh-Hans": "接入电源",
+    "zh-Hant": "接入電源",
+    "ja": "AC 電源",
+    "ko": "AC 전원",
+    "es": "En AC"
+  },
+  "label.hardwarePercent": {
+    "en": "Pack gauge",
+    "zh-Hans": "电池组电量",
+    "zh-Hant": "電池組電量",
+    "ja": "パック残量",
+    "ko": "팩 잔량",
+    "es": "Carga del paquete"
+  },
+  "label.temperature": {
+    "en": "Temperature",
+    "zh-Hans": "温度",
+    "zh-Hant": "溫度",
+    "ja": "温度",
+    "ko": "온도",
+    "es": "Temperatura"
+  },
+  "label.yes": {
+    "en": "Yes",
+    "zh-Hans": "是",
+    "zh-Hant": "是",
+    "ja": "はい",
+    "ko": "예",
+    "es": "Sí"
+  },
+  "label.no": {
+    "en": "No",
+    "zh-Hans": "否",
+    "zh-Hant": "否",
+    "ja": "いいえ",
+    "ko": "아니오",
+    "es": "No"
+  },
+  "section.powerFlow": {
+    "en": "Power Flow",
+    "zh-Hans": "实时功率流",
+    "zh-Hant": "即時功率流",
+    "ja": "電力フロー",
+    "ko": "전력 흐름",
+    "es": "Flujo de energía"
+  },
+  "power.input": {
+    "en": "Input",
+    "zh-Hans": "输入",
+    "zh-Hant": "輸入",
+    "ja": "入力",
+    "ko": "입력",
+    "es": "Entrada"
+  },
+  "power.system": {
+    "en": "System",
+    "zh-Hans": "系统",
+    "zh-Hant": "系統",
+    "ja": "システム",
+    "ko": "시스템",
+    "es": "Sistema"
+  },
+  "power.battery": {
+    "en": "Battery",
+    "zh-Hans": "电池",
+    "zh-Hant": "電池",
+    "ja": "バッテリー",
+    "ko": "배터리",
+    "es": "Batería"
+  },
+  "power.bypassed": {
+    "en": "Bypassed",
+    "zh-Hans": "旁路供电",
+    "zh-Hant": "旁路供電",
+    "ja": "バイパス",
+    "ko": "바이패스",
+    "es": "Bypass"
+  },
+  "section.chargeLimit": {
+    "en": "Charge Limit",
+    "zh-Hans": "充电上限",
+    "zh-Hant": "充電上限",
+    "ja": "充電上限",
+    "ko": "충전 한도",
+    "es": "Límite de carga"
+  },
+  "limit.off": {
+    "en": "Off",
+    "zh-Hans": "关闭",
+    "zh-Hant": "關閉",
+    "ja": "オフ",
+    "ko": "끔",
+    "es": "Desactivado"
+  },
+  "smart.title": {
+    "en": "Smart charging",
+    "zh-Hans": "智能充电",
+    "zh-Hant": "智慧充電",
+    "ja": "スマート充電",
+    "ko": "스마트 충전",
+    "es": "Carga inteligente"
+  },
+  "smart.desc": {
+    "en": "Hold a lower charge while plugged in, then top up before you unplug.",
+    "zh-Hans": "接通电源时保持较低电量，拔下前再充满。",
+    "zh-Hant": "接通電源時保持較低電量，拔下前再充滿。",
+    "ja": "電源接続中は低めに保ち、取り外す前に満充電にします。",
+    "ko": "전원 연결 시 낮게 유지하고, 분리 전에 완충합니다.",
+    "es": "Mantiene una carga baja enchufado y la completa antes de desconectar."
+  },
+  "smart.holdLimit": {
+    "en": "Hold at",
+    "zh-Hans": "保持在",
+    "zh-Hant": "保持在",
+    "ja": "保持",
+    "ko": "유지 수준",
+    "es": "Mantener en"
+  },
+  "section.settings": {
+    "en": "Menu bar, Dock & startup",
+    "zh-Hans": "菜单栏、Dock 与启动",
+    "zh-Hant": "選單列、Dock 與啟動",
+    "ja": "メニューバー、Dock、起動",
+    "ko": "메뉴 막대, Dock 및 시작",
+    "es": "Barra de menús, Dock e inicio"
+  },
+  "settings.iconOnly": {
+    "en": "Menu bar icon only (hide %)",
+    "zh-Hans": "仅菜单栏图标（隐藏百分比）",
+    "zh-Hant": "僅選單列圖示（隱藏百分比）",
+    "ja": "メニューバーアイコンのみ（% 非表示）",
+    "ko": "메뉴 막대 아이콘만 (% 숨김)",
+    "es": "Solo icono en la barra de menús (ocultar %)"
+  },
+  "settings.showMenuBarIcon": {
+    "en": "Show menu bar icon",
+    "zh-Hans": "显示菜单栏图标",
+    "zh-Hant": "顯示選單列圖示",
+    "ja": "メニューバーアイコンを表示",
+    "ko": "메뉴 막대 아이콘 표시",
+    "es": "Mostrar icono en la barra de menús"
+  },
+  "settings.showInDock": {
+    "en": "Show Dock icon",
+    "zh-Hans": "显示 Dock 图标",
+    "zh-Hant": "顯示 Dock 圖示",
+    "ja": "Dock アイコンを表示",
+    "ko": "Dock 아이콘 표시",
+    "es": "Mostrar icono en el Dock"
+  },
+  "settings.restartToApply": {
+    "en": "Restart Coddle to hide its Dock icon.",
+    "zh-Hans": "重启 Coddle 后隐藏 Dock 图标。",
+    "zh-Hant": "重新啟動 Coddle 後隱藏 Dock 圖像。",
+    "ja": "Dock アイコンを隠すには Coddle を再起動してください。",
+    "ko": "Dock 아이콘을 숨기려면 Coddle을 다시 시작하세요.",
+    "es": "Reinicia Coddle para ocultar su icono del Dock."
+  },
+  "settings.keepOne": {
+    "en": "Keep at least one way to open Coddle.",
+    "zh-Hans": "至少保留一个应用入口。",
+    "zh-Hant": "至少保留一個應用程式入口。",
+    "ja": "Coddle を開く方法を少なくとも1つ残してください。",
+    "ko": "Coddle을 여는 방법을 하나 이상 유지하세요.",
+    "es": "Mantén al menos una forma de abrir Coddle."
+  },
+  "settings.launchAtLogin": {
+    "en": "Launch at login",
+    "zh-Hans": "登录时启动",
+    "zh-Hant": "登入時啟動",
+    "ja": "ログイン時に起動",
+    "ko": "로그인 시 실행",
+    "es": "Abrir al iniciar sesión"
+  },
+  "settings.refresh": {
+    "en": "Refresh interval",
+    "zh-Hans": "刷新间隔",
+    "zh-Hant": "重新整理間隔",
+    "ja": "更新間隔",
+    "ko": "새로 고침 간격",
+    "es": "Intervalo de actualización"
+  },
+  "settings.language": {
+    "en": "Language",
+    "zh-Hans": "语言",
+    "zh-Hant": "語言",
+    "ja": "言語",
+    "ko": "언어",
+    "es": "Idioma"
+  },
+  "theme.title": {
+    "en": "Appearance",
+    "zh-Hans": "外观",
+    "zh-Hant": "外觀",
+    "ja": "外観",
+    "ko": "모양",
+    "es": "Aspecto"
+  },
+  "theme.liquidGlass": {
+    "en": "Liquid Glass (Modern)",
+    "zh-Hans": "流体玻璃 (次世代)",
+    "zh-Hant": "流體玻璃 (次世代)",
+    "ja": "リキッドガラス (次世代)",
+    "ko": "리퀴드 글래스 (모던)",
+    "es": "Cristal líquido (moderno)"
+  },
+  "theme.classic": {
+    "en": "Classic",
+    "zh-Hans": "经典原生",
+    "zh-Hant": "經典原生",
+    "ja": "クラシック",
+    "ko": "클래식",
+    "es": "Clásico"
+  },
+  "action.openConfig": {
+    "en": "Show Config in Finder",
+    "zh-Hans": "在 Finder 中显示配置",
+    "zh-Hant": "在 Finder 中顯示設定",
+    "ja": "Finderで設定を表示",
+    "ko": "Finder에서 설정 보기",
+    "es": "Mostrar configuración en Finder"
+  },
+  "action.reloadConfig": {
+    "en": "Reload config",
+    "zh-Hans": "重新加载配置",
+    "zh-Hant": "重新載入設定",
+    "ja": "設定を再読み込み",
+    "ko": "설정 다시 불러오기",
+    "es": "Recargar configuración"
+  },
+  "action.quit": {
+    "en": "Quit",
+    "zh-Hans": "退出",
+    "zh-Hant": "結束",
+    "ja": "終了",
+    "ko": "종료",
+    "es": "Salir"
+  },
+  "msg.noNativeLimit": {
+    "en": "Native charge limit is not available on this Mac.",
+    "zh-Hans": "此 Mac 不支持原生充电上限。",
+    "zh-Hant": "此 Mac 不支援原生充電上限。",
+    "ja": "この Mac はネイティブの充電上限に対応していません。",
+    "ko": "이 Mac은 기본 충전 한도를 지원하지 않습니다.",
+    "es": "El límite de carga nativo no está disponible en este Mac."
+  },
+  "login.enabled": {
+    "en": "Enabled",
+    "zh-Hans": "已启用",
+    "zh-Hant": "已啟用",
+    "ja": "有効",
+    "ko": "활성화됨",
+    "es": "Activado"
+  },
+  "login.off": {
+    "en": "Off",
+    "zh-Hans": "已关闭",
+    "zh-Hant": "已關閉",
+    "ja": "オフ",
+    "ko": "꺼짐",
+    "es": "Desactivado"
+  },
+  "login.requiresApproval": {
+    "en": "Approve in System Settings > General > Login Items",
+    "zh-Hans": "请在“系统设置”>“通用”>“登录项”中批准",
+    "zh-Hant": "請在「系統設定」>「一般」>「登入項目」中批准",
+    "ja": "システム設定 > 一般 > ログイン項目で承認してください",
+    "ko": "시스템 설정 > 일반 > 로그인 항목에서 승인하세요",
+    "es": "Apruébalo en Ajustes del Sistema > General > Ítems de inicio de sesión"
+  },
+  "login.notFound": {
+    "en": "App not found by the login-item service",
+    "zh-Hans": "登录项服务未找到该应用",
+    "zh-Hant": "登入項目服務未找到此應用程式",
+    "ja": "ログイン項目サービスがアプリを認識できません",
+    "ko": "로그인 항목 서비스가 앱을 찾지 못함",
+    "es": "El servicio de ítems de inicio no encuentra la app"
+  },
+  "login.unknown": {
+    "en": "Unknown",
+    "zh-Hans": "未知",
+    "zh-Hant": "未知",
+    "ja": "不明",
+    "ko": "알 수 없음",
+    "es": "Desconocido"
+  },
+  "language.systemDefault": {
+    "en": "System default",
+    "zh-Hans": "跟随系统",
+    "zh-Hant": "跟隨系統",
+    "ja": "システムデフォルト",
+    "ko": "시스템 기본값",
+    "es": "Predeterminado del sistema"
+  },
+  "language.en": {
+    "en": "English",
+    "zh-Hans": "English",
+    "zh-Hant": "English",
+    "ja": "English",
+    "ko": "English",
+    "es": "English"
+  },
+  "language.zhHans": {
+    "en": "简体中文",
+    "zh-Hans": "简体中文",
+    "zh-Hant": "简体中文",
+    "ja": "简体中文",
+    "ko": "简体中文",
+    "es": "简体中文"
+  },
+  "language.zhHant": {
+    "en": "繁體中文",
+    "zh-Hans": "繁體中文",
+    "zh-Hant": "繁體中文",
+    "ja": "繁體中文",
+    "ko": "繁體中文",
+    "es": "繁體中文"
+  },
+  "language.ja": {
+    "en": "日本語",
+    "zh-Hans": "日本語",
+    "zh-Hant": "日本語",
+    "ja": "日本語",
+    "ko": "日本語",
+    "es": "日本語"
+  },
+  "language.ko": {
+    "en": "한국어",
+    "zh-Hans": "한국어",
+    "zh-Hant": "한국어",
+    "ja": "한국어",
+    "ko": "한국어",
+    "es": "한국어"
+  },
+  "language.es": {
+    "en": "Español",
+    "zh-Hans": "Español",
+    "zh-Hant": "Español",
+    "ja": "Español",
+    "ko": "Español",
+    "es": "Español"
+  },
+  "unit.seconds": {
+    "en": "{n}s",
+    "zh-Hans": "{n}秒",
+    "zh-Hant": "{n}秒",
+    "ja": "{n}秒",
+    "ko": "{n}초",
+    "es": "{n}s"
+  },
+  "keepAwake.title": {
+    "en": "Prevent automatic sleep",
+    "zh-Hans": "防止自动休眠",
+    "zh-Hant": "防止自動睡眠",
+    "ja": "自動スリープを防ぐ",
+    "ko": "자동 잠자기 방지",
+    "es": "Evitar el reposo automático"
+  },
+  "keepAwake.desc": {
+    "en": "The screen can turn off while your Mac keeps running. Turning this off stops all sleep prevention but keeps your display and lid preferences for next time.",
+    "zh-Hans": "屏幕可以关闭，电脑继续运行。关闭主开关会停止全部保活，但保留屏幕与合盖偏好，再次开启时沿用。",
+    "zh-Hant": "螢幕可以關閉，電腦繼續運作。關閉主開關會停止全部保活，但保留螢幕與闔蓋偏好，再次開啟時沿用。",
+    "ja": "画面が消えても Mac は動作を続けます。メインスイッチをオフにするとスリープ防止をすべて停止しますが、画面と蓋の設定は次回オンにするときに引き継ぎます。",
+    "ko": "화면이 꺼져도 Mac은 계속 실행됩니다. 기본 스위치를 끄면 모든 잠자기 방지가 중지되지만 화면과 덮개 설정은 저장되어 다음에 켤 때 다시 적용됩니다.",
+    "es": "La pantalla puede apagarse mientras el Mac sigue activo. Al desactivarlo se detiene toda prevención del reposo, pero se conservan las preferencias de pantalla y tapa para la próxima vez."
+  },
+  "keepAwake.lidClosed": {
+    "en": "Keep running with lid closed",
+    "zh-Hans": "合盖后继续运行",
+    "zh-Hant": "闔蓋後繼續運作",
+    "ja": "蓋を閉じても動作を続ける",
+    "ko": "덮개를 닫아도 계속 실행",
+    "es": "Seguir funcionando con la tapa cerrada"
+  },
+  "keepAwake.lidClosedDesc": {
+    "en": "Requires the main sleep-prevention switch and an administrator-approved component. Check away protection before leaving. Turn off the main switch before putting the Mac to sleep manually.",
+    "zh-Hans": "需先开启“防止自动休眠”，并使用管理员授权组件。离开前检查保护状态；主动让 Mac 休眠前，请先关闭主开关。",
+    "zh-Hant": "需先開啟「防止自動睡眠」，並使用管理員授權元件。離開前檢查保護狀態；主動讓 Mac 睡眠前，請先關閉主開關。",
+    "ja": "自動スリープ防止のメインスイッチと、管理者が許可したコンポーネントが必要です。離席前に保護状態を確認し、手動でスリープさせる前にメインスイッチをオフにしてください。",
+    "ko": "잠자기 방지 기본 스위치와 관리자가 승인한 구성 요소가 필요합니다. 자리를 비우기 전에 보호 상태를 확인하고, 수동으로 잠자기에 들어가기 전에 기본 스위치를 끄세요.",
+    "es": "Requiere el interruptor principal de prevención del reposo y un componente autorizado por el administrador. Comprueba la protección antes de ausentarte y desactiva el interruptor principal antes de poner el Mac en reposo manualmente."
+  },
+  "helper.install": {
+    "en": "Install…",
+    "zh-Hans": "安装…",
+    "zh-Hant": "安裝…",
+    "ja": "インストール…",
+    "ko": "설치…",
+    "es": "Instalar…"
+  },
+  "helper.installing": {
+    "en": "Installing…",
+    "zh-Hans": "正在安装…",
+    "zh-Hant": "安裝中…",
+    "ja": "インストール中…",
+    "ko": "설치 중…",
+    "es": "Instalando…"
+  },
+  "helper.remove": {
+    "en": "Remove…",
+    "zh-Hans": "移除…",
+    "zh-Hant": "移除…",
+    "ja": "削除…",
+    "ko": "제거…",
+    "es": "Eliminar…"
+  },
+  "helper.notInstalled": {
+    "en": "Not installed",
+    "zh-Hans": "未安装",
+    "zh-Hant": "未安裝",
+    "ja": "未インストール",
+    "ko": "설치되지 않음",
+    "es": "Sin instalar"
+  },
+  "helper.installed": {
+    "en": "Installed",
+    "zh-Hans": "已安装",
+    "zh-Hant": "已安裝",
+    "ja": "インストール済み",
+    "ko": "설치됨",
+    "es": "Instalado"
+  },
+  "helper.explain": {
+    "en": "The system component supports closed-lid operation and power modes.",
+    "zh-Hans": "系统组件用于合盖运行和电源模式。",
+    "zh-Hant": "系統元件用於闔蓋運作和電源模式。",
+    "ja": "システムコンポーネントは、蓋を閉じたままの動作と電力モードに使われます。",
+    "ko": "시스템 구성 요소는 덮개를 닫은 상태의 실행과 전원 모드에 사용됩니다.",
+    "es": "El componente del sistema permite funcionar con la tapa cerrada y gestionar los modos de energía."
+  },
+  "helper.startFailed": {
+    "en": "The system component did not start. Try installing it again.",
+    "zh-Hans": "系统组件未能启动，请重新安装。",
+    "zh-Hant": "系統元件未能啟動，請重新安裝。",
+    "ja": "システムコンポーネントが起動しませんでした。再インストールしてください。",
+    "ko": "시스템 구성 요소가 시작되지 않았습니다. 다시 설치해 보세요.",
+    "es": "El componente del sistema no se ha iniciado. Vuelve a instalarlo."
+  },
+  "awayGuard.title": {
+    "en": "Away protection",
+    "zh-Hans": "离开保护",
+    "zh-Hant": "離開保護",
+    "ja": "不在時の保護",
+    "ko": "자리 비움 보호",
+    "es": "Protección al ausentarse"
+  },
+  "awayGuard.desc": {
+    "en": "Pauses sleep prevention away from your usual networks when the Mac is unattended: lid closed, screen locked or idle. Your waiting times and power-source settings also apply.",
+    "zh-Hans": "离开常用网络且 Mac 无人使用（合盖、锁屏或闲置）时，暂停防止休眠。还需满足所设的等待时间与电源条件。",
+    "zh-Hant": "離開常用網路且 Mac 無人使用（闔蓋、鎖定螢幕或閒置）時，暫停防止睡眠。還需滿足所設的等待時間與電源條件。",
+    "ja": "普段のネットワークを離れ、Mac が未使用（蓋を閉じる、画面ロック、または無操作）のときにスリープ防止を一時停止します。設定した待機時間と電源条件も適用されます。",
+    "ko": "평소 네트워크를 떠나 Mac을 사용하지 않을 때(덮개 닫힘, 화면 잠금 또는 유휴) 잠자기 방지를 일시 중지합니다. 설정한 대기 시간과 전원 조건도 충족해야 합니다.",
+    "es": "Pausa la prevención del reposo fuera de tus redes habituales cuando no se usa el Mac: tapa cerrada, pantalla bloqueada o inactividad. También se aplican los tiempos de espera y las condiciones de alimentación."
+  },
+  "awayGuard.network": {
+    "en": "Network: {n}",
+    "zh-Hans": "网络：{n}",
+    "zh-Hant": "網路：{n}",
+    "ja": "ネットワーク: {n}",
+    "ko": "네트워크: {n}",
+    "es": "Red: {n}"
+  },
+  "awayGuard.offline": {
+    "en": "offline",
+    "zh-Hans": "离线",
+    "zh-Hant": "離線",
+    "ja": "オフライン",
+    "ko": "오프라인",
+    "es": "Sin conexión"
+  },
+  "awayGuard.awayFor": {
+    "en": "away {n}m",
+    "zh-Hans": "已离开 {n} 分钟",
+    "zh-Hant": "已離開 {n} 分鐘",
+    "ja": "離れて {n} 分",
+    "ko": "{n}분째 자리 비움",
+    "es": "ausente {n} min"
+  },
+  "awayGuard.usual": {
+    "en": "usual network",
+    "zh-Hans": "常用网络",
+    "zh-Hant": "常用網路",
+    "ja": "普段のネットワーク",
+    "ko": "평소 네트워크",
+    "es": "Red habitual"
+  },
+  "awayGuard.vpn": {
+    "en": "VPN",
+    "zh-Hans": "VPN",
+    "zh-Hant": "VPN",
+    "ja": "VPN",
+    "ko": "VPN",
+    "es": "VPN"
+  },
+  "section.lowBattery": {
+    "en": "Low battery",
+    "zh-Hans": "低电量",
+    "zh-Hant": "低電量",
+    "ja": "バッテリー低下",
+    "ko": "배터리 부족",
+    "es": "Batería baja"
+  },
+  "lowBattery.warn": {
+    "en": "Warn at {n}%",
+    "zh-Hans": "低于 {n}% 时提醒",
+    "zh-Hant": "低於 {n}% 時提醒",
+    "ja": "{n}% で通知",
+    "ko": "{n}%에서 경고",
+    "es": "Avisar al {n}%"
+  },
+  "lowBattery.desc": {
+    "en": "Shows one system notification when the battery drops to this level. This never sleeps the Mac by itself.",
+    "zh-Hans": "电量降到该水平时发送一条系统通知。此功能不会自行让 Mac 睡眠。",
+    "zh-Hant": "電量降到該水準時傳送一則系統通知。此功能不會自行讓 Mac 睡眠。",
+    "ja": "バッテリーがこの値まで下がると通知を 1 回表示します。Mac を自動でスリープさせることはありません。",
+    "ko": "배터리가 이 수준으로 떨어지면 시스템 알림을 한 번 표시합니다. Mac을 자동으로 잠재우지는 않습니다.",
+    "es": "Muestra una notificación del sistema cuando la batería baja a este nivel. Nunca suspende el Mac por sí solo."
+  },
+  "display.keepAwake": {
+    "en": "Keep display on",
+    "zh-Hans": "屏幕常亮",
+    "zh-Hant": "螢幕常亮",
+    "ja": "画面を点灯したままにする",
+    "ko": "화면 켜짐 유지",
+    "es": "Mantener la pantalla encendida"
+  },
+  "display.keepAwakeDesc": {
+    "en": "Keeps the display on only when selected and the main switch is on. Otherwise, the display follows the system timeout.",
+    "zh-Hans": "仅在主开关开启且勾选时保持常亮；否则屏幕按系统时间熄灭。",
+    "zh-Hant": "僅在主開關開啟且勾選時保持常亮；否則螢幕依系統設定的時間關閉。",
+    "ja": "選択され、メインスイッチがオンのときだけ画面を点灯したままにします。それ以外は、システムで設定した時間に消灯します。",
+    "ko": "이 항목이 선택되고 기본 스위치가 켜져 있을 때만 화면을 켜진 상태로 유지합니다. 그 외에는 시스템에 설정된 시간이 지나면 화면이 꺼집니다.",
+    "es": "Mantiene la pantalla encendida solo si está seleccionado y el interruptor principal está activado. En caso contrario, sigue el tiempo de apagado del sistema."
+  },
+  "notify.lowBattery.title": {
+    "en": "Battery low",
+    "zh-Hans": "电量不足",
+    "zh-Hant": "電量不足",
+    "ja": "バッテリー残量低下",
+    "ko": "배터리 부족",
+    "es": "Batería baja"
+  },
+  "notify.lowBattery.body": {
+    "en": "Battery is at {n}%. Plug in soon.",
+    "zh-Hans": "电量仅剩 {n}%，请尽快充电。",
+    "zh-Hant": "電量僅剩 {n}%，請盡快充電。",
+    "ja": "バッテリー残量が {n}% です。まもなく充電してください。",
+    "ko": "배터리가 {n}%입니다. 곧 충전하세요.",
+    "es": "La batería está al {n}%. Conecta el cargador pronto."
+  },
+  "menu.about": {
+    "en": "About Coddle",
+    "zh-Hans": "关于 Coddle",
+    "zh-Hant": "關於 Coddle",
+    "ja": "Coddle について",
+    "ko": "Coddle 정보",
+    "es": "Acerca de Coddle"
+  },
+  "menu.hide": {
+    "en": "Hide Coddle",
+    "zh-Hans": "隐藏 Coddle",
+    "zh-Hant": "隱藏 Coddle",
+    "ja": "Coddle を非表示",
+    "ko": "Coddle 가리기",
+    "es": "Ocultar Coddle"
+  },
+  "menu.hideOthers": {
+    "en": "Hide Others",
+    "zh-Hans": "隐藏其他",
+    "zh-Hant": "隱藏其他",
+    "ja": "ほかを非表示",
+    "ko": "기타 가리기",
+    "es": "Ocultar otros"
+  },
+  "menu.showAll": {
+    "en": "Show All",
+    "zh-Hans": "显示全部",
+    "zh-Hant": "顯示全部",
+    "ja": "すべてを表示",
+    "ko": "모두 보기",
+    "es": "Mostrar todo"
+  },
+  "menu.quit": {
+    "en": "Quit Coddle",
+    "zh-Hans": "退出 Coddle",
+    "zh-Hant": "結束 Coddle",
+    "ja": "Coddle を終了",
+    "ko": "Coddle 종료",
+    "es": "Salir de Coddle"
+  },
+  "menu.window": {
+    "en": "Window",
+    "zh-Hans": "窗口",
+    "zh-Hant": "視窗",
+    "ja": "ウインドウ",
+    "ko": "윈도우",
+    "es": "Ventana"
+  },
+  "menu.close": {
+    "en": "Close Window",
+    "zh-Hans": "关闭窗口",
+    "zh-Hant": "關閉視窗",
+    "ja": "ウインドウを閉じる",
+    "ko": "창 닫기",
+    "es": "Cerrar ventana"
+  },
+  "error.assertionFailed": {
+    "en": "Could not apply sleep prevention.",
+    "zh-Hans": "未能应用防止休眠设置。",
+    "zh-Hant": "未能套用防止睡眠設定。",
+    "ja": "スリープ防止を適用できませんでした。",
+    "ko": "잠자기 방지를 적용하지 못했습니다.",
+    "es": "No se pudo aplicar la prevención del reposo."
+  },
+  "error.helperNotRunning": {
+    "en": "The system component is not running.",
+    "zh-Hans": "系统组件未运行。",
+    "zh-Hant": "系統元件未執行。",
+    "ja": "システムコンポーネントが動作していません。",
+    "ko": "시스템 구성 요소가 실행되고 있지 않습니다.",
+    "es": "El componente del sistema no está en ejecución."
+  },
+  "helper.removeConfirmTitle": {
+    "en": "Remove the system component?",
+    "zh-Hans": "移除系统组件？",
+    "zh-Hant": "移除系統元件？",
+    "ja": "システムコンポーネントを削除しますか？",
+    "ko": "시스템 구성 요소를 제거할까요?",
+    "es": "¿Eliminar el componente del sistema?"
+  },
+  "helper.removeConfirmMessage": {
+    "en": "Removal stops closed-lid operation and requires administrator approval. Power mode changes may ask for a password afterwards.",
+    "zh-Hans": "移除需要管理员授权，并会停止合盖运行。之后切换电源模式可能再次询问密码。",
+    "zh-Hant": "移除需要管理員授權，並會停止闔蓋運作。之後切換電源模式可能再次詢問密碼。",
+    "ja": "削除には管理者の承認が必要で、蓋を閉じたままの動作が停止します。以後、電力モードの変更時にパスワードを求められる場合があります。",
+    "ko": "제거하려면 관리자 승인이 필요하며 덮개를 닫은 상태의 실행이 중지됩니다. 이후 전원 모드를 변경할 때 암호를 요청할 수 있습니다.",
+    "es": "La eliminación requiere autorización de administrador y detiene el funcionamiento con la tapa cerrada. Después, cambiar el modo de energía puede requerir una contraseña."
+  },
+  "action.cancel": {
+    "en": "Cancel",
+    "zh-Hans": "取消",
+    "zh-Hant": "取消",
+    "ja": "キャンセル",
+    "ko": "취소",
+    "es": "Cancelar"
+  },
+  "action.dismiss": {
+    "en": "Dismiss",
+    "zh-Hans": "忽略",
+    "zh-Hant": "忽略",
+    "ja": "閉じる",
+    "ko": "닫기",
+    "es": "Descartar"
+  },
+  "settings.windowTitle": {
+    "en": "Settings",
+    "zh-Hans": "设置",
+    "zh-Hant": "設定",
+    "ja": "設定",
+    "ko": "설정",
+    "es": "Ajustes"
+  },
+  "menu.preferences": {
+    "en": "Settings...",
+    "zh-Hans": "设置...",
+    "zh-Hant": "設定...",
+    "ja": "設定...",
+    "ko": "설정...",
+    "es": "Ajustes..."
+  },
+  "menu.edit": {
+    "en": "Edit",
+    "zh-Hans": "编辑",
+    "zh-Hant": "編輯",
+    "ja": "編集",
+    "ko": "편집",
+    "es": "Edición"
+  },
+  "menu.cut": {
+    "en": "Cut",
+    "zh-Hans": "剪切",
+    "zh-Hant": "剪下",
+    "ja": "カット",
+    "ko": "오려두기",
+    "es": "Cortar"
+  },
+  "menu.copy": {
+    "en": "Copy",
+    "zh-Hans": "拷贝",
+    "zh-Hant": "拷貝",
+    "ja": "コピー",
+    "ko": "복사",
+    "es": "Copiar"
+  },
+  "menu.paste": {
+    "en": "Paste",
+    "zh-Hans": "粘贴",
+    "zh-Hant": "貼上",
+    "ja": "ペースト",
+    "ko": "붙여넣기",
+    "es": "Pegar"
+  },
+  "menu.selectAll": {
+    "en": "Select All",
+    "zh-Hans": "全选",
+    "zh-Hant": "全選",
+    "ja": "すべてを選択",
+    "ko": "전체 선택",
+    "es": "Seleccionar todo"
+  },
+  "source.powerAdapter": {
+    "en": "Power Source: Power Adapter",
+    "zh-Hans": "电源：电源适配器",
+    "zh-Hant": "電源：電源轉接器",
+    "ja": "電源: 電源アダプタ",
+    "ko": "전원: 전원 어댑터",
+    "es": "Adaptador de corriente"
+  },
+  "source.powerAdapterWatts": {
+    "en": "Power Source: Power Adapter ({n}W)",
+    "zh-Hans": "电源：电源适配器 ({n}W)",
+    "zh-Hant": "電源：電源轉接器 ({n}W)",
+    "ja": "電源: 電源アダプタ ({n}W)",
+    "ko": "전원: 전원 어댑터 ({n}W)",
+    "es": "Adaptador de corriente ({n} W)"
+  },
+  "source.battery": {
+    "en": "Power Source: Battery",
+    "zh-Hans": "电源：电池",
+    "zh-Hant": "電源：電池",
+    "ja": "電源: バッテリー",
+    "ko": "전원: 배터리",
+    "es": "Fuente de alimentación: Batería"
+  },
+  "action.chargeToFullNow": {
+    "en": "Charge to Full Now",
+    "zh-Hans": "立即充满电",
+    "zh-Hant": "立即充滿電",
+    "ja": "今すぐフル充電",
+    "ko": "지금 완전히 충전",
+    "es": "Cargar por completo ahora"
+  },
+  "action.resumeLimit": {
+    "en": "Resume {n}% Limit",
+    "zh-Hans": "恢复 {n}% 上限",
+    "zh-Hant": "恢復 {n}% 上限",
+    "ja": "{n}% の上限を再開",
+    "ko": "{n}% 한도 재개",
+    "es": "Reanudar límite del {n}%"
+  },
+  "energyMode.auto": {
+    "en": "Automatic",
+    "zh-Hans": "自动",
+    "zh-Hant": "自動",
+    "ja": "自動",
+    "ko": "자동",
+    "es": "Automático"
+  },
+  "energyMode.low": {
+    "en": "Low Power",
+    "zh-Hans": "低电量",
+    "zh-Hant": "低耗電",
+    "ja": "低電力",
+    "ko": "저전력",
+    "es": "Bajo consumo"
+  },
+  "energyMode.high": {
+    "en": "High Power",
+    "zh-Hans": "高功率",
+    "zh-Hant": "高功率",
+    "ja": "高出力",
+    "ko": "고출력",
+    "es": "Alta potencia"
+  },
+  "section.significantEnergy": {
+    "en": "App activity estimate",
+    "zh-Hans": "应用活动估算",
+    "zh-Hant": "應用程式活動估算",
+    "ja": "アプリ活動の推定",
+    "ko": "앱 활동 추정",
+    "es": "Actividad estimada de apps"
+  },
+  "significantEnergy.none": {
+    "en": "No high activity found in readable apps",
+    "zh-Hans": "可读取应用中未发现高活动",
+    "zh-Hant": "可讀取應用程式中未發現高活動",
+    "ja": "読み取り可能なアプリに高い活動なし",
+    "ko": "읽을 수 있는 앱에서 높은 활동 없음",
+    "es": "Sin actividad alta en apps legibles"
+  },
+  "tab.charging": {
+    "en": "Charging & Battery",
+    "zh-Hans": "充电与电池",
+    "zh-Hant": "充電與電池",
+    "ja": "充電とバッテリー",
+    "ko": "충전 및 배터리",
+    "es": "Carga y batería"
+  },
+  "tab.awake": {
+    "en": "Sleep Prevention",
+    "zh-Hans": "防止休眠",
+    "zh-Hant": "防止睡眠",
+    "ja": "スリープ防止",
+    "ko": "잠자기 방지",
+    "es": "Evitar reposo"
+  },
+  "tab.general": {
+    "en": "General & Appearance",
+    "zh-Hans": "通用与外观",
+    "zh-Hant": "一般與外觀",
+    "ja": "一般と外観",
+    "ko": "일반 및 모양",
+    "es": "General y aspecto"
+  },
+  "charge.smartTarget": {
+    "en": "Smart · {n}%",
+    "zh-Hans": "智能 · {n}%",
+    "zh-Hant": "智慧 · {n}%",
+    "ja": "スマート · {n}%",
+    "ko": "스마트 · {n}%",
+    "es": "Auto · {n}%"
+  },
+  "charge.fixedTarget": {
+    "en": "Fixed · {n}%",
+    "zh-Hans": "固定 · {n}%",
+    "zh-Hant": "固定 · {n}%",
+    "ja": "固定 · {n}%",
+    "ko": "고정 · {n}%",
+    "es": "Fijo · {n}%"
+  },
+  "charge.applying": {
+    "en": "Applying {n}; last confirmed: {n}.",
+    "zh-Hans": "正在应用 {n}；上次确认：{n}。",
+    "zh-Hant": "正在套用 {n}；上次確認：{n}。",
+    "ja": "{n} を適用中。前回確認：{n}。",
+    "ko": "{n} 적용 중. 마지막 확인: {n}.",
+    "es": "Aplicando {n}; último confirmado: {n}."
+  },
+  "charge.waitingRecovery": {
+    "en": "Waiting for hardware; will retry {n}. Last confirmed: {n}.",
+    "zh-Hans": "等待硬件恢复后重试 {n}；上次确认：{n}。",
+    "zh-Hant": "等待硬體恢復後重試 {n}；上次確認：{n}。",
+    "ja": "ハードウェア復帰後に {n} を再試行。前回確認：{n}。",
+    "ko": "하드웨어 복구 후 {n} 재시도. 마지막 확인: {n}.",
+    "es": "Esperando al equipo para reintentar {n}. Confirmado: {n}."
+  },
+  "charge.retrying": {
+    "en": "{n} not applied; retrying automatically. Last confirmed: {n}.",
+    "zh-Hans": "{n} 尚未生效，将自动重试；上次确认：{n}。",
+    "zh-Hant": "{n} 尚未生效，將自動重試；上次確認：{n}。",
+    "ja": "{n} は未適用。自動再試行します。前回確認：{n}。",
+    "ko": "{n} 미적용. 자동 재시도합니다. 마지막 확인: {n}.",
+    "es": "{n} sin aplicar; se reintentará. Confirmado: {n}."
+  },
+  "charge.temporary": {
+    "en": "100% allowed this time. Restores {n} on unplug or full.",
+    "zh-Hans": "本次允许充至 100%；拔电或满电后恢复 {n}。",
+    "zh-Hant": "本次允許充至 100%；拔電或滿電後恢復 {n}。",
+    "ja": "今回のみ100%を許可。電源を外すか満充電で {n} に戻ります。",
+    "ko": "이번에만 100% 허용. 전원 분리나 완충 후 {n} 복원.",
+    "es": "100% esta vez. Vuelve a {n} al desenchufar o completar."
+  },
+  "state.aboveLimit": {
+    "en": "Current {n}%, target {n}%. A lower limit does not discharge the battery.",
+    "zh-Hans": "当前 {n}%，目标 {n}%；降低上限不会主动放电。",
+    "zh-Hant": "目前 {n}%，目標 {n}%；降低上限不會主動放電。",
+    "ja": "現在 {n}%、目標 {n}%。上限を下げても放電しません。",
+    "ko": "현재 {n}%, 목표 {n}%. 상한을 낮춰도 방전하지 않습니다.",
+    "es": "Actual {n}%, objetivo {n}%. Bajar el límite no descarga la batería."
+  },
+  "config.loadFailed": {
+    "en": "Config not loaded. Current session settings retained (defaults at startup). Fix config.json, then Reload; the file is unchanged.",
+    "zh-Hans": "配置未加载，保留本次设置（启动时使用默认值）。请修复 config.json 后重载；原文件未改动。",
+    "zh-Hant": "設定未載入，保留本次設定（啟動時使用預設值）。請修復 config.json 後重新載入；原檔案未改動。",
+    "ja": "設定を読めません。現在の設定を維持（起動時は既定値）。config.json を修正して再読込してください。元のファイルは変更していません。",
+    "ko": "설정을 불러오지 못했습니다. 현재 설정 유지(시작 시 기본값). config.json 수정 후 다시 불러오세요. 원본 파일은 그대로입니다.",
+    "es": "No se cargó config.json. Se conserva la sesión (valores iniciales al arrancar). Corrige el archivo y recarga; sigue intacto."
+  },
+  "config.saveFailed": {
+    "en": "Settings work for this session but were not saved. Check the config folder permissions, then Retry Saving.",
+    "zh-Hans": "设置仅在本次运行有效，尚未保存。请检查配置目录写入权限，然后重试保存。",
+    "zh-Hant": "設定僅在本次執行有效，尚未儲存。請檢查設定目錄寫入權限，然後重試儲存。",
+    "ja": "設定は今回のみ有効で保存されていません。設定フォルダの権限を確認し、保存を再試行してください。",
+    "ko": "설정이 이번 실행에만 적용되고 저장되지 않았습니다. 설정 폴더 권한을 확인하고 저장을 재시도하세요.",
+    "es": "Los ajustes solo valen para esta sesión. Revisa los permisos de la carpeta y reintenta el guardado."
+  },
+  "error.hardwarePending": {
+    "en": "Hardware is still responding. The latest request will retry when it recovers.",
+    "zh-Hans": "硬件仍在响应中，恢复后将重试最新请求。",
+    "zh-Hant": "硬體仍在回應中，恢復後將重試最新要求。",
+    "ja": "ハードウェアの応答待ちです。復帰後に最新の要求を再試行します。",
+    "ko": "하드웨어 응답 대기 중. 복구 후 최신 요청을 재시도합니다.",
+    "es": "Esperando al equipo. Se reintentará la última solicitud al recuperarse."
+  },
+  "error.hardwareTimeout": {
+    "en": "Hardware timed out; the result is unconfirmed. Waiting to retry.",
+    "zh-Hans": "硬件响应超时，结果尚未确认；等待恢复后重试。",
+    "zh-Hant": "硬體回應逾時，結果尚未確認；等待恢復後重試。",
+    "ja": "応答がタイムアウトしました。結果は未確認。復帰後に再試行します。",
+    "ko": "하드웨어 응답 시간 초과. 결과 미확인. 복구 후 재시도합니다.",
+    "es": "El equipo no respondió a tiempo. Resultado sin confirmar; se reintentará."
+  },
+  "awake.summary": {
+    "en": "System: {n} · Display: {n} · Lid: {n}",
+    "zh-Hans": "系统：{n} · 屏幕：{n} · 合盖：{n}",
+    "zh-Hant": "系統：{n} · 螢幕：{n} · 闔蓋：{n}",
+    "ja": "本体：{n} · 画面：{n} · 蓋：{n}",
+    "ko": "시스템: {n} · 화면: {n} · 덮개: {n}",
+    "es": "Sistema: {n} · Pantalla: {n} · Tapa: {n}"
+  },
+  "awake.on": {
+    "en": "Awake",
+    "zh-Hans": "保活中",
+    "zh-Hant": "保活中",
+    "ja": "起動維持",
+    "ko": "유지",
+    "es": "Activo"
+  },
+  "awake.off": {
+    "en": "Off",
+    "zh-Hans": "未启用",
+    "zh-Hant": "未啟用",
+    "ja": "オフ",
+    "ko": "꺼짐",
+    "es": "Desactivado"
+  },
+  "awake.pending": {
+    "en": "Unconfirmed",
+    "zh-Hans": "待确认",
+    "zh-Hant": "待確認",
+    "ja": "未確認",
+    "ko": "미확인",
+    "es": "Sin confirmar"
+  },
+  "guard.learning": {
+    "en": "Away protection isn’t ready. About {n} min of network use remaining.",
+    "zh-Hans": "离开保护尚未就绪，还需约 {n} 分钟联网使用。",
+    "zh-Hant": "離開保護尚未就緒，還需約 {n} 分鐘連網使用。",
+    "ja": "不在時の保護は準備中です。ネットワークの利用があと約 {n} 分必要です。",
+    "ko": "자리 비움 보호가 아직 준비되지 않았습니다. 네트워크 사용이 약 {n}분 더 필요합니다.",
+    "es": "La protección al ausentarse aún no está lista. Faltan unos {n} min de uso de red."
+  },
+  "guard.ready": {
+    "en": "Ready · Usual network",
+    "zh-Hans": "已就绪 · 常用网络",
+    "zh-Hant": "已就緒 · 常用網路",
+    "ja": "準備完了 · 普段のネットワーク",
+    "ko": "준비됨 · 평소 네트워크",
+    "es": "Lista · Red habitual"
+  },
+  "guard.disabled": {
+    "en": "Away protection is off. Sleep prevention won’t pause when you leave.",
+    "zh-Hans": "离开保护已关闭，离开后不会自动暂停保活。",
+    "zh-Hant": "離開保護已關閉，離開後不會自動暫停防止睡眠。",
+    "ja": "不在時の保護はオフです。離席してもスリープ防止は一時停止しません。",
+    "ko": "자리 비움 보호가 꺼져 있습니다. 자리를 떠나도 잠자기 방지가 일시 중지되지 않습니다.",
+    "es": "La protección al ausentarse está desactivada. La prevención del reposo no se pausará al salir."
+  },
+  "guard.noBattery": {
+    "en": "Away protection requires a Mac with a battery.",
+    "zh-Hans": "离开保护需要带电池的 Mac。",
+    "zh-Hant": "離開保護需要配備電池的 Mac。",
+    "ja": "不在時の保護にはバッテリーを搭載した Mac が必要です。",
+    "ko": "자리 비움 보호에는 배터리가 있는 Mac이 필요합니다.",
+    "es": "La protección al ausentarse requiere un Mac con batería."
+  },
+  "guard.waitBattery": {
+    "en": "Ready · Waiting for battery power",
+    "zh-Hans": "已就绪 · 等待电池供电",
+    "zh-Hant": "已就緒 · 等待電池供電",
+    "ja": "準備完了 · バッテリー駆動を待機中",
+    "ko": "준비됨 · 배터리 전원 대기 중",
+    "es": "Lista · Esperando alimentación por batería"
+  },
+  "guard.waitIdle": {
+    "en": "Away detected; waits for idle, lock or lid close.",
+    "zh-Hans": "已判定离开，等待闲置、锁屏或合盖。",
+    "zh-Hant": "已判定離開，等待閒置、鎖定螢幕或闔蓋。",
+    "ja": "外出を検出。無操作・画面ロック・蓋閉じを待機。",
+    "ko": "외출 감지. 유휴, 잠금 또는 덮개 닫기 대기.",
+    "es": "Salida detectada; espera inactividad, bloqueo o cierre."
+  },
+  "guard.waitOffline": {
+    "en": "Offline; about {n} min until away detection.",
+    "zh-Hans": "已离线，约 {n} 分钟后判定离开。",
+    "zh-Hant": "已離線，約 {n} 分鐘後判定離開。",
+    "ja": "オフライン。あと約 {n} 分で外出判定。",
+    "ko": "오프라인. 약 {n}분 후 외출 판정.",
+    "es": "Sin conexión; unos {n} min para detectar salida."
+  },
+  "guard.waitNetwork": {
+    "en": "Unfamiliar network; about {n} min until away detection.",
+    "zh-Hans": "非常用网络，约 {n} 分钟后判定离开。",
+    "zh-Hant": "非常用網路，約 {n} 分鐘後判定離開。",
+    "ja": "不慣れなネットワーク。あと約 {n} 分で外出判定。",
+    "ko": "낯선 네트워크. 약 {n}분 후 외출 판정.",
+    "es": "Red no habitual; unos {n} min para detectar salida."
+  },
+  "guard.conditions": {
+    "en": "Away after {n} min on another network or {n} min offline; also requires lid closed, lock or {n}s idle.",
+    "zh-Hans": "其他网络 {n} 分钟或离线 {n} 分钟后判定离开；还需合盖、锁屏或闲置 {n} 秒。",
+    "zh-Hant": "其他網路 {n} 分鐘或離線 {n} 分鐘後判定離開；還需闔蓋、鎖定螢幕或閒置 {n} 秒。",
+    "ja": "別のネットワークで {n} 分、またはオフライン {n} 分で外出判定。蓋閉じ・ロック・{n}秒の無操作も必要です。",
+    "ko": "다른 네트워크 {n}분 또는 오프라인 {n}분 후 외출 판정. 덮개 닫힘, 잠금 또는 {n}초 유휴도 필요.",
+    "es": "Salida tras {n} min en otra red o {n} min sin conexión; requiere tapa cerrada, bloqueo o {n}s de inactividad."
+  },
+  "guard.eventLocked": {
+    "en": "Last trigger: away and screen locked.",
+    "zh-Hans": "最近触发：离开且已锁屏。",
+    "zh-Hant": "最近觸發：離開且已鎖定螢幕。",
+    "ja": "前回の検出：離席と画面ロック。",
+    "ko": "최근 감지: 자리 비움 및 화면 잠금.",
+    "es": "Última activación: ausencia y pantalla bloqueada."
+  },
+  "guard.eventLid": {
+    "en": "Last trigger: away and lid closed.",
+    "zh-Hans": "最近触发：离开且已合盖。",
+    "zh-Hant": "最近觸發：離開且已闔蓋。",
+    "ja": "前回の検出：離席と蓋が閉じた状態。",
+    "ko": "최근 감지: 자리 비움 및 덮개 닫힘.",
+    "es": "Última activación: ausencia y tapa cerrada."
+  },
+  "guard.eventIdle": {
+    "en": "Last trigger: away and idle.",
+    "zh-Hans": "最近触发：离开且已闲置。",
+    "zh-Hant": "最近觸發：離開且已閒置。",
+    "ja": "前回の検出：離席と未使用。",
+    "ko": "최근 감지: 자리 비움 및 유휴 상태.",
+    "es": "Última activación: ausencia e inactividad."
+  },
+  "helper.unavailable": {
+    "en": "Installed · not responding",
+    "zh-Hans": "已安装 · 无响应",
+    "zh-Hant": "已安裝 · 無回應",
+    "ja": "インストール済み · 応答なし",
+    "ko": "설치됨 · 응답 없음",
+    "es": "Instalado · sin respuesta"
+  },
+  "helper.repair": {
+    "en": "Repair",
+    "zh-Hans": "修复",
+    "zh-Hant": "修復",
+    "ja": "修復",
+    "ko": "복구",
+    "es": "Reparar"
+  },
+  "helper.lidStateUnconfirmed": {
+    "en": "Closed-lid control could not be confirmed to match your settings. Keep the lid open and retry.",
+    "zh-Hans": "合盖控制尚未确认符合当前设置，请保持开盖并重试。",
+    "zh-Hant": "闔蓋控制尚未確認符合目前設定，請保持開蓋並重試。",
+    "ja": "蓋を閉じたときの制御状態が現在の設定と一致するか確認できません。蓋を開いたまま再試行してください。",
+    "ko": "덮개를 닫았을 때의 제어 상태가 현재 설정과 일치하는지 확인할 수 없습니다. 덮개를 열어 둔 채 다시 시도하세요.",
+    "es": "No se pudo confirmar que el control con la tapa cerrada coincida con los ajustes actuales. Mantén la tapa abierta y vuelve a intentarlo."
+  },
+  "smart.learning": {
+    "en": "Learning your routine; holding {n}%.",
+    "zh-Hans": "正在学习作息，当前保持 {n}%。",
+    "zh-Hant": "正在學習作息，目前保持 {n}%。",
+    "ja": "習慣を学習中。現在は {n}% を維持。",
+    "ko": "사용 패턴 학습 중. {n}% 유지.",
+    "es": "Aprendiendo tu rutina; mantiene {n}%."
+  },
+  "smart.topupOff": {
+    "en": "Automatic top-up off; holding {n}%.",
+    "zh-Hans": "自动补电关闭，保持 {n}%。",
+    "zh-Hant": "自動補電關閉，保持 {n}%。",
+    "ja": "自動追加充電はオフ。{n}% を維持。",
+    "ko": "자동 추가 충전 꺼짐. {n}% 유지.",
+    "es": "Recarga automática desactivada; mantiene {n}%."
+  },
+  "smart.plan": {
+    "en": "Hold {n}%; estimated unplug {n}. Top-up starts {n} to {n}%.",
+    "zh-Hans": "保持 {n}%；预计 {n} 拔电，{n} 开始补至 {n}%。",
+    "zh-Hant": "保持 {n}%；預計 {n} 拔電，{n} 開始補至 {n}%。",
+    "ja": "{n}% を維持。電源を外す予測は {n}。{n} に {n}% への充電を開始。",
+    "ko": "{n}% 유지. 전원 분리 예상 {n}. {n}부터 {n}%로 충전.",
+    "es": "Mantiene {n}%; desconexión prevista {n}. Recarga desde {n} al {n}%."
+  },
+  "smart.toppingUp": {
+    "en": "Daily hold {n}%; unplug estimated {n}. Top-up window since {n}, target {n}%.",
+    "zh-Hans": "日常保持 {n}%；预计 {n} 拔电，已进入 {n} 开始的补电窗口，目标 {n}%。",
+    "zh-Hant": "日常保持 {n}%；預計 {n} 拔電，已進入 {n} 開始的補電時段，目標 {n}%。",
+    "ja": "通常は {n}% 維持。電源を外す予測 {n}。{n} から追加充電期間、目標 {n}%。",
+    "ko": "평소 {n}% 유지. 분리 예상 {n}. {n}부터 추가 충전 시간대, 목표 {n}%.",
+    "es": "Límite diario {n}%; salida estimada {n}. Ventana desde {n}, objetivo {n}%."
+  },
+  "smart.planDetail": {
+    "en": "Based on recorded hourly use in local time. The start time is not a guaranteed completion time.",
+    "zh-Hans": "根据已记录的每小时使用习惯推算，时间为本地时间；开始补电不保证届时充满。",
+    "zh-Hant": "根據已記錄的每小時使用習慣推算，時間為本地時間；開始補電不保證屆時充滿。",
+    "ja": "記録された時間帯別利用から推定（現地時刻）。開始時刻は満充電を保証しません。",
+    "ko": "기록된 시간대별 사용을 바탕으로 추정(현지 시간). 시작 시각은 완충 시각을 보장하지 않습니다.",
+    "es": "Estimación del uso registrado, en hora local. La hora de inicio no garantiza la finalización."
+  },
+  "energyMode.scope": {
+    "en": "Battery + adapter · persists after quit",
+    "zh-Hans": "电池与适配器 · 退出后保留",
+    "zh-Hant": "電池與轉接器 · 結束後保留",
+    "ja": "バッテリーとAC · 終了後も保持",
+    "ko": "배터리와 어댑터 · 종료 후 유지",
+    "es": "Batería y adaptador · persiste al salir"
+  },
+  "power.unavailable": {
+    "en": "Real-time input unavailable",
+    "zh-Hans": "实时输入未知",
+    "zh-Hant": "即時輸入未知",
+    "ja": "リアルタイム入力は不明",
+    "ko": "실시간 입력 알 수 없음",
+    "es": "Entrada en tiempo real no disponible"
+  },
+  "telemetry.explain": {
+    "en": "Large percentage: macOS charge reading. Pack level: raw battery gauge; rounding and reserve can differ. Health compares capacity to design capacity. These diagnostics are not a charging target or a temperature warning.",
+    "zh-Hans": "大号电量来自 macOS；电池组读值来自硬件，取整与预留电量可能不同。健康度是容量与设计容量之比。这些是诊断读值，并非限充目标或温度警报。",
+    "zh-Hant": "大字電量來自 macOS；電池組讀值來自硬體，取整與預留電量可能不同。健康度是容量與設計容量之比。這些是診斷讀值，並非限充目標或溫度警報。",
+    "ja": "大きな数値はmacOSの電量。パック電量はハードウェア値で丸めや予備容量が異なります。最大容量は設計容量との比率です。診断値であり充電目標や温度警報ではありません。",
+    "ko": "큰 비율은 macOS 전량, 팩 수치는 하드웨어 값으로 반올림과 예비 용량이 다를 수 있습니다. 상태는 설계 용량 대비 용량입니다. 진단값이며 충전 목표나 온도 경고가 아닙니다.",
+    "es": "El porcentaje grande es de macOS; el nivel del paquete es del sensor y puede diferir por redondeo y reserva. Salud compara capacidad actual y de diseño. Son datos diagnósticos, no un objetivo ni una alerta térmica."
+  },
+  "energySample.explain": {
+    "en": "Estimate from CPU and wakeups of readable GUI main processes; excludes background and child processes. Open Activity Monitor for more detail.",
+    "zh-Hans": "根据可读取的图形应用主进程 CPU 和唤醒次数估算，不含后台及子进程；可打开活动监视器查看详情。",
+    "zh-Hant": "根據可讀取的圖形應用程式主程序 CPU 和喚醒次數估算，不含背景及子程序；可開啟活動監視器查看詳情。",
+    "ja": "読み取り可能なGUIアプリの主プロセスのCPUと復帰回数から推定。バックグラウンドと子プロセスは対象外。詳細はアクティビティモニタへ。",
+    "ko": "읽을 수 있는 GUI 앱 주 프로세스의 CPU와 깨우기 횟수로 추정. 백그라운드 및 자식 프로세스 제외. 자세한 내용은 활성 상태 보기에서 확인.",
+    "es": "Estimación de CPU y activaciones de procesos principales de apps visibles; excluye procesos de fondo e hijos. Más información en Monitor de Actividad."
+  },
+  "energySample.unavailable": {
+    "en": "App estimate unavailable",
+    "zh-Hans": "应用估算暂不可用",
+    "zh-Hant": "應用程式估算暫不可用",
+    "ja": "アプリの推定は利用不可",
+    "ko": "앱 추정 사용 불가",
+    "es": "Estimación no disponible"
+  },
+  "energySample.partial": {
+    "en": "Partial sample; some apps unreadable",
+    "zh-Hans": "部分采样，有应用无法读取",
+    "zh-Hant": "部分採樣，有應用程式無法讀取",
+    "ja": "一部のアプリを読み取れません",
+    "ko": "일부 앱을 읽지 못함",
+    "es": "Muestra parcial; algunas apps no se pueden leer"
+  },
+  "energySample.ready": {
+    "en": "Readable apps sampled",
+    "zh-Hans": "已采样可读取应用",
+    "zh-Hant": "已採樣可讀取應用程式",
+    "ja": "読み取り可能なアプリを測定済み",
+    "ko": "읽을 수 있는 앱 표본 수집됨",
+    "es": "Apps legibles muestreadas"
+  },
+  "notification.unknown": {
+    "en": "Notification permission has not been requested.",
+    "zh-Hans": "尚未请求通知权限。",
+    "zh-Hant": "尚未要求通知權限。",
+    "ja": "通知の許可はまだ要求していません。",
+    "ko": "알림 권한을 아직 요청하지 않았습니다.",
+    "es": "Aún no se ha solicitado permiso para notificaciones."
+  },
+  "notification.ready": {
+    "en": "Notifications allowed",
+    "zh-Hans": "通知已允许",
+    "zh-Hant": "通知已允許",
+    "ja": "通知は許可されています",
+    "ko": "알림 허용됨",
+    "es": "Notificaciones permitidas"
+  },
+  "notification.denied": {
+    "en": "Notifications denied. Enable Coddle in System Settings → Notifications, then test.",
+    "zh-Hans": "通知已被拒绝，请在系统设置 → 通知中允许 Coddle，然后测试。",
+    "zh-Hant": "通知已被拒絕，請在系統設定 → 通知中允許 Coddle，然後測試。",
+    "ja": "通知が拒否されています。システム設定 → 通知でCoddleを許可し、テストしてください。",
+    "ko": "알림 거부됨. 시스템 설정 → 알림에서 Coddle을 허용한 뒤 테스트하세요.",
+    "es": "Notificaciones denegadas. Activa Coddle en Ajustes del Sistema → Notificaciones y prueba."
+  },
+  "notification.alertsOff": {
+    "en": "Alerts are off in System Settings → Notifications.",
+    "zh-Hans": "通知横幅已关闭，请前往系统设置 → 通知检查。",
+    "zh-Hant": "通知橫幅已關閉，請前往系統設定 → 通知檢查。",
+    "ja": "システム設定 → 通知で通知表示がオフです。",
+    "ko": "시스템 설정 → 알림에서 알림 표시가 꺼져 있습니다.",
+    "es": "Alertas desactivadas en Ajustes del Sistema → Notificaciones."
+  },
+  "notification.unavailable": {
+    "en": "Notifications unavailable in this build. Delivery is unverified.",
+    "zh-Hans": "此构建无法确认通知可用，送达尚未验证。",
+    "zh-Hant": "此版本無法確認通知可用，送達尚未驗證。",
+    "ja": "このビルドでは通知を確認できません。到着は未検証です。",
+    "ko": "이 빌드에서 알림을 확인할 수 없습니다. 전달 미검증.",
+    "es": "Notificaciones no disponibles en esta versión. Entrega sin verificar."
+  },
+  "notification.sent": {
+    "en": "Test notification submitted. Check that you received it.",
+    "zh-Hans": "测试通知已提交，请查看是否收到。",
+    "zh-Hant": "測試通知已提交，請查看是否收到。",
+    "ja": "テスト通知をシステムに送信しました。届いたか確認してください。",
+    "ko": "테스트 알림을 시스템에 제출했습니다. 수신 여부를 확인하세요.",
+    "es": "La notificación de prueba se ha enviado al sistema. Comprueba si la has recibido."
+  },
+  "notification.test": {
+    "en": "Test",
+    "zh-Hans": "测试",
+    "zh-Hant": "測試",
+    "ja": "テスト",
+    "ko": "테스트",
+    "es": "Probar"
+  },
+  "notification.testTitle": {
+    "en": "Coddle reminder test",
+    "zh-Hans": "Coddle 提醒测试",
+    "zh-Hant": "Coddle 提醒測試",
+    "ja": "Coddle 通知テスト",
+    "ko": "Coddle 알림 테스트",
+    "es": "Prueba de aviso de Coddle"
+  },
+  "notification.testBody": {
+    "en": "If you can read this, Coddle notifications can reach you now.",
+    "zh-Hans": "如果你看到了这条消息，Coddle 当前能够向你发送通知。",
+    "zh-Hant": "如果你看到了這則訊息，Coddle 目前能夠向你傳送通知。",
+    "ja": "この通知が見えれば、現在Coddleの通知を受信できます。",
+    "ko": "이 메시지가 보이면 현재 Coddle 알림을 받을 수 있습니다.",
+    "es": "Si puedes leer esto, ahora puedes recibir avisos de Coddle."
+  },
+  "action.quitEffect": {
+    "en": "Quit Coddle and release its keep-awake modes (⌘Q).",
+    "zh-Hans": "退出 Coddle 并释放其保活（⌘Q）。",
+    "zh-Hant": "結束 Coddle 並釋放其保活（⌘Q）。",
+    "ja": "Coddleを終了し起動維持を解除（⌘Q）。",
+    "ko": "Coddle 종료 및 유지 해제(⌘Q).",
+    "es": "Salir de Coddle y liberar sus modos de vigilia (⌘Q)."
+  },
+  "config.retrySave": {
+    "en": "Retry Saving",
+    "zh-Hans": "重试保存",
+    "zh-Hant": "重試儲存",
+    "ja": "保存を再試行",
+    "ko": "저장 재시도",
+    "es": "Reintentar guardado"
+  },
+  "panel.charge.title": {
+    "en": "Manual limit",
+    "zh-Hans": "手动限充",
+    "zh-Hant": "手動限充",
+    "ja": "手動の充電上限",
+    "ko": "수동 충전 상한",
+    "es": "Límite manual"
+  },
+  "panel.charge.manualHint": {
+    "en": "Adjusting the limit turns off Smart Charging.",
+    "zh-Hans": "调整将关闭智能充电。",
+    "zh-Hant": "調整將關閉智慧充電。",
+    "ja": "変更するとスマート充電がオフになります。",
+    "ko": "상한을 조절하면 스마트 충전이 꺼집니다.",
+    "es": "Al ajustar el límite se desactiva la carga inteligente."
+  },
+  "panel.charge.applying": {
+    "en": "Setting {n} · confirmed {n}",
+    "zh-Hans": "正在设置 {n} · 已确认 {n}",
+    "zh-Hant": "正在設定 {n} · 已確認 {n}",
+    "ja": "{n} に設定中 · 確認済み {n}",
+    "ko": "{n} 설정 중 · 확인됨 {n}",
+    "es": "Aplicando {n} · confirmado {n}"
+  },
+  "panel.charge.waitingRecovery": {
+    "en": "Recovering {n} · confirmed {n}",
+    "zh-Hans": "正在恢复 {n} · 已确认 {n}",
+    "zh-Hant": "正在恢復 {n} · 已確認 {n}",
+    "ja": "{n} を復元中 · 確認済み {n}",
+    "ko": "{n} 복구 중 · 확인됨 {n}",
+    "es": "Restaurando {n} · confirmado {n}"
+  },
+  "panel.charge.retrying": {
+    "en": "Retrying {n} · confirmed {n}",
+    "zh-Hans": "正在重试 {n} · 已确认 {n}",
+    "zh-Hant": "正在重試 {n} · 已確認 {n}",
+    "ja": "{n} を再試行 · 確認済み {n}",
+    "ko": "{n} 재시도 중 · 확인됨 {n}",
+    "es": "Reintentando {n} · confirmado {n}"
+  },
+  "panel.charge.temporary": {
+    "en": "Charge to 100% this time",
+    "zh-Hans": "本次充至 100%",
+    "zh-Hant": "本次充至 100%",
+    "ja": "今回は 100% まで充電",
+    "ko": "이번만 100% 충전",
+    "es": "Esta vez, cargar al 100%"
+  },
+  "panel.energy.title": {
+    "en": "System power mode",
+    "zh-Hans": "系统电源模式",
+    "zh-Hant": "系統電源模式",
+    "ja": "システムの電力モード",
+    "ko": "시스템 전원 모드",
+    "es": "Modo de energía del sistema"
+  },
+  "panel.energy.applying": {
+    "en": "Applying power mode…",
+    "zh-Hans": "正在设置电源模式…",
+    "zh-Hant": "正在設定電源模式…",
+    "ja": "電力モードを適用中…",
+    "ko": "전원 모드 적용 중…",
+    "es": "Aplicando modo de energía…"
+  },
+  "panel.awake.pending": {
+    "en": "Applying…",
+    "zh-Hans": "正在调整…",
+    "zh-Hant": "正在調整…",
+    "ja": "適用中…",
+    "ko": "적용 중…",
+    "es": "Aplicando…"
+  },
+  "panel.smart.learning": {
+    "en": "Learning",
+    "zh-Hans": "学习中",
+    "zh-Hant": "學習中",
+    "ja": "学習中",
+    "ko": "학습 중",
+    "es": "Aprendiendo"
+  },
+  "panel.smart.plan": {
+    "en": "Top-up expected at {n}",
+    "zh-Hans": "预计 {n} 开始补电",
+    "zh-Hant": "預計 {n} 開始補電",
+    "ja": "{n} に追加充電の予定",
+    "ko": "{n} 추가 충전 예정",
+    "es": "Recarga prevista a las {n}"
+  },
+  "panel.smart.topupWindow": {
+    "en": "Top-up window",
+    "zh-Hans": "补电时段",
+    "zh-Hant": "補電時段",
+    "ja": "追加充電の時間帯",
+    "ko": "추가 충전 시간대",
+    "es": "Periodo de recarga"
+  },
+  "panel.smart.topupOff": {
+    "en": "Automatic top-up off",
+    "zh-Hans": "自动补电已关闭",
+    "zh-Hant": "自動補電已關閉",
+    "ja": "自動追加充電はオフ",
+    "ko": "자동 추가 충전 꺼짐",
+    "es": "Recarga automática desactivada"
+  },
+  "tab.compact.charging": {
+    "en": "Charging",
+    "zh-Hans": "充电",
+    "zh-Hant": "充電",
+    "ja": "充電",
+    "ko": "충전",
+    "es": "Carga"
+  },
+  "tab.compact.awake": {
+    "en": "Sleep Prevention",
+    "zh-Hans": "防止休眠",
+    "zh-Hant": "防止睡眠",
+    "ja": "スリープ防止",
+    "ko": "잠자기 방지",
+    "es": "Evitar reposo"
+  },
+  "tab.compact.general": {
+    "en": "General",
+    "zh-Hans": "通用",
+    "zh-Hant": "一般",
+    "ja": "一般",
+    "ko": "일반",
+    "es": "General"
+  },
+  "onboarding.windowTitle": {
+    "en": "Coddle — First setup",
+    "zh-Hans": "Coddle — 首次设置",
+    "zh-Hant": "Coddle — 首次設定",
+    "ja": "Coddle — 初期設定",
+    "ko": "Coddle — 초기 설정",
+    "es": "Coddle — Configuración inicial"
+  },
+  "onboarding.menuTitle": {
+    "en": "Usage guide…",
+    "zh-Hans": "使用引导…",
+    "zh-Hant": "使用引導…",
+    "ja": "使い方ガイド…",
+    "ko": "사용 가이드…",
+    "es": "Guía de uso…"
+  },
+  "onboarding.continueSetup": {
+    "en": "Continue first setup",
+    "zh-Hans": "继续首次设置",
+    "zh-Hant": "繼續首次設定",
+    "ja": "初期設定を続ける",
+    "ko": "초기 설정 계속",
+    "es": "Continuar configuración"
+  },
+  "onboarding.welcome": {
+    "en": "Make Coddle work for you",
+    "zh-Hans": "让 Coddle 开始为你工作",
+    "zh-Hant": "讓 Coddle 開始為你工作",
+    "ja": "Coddle を使い始めましょう",
+    "ko": "Coddle 사용 시작하기",
+    "es": "Empieza a usar Coddle"
+  },
+  "onboarding.menuBody": {
+    "en": "Finish preparing your charging or task plan. Your progress is saved.",
+    "zh-Hans": "完成充电或任务方案的准备。已有进度会保留。",
+    "zh-Hant": "完成充電或工作方案的準備。已有進度會保留。",
+    "ja": "充電や長時間作業の準備を完了しましょう。進行状況は保存されます。",
+    "ko": "충전 또는 작업 설정을 완료하세요. 진행 상황은 저장됩니다.",
+    "es": "Completa los preparativos de carga o tareas. Tu progreso se guarda."
+  },
+  "onboarding.phase.choose": {
+    "en": "Choose your use",
+    "zh-Hans": "选择使用方式",
+    "zh-Hant": "選擇使用方式",
+    "ja": "使い方を選択",
+    "ko": "사용 방식 선택",
+    "es": "Elegir uso"
+  },
+  "onboarding.phase.prepare": {
+    "en": "Install & authorize",
+    "zh-Hans": "安装与授权",
+    "zh-Hant": "安裝與授權",
+    "ja": "インストールと許可",
+    "ko": "설치 및 권한",
+    "es": "Instalar y autorizar"
+  },
+  "onboarding.phase.apply": {
+    "en": "Start your plan",
+    "zh-Hans": "启用方案",
+    "zh-Hant": "啟用方案",
+    "ja": "設定を適用",
+    "ko": "설정 적용",
+    "es": "Aplicar plan"
+  },
+  "onboarding.phaseLabel": {
+    "en": "Stage {n} of {n}",
+    "zh-Hans": "第 {n} 阶段，共 {n} 阶段",
+    "zh-Hant": "第 {n} 階段，共 {n} 階段",
+    "ja": "ステップ {n}/{n}",
+    "ko": "{n}단계, 전체 {n}단계",
+    "es": "Etapa {n} de {n}"
+  },
+  "onboarding.retrySave": {
+    "en": "Retry saving",
+    "zh-Hans": "重试保存",
+    "zh-Hant": "重試儲存",
+    "ja": "保存を再試行",
+    "ko": "저장 다시 시도",
+    "es": "Reintentar guardado"
+  },
+  "onboarding.checking": {
+    "en": "Checking current status…",
+    "zh-Hans": "正在检查当前状态…",
+    "zh-Hant": "正在檢查目前狀態…",
+    "ja": "現在の状態を確認中…",
+    "ko": "현재 상태 확인 중…",
+    "es": "Comprobando estado…"
+  },
+  "onboarding.tutorialOptional": {
+    "en": "No need to try it now.",
+    "zh-Hans": "不必现在操作。",
+    "zh-Hant": "不必現在操作。",
+    "ja": "今すぐ操作する必要はありません。",
+    "ko": "지금 실행하지 않아도 됩니다.",
+    "es": "No hace falta probarlo ahora."
+  },
+  "onboarding.enterPanel": {
+    "en": "Got it, open panel",
+    "zh-Hans": "知道了，进入面板",
+    "zh-Hant": "知道了，進入面板",
+    "ja": "確認してパネルを開く",
+    "ko": "확인, 패널 열기",
+    "es": "Entendido, abrir panel"
+  },
+  "onboarding.finishSetup": {
+    "en": "Finish setup",
+    "zh-Hans": "完成设置",
+    "zh-Hant": "完成設定",
+    "ja": "設定を完了",
+    "ko": "설정 완료",
+    "es": "Finalizar configuración"
+  },
+  "onboarding.later": {
+    "en": "Continue later",
+    "zh-Hans": "稍后继续",
+    "zh-Hant": "稍後繼續",
+    "ja": "あとで続ける",
+    "ko": "나중에 계속",
+    "es": "Continuar después"
+  },
+  "onboarding.back": {
+    "en": "Back",
+    "zh-Hans": "上一步",
+    "zh-Hant": "上一步",
+    "ja": "戻る",
+    "ko": "뒤로",
+    "es": "Atrás"
+  },
+  "onboarding.working": {
+    "en": "Working…",
+    "zh-Hans": "正在处理…",
+    "zh-Hant": "正在處理…",
+    "ja": "処理中…",
+    "ko": "처리 중…",
+    "es": "Procesando…"
+  },
+  "onboarding.next": {
+    "en": "Continue",
+    "zh-Hans": "继续",
+    "zh-Hant": "繼續",
+    "ja": "続ける",
+    "ko": "계속",
+    "es": "Continuar"
+  },
+  "onboarding.checkResults": {
+    "en": "Check results again",
+    "zh-Hans": "重新检测启用结果",
+    "zh-Hant": "重新檢測啟用結果",
+    "ja": "適用結果を再確認",
+    "ko": "적용 결과 다시 확인",
+    "es": "Comprobar resultados"
+  },
+  "onboarding.retryFailed": {
+    "en": "Retry unfinished items",
+    "zh-Hans": "重试未完成项目",
+    "zh-Hant": "重試未完成項目",
+    "ja": "未完了の項目を再試行",
+    "ko": "미완료 항목 재시도",
+    "es": "Reintentar pendientes"
+  },
+  "onboarding.applyBoth": {
+    "en": "Protect battery & keep awake",
+    "zh-Hans": "启用保护并开始保活",
+    "zh-Hant": "啟用保護並開始保活",
+    "ja": "保護とスリープ防止を開始",
+    "ko": "배터리 보호 및 절전 방지 시작",
+    "es": "Proteger y mantener activo"
+  },
+  "onboarding.applyAwake": {
+    "en": "Prevent Automatic Sleep",
+    "zh-Hans": "防止自动休眠",
+    "zh-Hant": "防止自動睡眠",
+    "ja": "自動スリープを防ぐ",
+    "ko": "자동 잠자기 방지",
+    "es": "Evitar reposo automático"
+  },
+  "onboarding.applyCharge": {
+    "en": "Start battery protection",
+    "zh-Hans": "启用电池保护",
+    "zh-Hant": "啟用電池保護",
+    "ja": "バッテリー保護を開始",
+    "ko": "배터리 보호 시작",
+    "es": "Activar protección"
+  },
+  "onboarding.deviceTitle": {
+    "en": "Check what this Mac supports",
+    "zh-Hans": "先确认这台 Mac 能做什么",
+    "zh-Hant": "先確認這台 Mac 能做什麼",
+    "ja": "この Mac の対応機能を確認",
+    "ko": "이 Mac의 지원 기능 확인",
+    "es": "Comprueba qué admite este Mac"
+  },
+  "onboarding.deviceUnknown": {
+    "en": "Device information is unavailable. This does not mean the feature is unsupported.",
+    "zh-Hans": "暂时没有读到设备能力，不代表设备不支持。",
+    "zh-Hant": "暫時沒有讀到裝置能力，不代表裝置不支援。",
+    "ja": "機能情報を取得できません。非対応とは限りません。",
+    "ko": "기기 정보를 읽지 못했습니다. 미지원이라는 뜻은 아닙니다.",
+    "es": "No se pudo leer la información. No significa que sea incompatible."
+  },
+  "onboarding.chargeUnsupported": {
+    "en": "Charging limits are unavailable here. You can still keep long tasks running.",
+    "zh-Hans": "当前设备不支持充电上限，仍可让长任务持续运行。",
+    "zh-Hant": "目前裝置不支援充電上限，仍可讓長時間工作持續執行。",
+    "ja": "充電上限には非対応ですが、長時間作業の継続は可能です。",
+    "ko": "충전 한도는 지원하지 않지만 긴 작업은 계속 실행할 수 있습니다.",
+    "es": "No hay límites de carga disponibles, pero puedes mantener tareas activas."
+  },
+  "onboarding.helperNotHardware": {
+    "en": "Installing the system component does not add unsupported hardware features.",
+    "zh-Hans": "安装系统组件不会改变硬件是否支持限充。",
+    "zh-Hant": "安裝系統元件不會改變硬體是否支援充電上限。",
+    "ja": "システムコンポーネントを入れても非対応のハードウェア機能は追加されません。",
+    "ko": "시스템 구성 요소를 설치해도 미지원 하드웨어 기능은 추가되지 않습니다.",
+    "es": "Instalar el componente no añade funciones de hardware no compatibles."
+  },
+  "onboarding.recheck": {
+    "en": "Check again",
+    "zh-Hans": "重新检测",
+    "zh-Hant": "重新檢測",
+    "ja": "再確認",
+    "ko": "다시 확인",
+    "es": "Comprobar de nuevo"
+  },
+  "onboarding.habitTitle": {
+    "en": "How do you usually use this Mac?",
+    "zh-Hans": "平时，你怎么用这台 Mac？",
+    "zh-Hant": "平時，你怎麼用這台 Mac？",
+    "ja": "普段、この Mac をどう使いますか？",
+    "ko": "평소 이 Mac을 어떻게 사용하나요?",
+    "es": "¿Cómo sueles usar este Mac?"
+  },
+  "onboarding.habitBody": {
+    "en": "Choose a routine. Coddle will suggest a charging plan.",
+    "zh-Hans": "根据日常习惯选好方案，不用先研究参数。",
+    "zh-Hant": "根據日常習慣選好方案，不用先研究參數。",
+    "ja": "使い方に合わせて充電プランを選びましょう。",
+    "ko": "사용 습관에 맞는 충전 설정을 선택하세요.",
+    "es": "Elige tu rutina y Coddle propondrá un plan de carga."
+  },
+  "onboarding.desk": {
+    "en": "Mostly plugged in at a desk",
+    "zh-Hans": "多数时间放在桌面接电",
+    "zh-Hant": "多數時間放在桌面接電",
+    "ja": "主にデスクで電源に接続",
+    "ko": "주로 책상에서 전원 연결",
+    "es": "Casi siempre conectado"
+  },
+  "onboarding.deskBody": {
+    "en": "Office work or long periods on power.",
+    "zh-Hans": "办公、桌面工作站、长时间插电。",
+    "zh-Hant": "辦公、桌面工作站、長時間插電。",
+    "ja": "オフィスや長時間の据え置き利用。",
+    "ko": "사무실이나 책상에서 장시간 사용합니다.",
+    "es": "Trabajo de escritorio y largos periodos conectado."
+  },
+  "onboarding.mobile": {
+    "en": "Often out and using the battery",
+    "zh-Hans": "经常带出门，用电池工作",
+    "zh-Hant": "經常帶出門，用電池工作",
+    "ja": "よく持ち出してバッテリーで使用",
+    "ko": "자주 휴대하며 배터리 사용",
+    "es": "Lo llevo fuera con frecuencia"
+  },
+  "onboarding.mobileBody": {
+    "en": "Protect the battery daily, with more charge when needed.",
+    "zh-Hans": "日常保护电池，需要时准备更多电量。",
+    "zh-Hant": "日常保護電池，需要時準備更多電量。",
+    "ja": "普段は保護し、必要に応じて充電量を確保。",
+    "ko": "평소에는 배터리를 보호하고 필요할 때 더 충전합니다.",
+    "es": "Protección diaria y más carga cuando la necesites."
+  },
+  "onboarding.recommended": {
+    "en": "Recommended for you",
+    "zh-Hans": "为你推荐",
+    "zh-Hant": "為你推薦",
+    "ja": "おすすめ",
+    "ko": "추천 설정",
+    "es": "Recomendado"
+  },
+  "onboarding.chooseAvailableLimit": {
+    "en": "Choose a supported limit",
+    "zh-Hans": "请选择可用上限",
+    "zh-Hant": "請選擇可用上限",
+    "ja": "利用可能な上限を選択",
+    "ko": "지원되는 상한 선택",
+    "es": "Elige un límite compatible"
+  },
+  "onboarding.selectedLimit": {
+    "en": "Your charging limit",
+    "zh-Hans": "你选择的充电上限",
+    "zh-Hant": "你選擇的充電上限",
+    "ja": "選択した充電上限",
+    "ko": "선택한 충전 상한",
+    "es": "Tu límite de carga"
+  },
+  "onboarding.dailyLimit": {
+    "en": "Daily charging limit: {n}%",
+    "zh-Hans": "日常充电上限：{n}%",
+    "zh-Hant": "日常充電上限：{n}%",
+    "ja": "通常の充電上限：{n}%",
+    "ko": "일상 충전 한도: {n}%",
+    "es": "Límite diario: {n}%"
+  },
+  "onboarding.deskRecommendation": {
+    "en": "Avoid staying fully charged all day. You can request more charge before going out.",
+    "zh-Hans": "不必一直顶着满电。出门前可按需要补充电量。",
+    "zh-Hant": "不必一直維持滿電。出門前可按需要補充電量。",
+    "ja": "常に満充電にせず、外出前には必要に応じて充電できます。",
+    "ko": "항상 완충 상태를 유지하지 않아도 됩니다. 외출 전에 더 충전할 수 있습니다.",
+    "es": "Evita mantener la carga completa todo el día. Puedes cargar más antes de salir."
+  },
+  "onboarding.limitUnavailable": {
+    "en": "80% is unavailable. Choose a supported value or keep your current charging setup.",
+    "zh-Hans": "设备不提供 80% 上限，请选择可用值或保留现有充电方式。",
+    "zh-Hant": "裝置不提供 80% 上限，請選擇可用值或保留現有充電方式。",
+    "ja": "80% は選べません。対応する値を選ぶか現在の設定を維持してください。",
+    "ko": "80%는 지원하지 않습니다. 지원하는 값을 선택하거나 현재 설정을 유지하세요.",
+    "es": "80% no está disponible. Elige otro valor o conserva la configuración actual."
+  },
+  "onboarding.availableLimits": {
+    "en": "Available limits",
+    "zh-Hans": "可用上限",
+    "zh-Hant": "可用上限",
+    "ja": "対応する上限",
+    "ko": "사용 가능한 한도",
+    "es": "Límites disponibles"
+  },
+  "onboarding.chargeSkip": {
+    "en": "Keep my charging setup; I only need task control",
+    "zh-Hans": "保留现有充电方式，我只需要任务保活",
+    "zh-Hant": "保留現有充電方式，我只需要工作保活",
+    "ja": "充電設定はそのまま、作業の継続だけ設定",
+    "ko": "현재 충전 설정을 유지하고 작업만 설정",
+    "es": "Conservar carga; solo configurar tareas"
+  },
+  "onboarding.keepCurrentChargeState": {
+    "en": "Keep the current charging state",
+    "zh-Hans": "保持当前充电状态",
+    "zh-Hant": "保持目前充電狀態",
+    "ja": "現在の充電状態を維持",
+    "ko": "현재 충전 상태 유지",
+    "es": "Mantener el estado de carga actual"
+  },
+  "onboarding.taskTitle": {
+    "en": "What happens during a long task?",
+    "zh-Hans": "长任务运行时，你会怎么做？",
+    "zh-Hant": "長時間工作執行時，你會怎麼做？",
+    "ja": "長時間の作業中はどうしますか？",
+    "ko": "긴 작업을 실행할 때 어떻게 하나요?",
+    "es": "¿Qué haces durante una tarea larga?"
+  },
+  "onboarding.taskBody": {
+    "en": "Keep downloads, rendering and AI tasks from stopping due to automatic sleep.",
+    "zh-Hans": "下载、渲染、AI 任务……避免因 Mac 自动睡眠而中断。",
+    "zh-Hant": "下載、算圖、AI 工作……避免因 Mac 自動睡眠而中斷。",
+    "ja": "ダウンロード、レンダリング、AI 作業を自動スリープで中断させません。",
+    "ko": "다운로드, 렌더링, AI 작업이 자동 잠자기로 중단되지 않도록 합니다.",
+    "es": "Evita que descargas, renderizados o tareas de IA se interrumpan por reposo automático."
+  },
+  "onboarding.taskNone": {
+    "en": "Not needed yet",
+    "zh-Hans": "暂时不需要",
+    "zh-Hant": "暫時不需要",
+    "ja": "今は不要",
+    "ko": "아직 필요 없음",
+    "es": "Todavía no lo necesito"
+  },
+  "onboarding.taskNoneBody": {
+    "en": "You can turn on sleep prevention later from the menu bar.",
+    "zh-Hans": "稍后可从菜单栏开启防止休眠。",
+    "zh-Hant": "稍後可從選單列開啟防止睡眠。",
+    "ja": "スリープ防止は、あとでメニューバーからオンにできます。",
+    "ko": "나중에 메뉴 막대에서 잠자기 방지를 켤 수 있습니다.",
+    "es": "Puedes activar la prevención del reposo más tarde desde la barra de menús."
+  },
+  "onboarding.taskOpen": {
+    "en": "Leave the lid open and step away",
+    "zh-Hans": "开着屏幕盖，离开一会儿",
+    "zh-Hant": "開著螢幕蓋，離開一會兒",
+    "ja": "ふたを開いたまま席を離れる",
+    "ko": "덮개를 열어 두고 잠시 자리 비우기",
+    "es": "Dejar la tapa abierta y ausentarme"
+  },
+  "onboarding.taskDesktop": {
+    "en": "Step away while tasks keep running",
+    "zh-Hans": "离开桌面，任务继续跑",
+    "zh-Hant": "離開桌面，工作繼續執行",
+    "ja": "席を離れても作業を継続",
+    "ko": "자리를 비워도 작업 계속 실행",
+    "es": "Ausentarme sin parar las tareas"
+  },
+  "onboarding.taskOpenBody": {
+    "en": "Prevent system idle sleep; the display may still turn off.",
+    "zh-Hans": "阻止系统自动睡眠，屏幕仍可正常熄灭。",
+    "zh-Hant": "阻止系統自動睡眠，螢幕仍可正常關閉。",
+    "ja": "システムの自動スリープを防止。画面は消灯できます。",
+    "ko": "시스템 자동 잠자기를 방지하며 화면은 꺼질 수 있습니다.",
+    "es": "Evita el reposo automático; la pantalla puede apagarse."
+  },
+  "onboarding.taskLid": {
+    "en": "Close the lid and keep tasks running",
+    "zh-Hans": "合上屏幕盖，也要继续跑",
+    "zh-Hant": "合上螢幕蓋，也要繼續執行",
+    "ja": "ふたを閉じても作業を継続",
+    "ko": "덮개를 닫아도 작업 계속 실행",
+    "es": "Cerrar la tapa y seguir trabajando"
+  },
+  "onboarding.taskLidBody": {
+    "en": "For desk tasks on power. Requires the system component.",
+    "zh-Hans": "适合桌面接电任务，需要安装系统组件。",
+    "zh-Hant": "適合桌面接電工作，需要安裝系統元件。",
+    "ja": "電源に接続した据え置き作業向け。システムコンポーネントが必要です。",
+    "ko": "전원을 연결한 책상 작업에 적합하며 시스템 구성 요소가 필요합니다.",
+    "es": "Para tareas conectado a la corriente. Requiere el componente del sistema."
+  },
+  "onboarding.persistentAwake": {
+    "en": "Starts when you apply the plan. Turning the main sleep-prevention switch off stops all controls but keeps your display and lid preferences. Coddle resumes them on reopening, including at login, only if the main switch is on. Task completion is not detected automatically.",
+    "zh-Hans": "应用计划后开始运行。关闭防止休眠主开关会停止全部保活，但保留屏幕和合盖偏好。只有主开关仍开启时，重新打开 Coddle（包括登录启动）才会恢复运行；不会自动判断任务是否结束。",
+    "zh-Hant": "套用計畫後開始運作。關閉防止睡眠主開關會停止全部保活，但保留螢幕和闔蓋偏好。只有主開關仍開啟時，重新開啟 Coddle（包含登入啟動）才會恢復運作；不會自動判斷工作是否結束。",
+    "ja": "プランを適用すると開始します。メインスイッチをオフにするとすべてのスリープ防止を停止しますが、画面と蓋の設定は保持します。ログイン時を含め、Coddle を開き直した際はメインスイッチがオンの場合だけ再開します。作業完了の自動判定はしません。",
+    "ko": "계획을 적용하면 시작합니다. 잠자기 방지 기본 스위치를 끄면 모든 제어가 중지되지만 화면과 덮개 설정은 유지됩니다. 로그인 시를 포함해 Coddle을 다시 열 때 기본 스위치가 켜져 있어야만 재개됩니다. 작업 완료는 자동 감지하지 않습니다.",
+    "es": "Empieza al aplicar el plan. Desactivar el interruptor principal detiene todos los controles, pero conserva las preferencias de pantalla y tapa. Coddle solo los reanuda al abrirse, también al iniciar sesión, si el interruptor principal está activado. No detecta el fin de las tareas."
+  },
+  "onboarding.bagAdvice": {
+    "en": "Turn off the main sleep-prevention switch before putting the Mac in a bag. Away protection may not recognize departure immediately.",
+    "zh-Hans": "装包前请关闭“防止自动休眠”，不能依赖离开保护立即识别。",
+    "zh-Hant": "裝包前請關閉「防止自動睡眠」，不能依賴離開保護立即識別。",
+    "ja": "かばんに入れる前に「Mac の自動スリープを防ぐ」をオフにしてください。離席の検知には時間がかかる場合があります。",
+    "ko": "가방에 넣기 전에 “Mac 자동 잠자기 방지”를 끄세요. 자리 비움 감지는 즉시 이루어지지 않을 수 있습니다.",
+    "es": "Desactiva la prevención del reposo automático antes de guardar el Mac. La protección por ausencia puede tardar en detectar que te has ido."
+  },
+  "onboarding.helperReady": {
+    "en": "Compatible and ready",
+    "zh-Hans": "兼容 · 可用",
+    "zh-Hant": "相容 · 可用",
+    "ja": "互換性確認済み",
+    "ko": "호환 확인 · 사용 가능",
+    "es": "Compatible y listo"
+  },
+  "onboarding.helperAbsent": {
+    "en": "macOS will ask for administrator confirmation.",
+    "zh-Hans": "安装时由 macOS 确认管理员身份。",
+    "zh-Hant": "安裝時由 macOS 確認管理員身分。",
+    "ja": "macOS が管理者の確認を求めます。",
+    "ko": "macOS에서 관리자 확인을 요청합니다.",
+    "es": "macOS solicitará confirmación de administrador."
+  },
+  "onboarding.helperUnavailable": {
+    "en": "Installed, but the service is not responding.",
+    "zh-Hans": "已安装，但服务尚未响应。",
+    "zh-Hant": "已安裝，但服務尚未回應。",
+    "ja": "インストール済みですが応答がありません。",
+    "ko": "설치되었지만 서비스가 응답하지 않습니다.",
+    "es": "Instalado, pero el servicio no responde."
+  },
+  "onboarding.helperOutdated": {
+    "en": "The service responds, but required capabilities are missing or unverified. Update it before continuing.",
+    "zh-Hans": "服务可响应，但所需能力缺失或未确认，请先更新。",
+    "zh-Hant": "服務可回應，但所需能力缺少或未確認，請先更新。",
+    "ja": "応答はありますが必要な機能を確認できません。更新してください。",
+    "ko": "서비스는 응답하지만 필요한 기능을 확인하지 못했습니다. 업데이트하세요.",
+    "es": "El servicio responde, pero faltan funciones o no se han confirmado. Actualízalo."
+  },
+  "onboarding.helperLidTitle": {
+    "en": "Prepare your Mac for closed-lid tasks",
+    "zh-Hans": "先让 Mac 能在合盖后继续工作",
+    "zh-Hant": "先讓 Mac 能在合蓋後繼續工作",
+    "ja": "ふたを閉じた作業の準備",
+    "ko": "덮개를 닫은 상태의 작업 준비",
+    "es": "Prepara las tareas con la tapa cerrada"
+  },
+  "onboarding.helperTitle": {
+    "en": "Set up the system component",
+    "zh-Hans": "设置系统组件",
+    "zh-Hant": "設定系統元件",
+    "ja": "システムコンポーネントを設定",
+    "ko": "시스템 구성 요소 설정",
+    "es": "Configura el componente del sistema"
+  },
+  "onboarding.helperBody": {
+    "en": "The component is included in Coddle. No separate download or terminal commands.",
+    "zh-Hans": "Coddle 内置组件，无需另找下载或执行命令。",
+    "zh-Hant": "Coddle 內建元件，無需另找下載或執行指令。",
+    "ja": "Coddle に同梱されています。別途ダウンロードやコマンドは不要です。",
+    "ko": "Coddle에 포함되어 있습니다. 별도 다운로드나 명령 실행은 필요 없습니다.",
+    "es": "Está incluido en Coddle. No requiere otra descarga ni comandos."
+  },
+  "onboarding.helperName": {
+    "en": "System component",
+    "zh-Hans": "系统组件",
+    "zh-Hant": "系統元件",
+    "ja": "システムコンポーネント",
+    "ko": "시스템 구성 요소",
+    "es": "Componente del sistema"
+  },
+  "onboarding.helperLidBenefit": {
+    "en": "Keep long tasks running with the lid closed.",
+    "zh-Hans": "合盖后，让长任务继续。",
+    "zh-Hant": "合蓋後，讓長時間工作繼續。",
+    "ja": "ふたを閉じても長時間作業を継続。",
+    "ko": "덮개를 닫아도 긴 작업을 계속 실행합니다.",
+    "es": "Mantén tareas activas con la tapa cerrada."
+  },
+  "onboarding.helperEnergyBenefit": {
+    "en": "Switch Energy Modes with fewer password interruptions.",
+    "zh-Hans": "切换能源模式，减少密码打断。",
+    "zh-Hant": "切換能源模式，減少密碼打斷。",
+    "ja": "エネルギーモード切替時のパスワード確認を軽減。",
+    "ko": "에너지 모드를 바꿀 때 암호 요청을 줄입니다.",
+    "es": "Cambia el modo de energía con menos solicitudes de contraseña."
+  },
+  "onboarding.updateHelper": {
+    "en": "Update system component…",
+    "zh-Hans": "更新系统组件…",
+    "zh-Hant": "更新系統元件…",
+    "ja": "システムコンポーネントを更新…",
+    "ko": "시스템 구성 요소 업데이트…",
+    "es": "Actualizar componente del sistema…"
+  },
+  "onboarding.installHelper": {
+    "en": "Install system component…",
+    "zh-Hans": "安装系统组件…",
+    "zh-Hant": "安裝系統元件…",
+    "ja": "システムコンポーネントをインストール…",
+    "ko": "시스템 구성 요소 설치…",
+    "es": "Instalar componente del sistema…"
+  },
+  "onboarding.helperRecovery": {
+    "en": "No response does not necessarily mean missing permission. If macOS reports background activity was disabled, allow Coddle in Login Items & Extensions. Otherwise retry installation.",
+    "zh-Hans": "服务未响应不一定是权限问题。仅当系统提示后台项目关闭时，在“登录项与扩展”允许 Coddle；否则请重试安装。",
+    "zh-Hant": "服務未回應不一定是權限問題。僅當系統提示背景項目關閉時，在「登入項目與延伸功能」允許 Coddle；否則請重試安裝。",
+    "ja": "応答がない原因が権限とは限りません。バックグラウンド動作が無効と表示された場合はログイン項目で許可し、それ以外は再インストールしてください。",
+    "ko": "응답 없음이 권한 문제인 것은 아닙니다. macOS가 백그라운드 활동 비활성화를 알린 경우 로그인 항목에서 허용하고, 아니면 설치를 다시 시도하세요.",
+    "es": "La falta de respuesta no siempre es un permiso. Si macOS indica actividad desactivada, permite Coddle en Ítems de inicio y extensiones; si no, reinstala."
+  },
+  "onboarding.helperPrivacy": {
+    "en": "Enter your password only in the macOS dialog. Installing does not start keep-awake or change Energy Mode.",
+    "zh-Hans": "密码只在 macOS 窗口输入。安装不会自动开启保活或切换能源模式。",
+    "zh-Hant": "密碼只在 macOS 視窗輸入。安裝不會自動開啟保活或切換能源模式。",
+    "ja": "パスワードは macOS の画面だけに入力します。インストールだけではスリープ防止やモード変更は行いません。",
+    "ko": "암호는 macOS 대화상자에만 입력하세요. 설치만으로 절전 방지나 에너지 모드가 변경되지는 않습니다.",
+    "es": "Introduce la contraseña solo en el diálogo de macOS. La instalación no activa tareas ni cambia el modo de energía."
+  },
+  "onboarding.installing": {
+    "en": "Waiting for installation and compatibility check…",
+    "zh-Hans": "等待安装与兼容检查完成…",
+    "zh-Hant": "等待安裝與相容檢查完成…",
+    "ja": "インストールと互換性の確認中…",
+    "ko": "설치 및 호환성 확인 대기 중…",
+    "es": "Esperando instalación y comprobación…"
+  },
+  "onboarding.downgrade": {
+    "en": "Use open-lid tasks instead",
+    "zh-Hans": "改用开盖保活",
+    "zh-Hant": "改用開蓋保活",
+    "ja": "ふたを開いて使用",
+    "ko": "덮개를 열고 사용",
+    "es": "Usar con la tapa abierta"
+  },
+  "onboarding.skipHelper": {
+    "en": "Skip installation; use basic features",
+    "zh-Hans": "暂不安装，继续基础功能",
+    "zh-Hant": "暫不安裝，繼續基本功能",
+    "ja": "インストールせず基本機能を使用",
+    "ko": "설치 건너뛰고 기본 기능 사용",
+    "es": "Omitir y usar funciones básicas"
+  },
+  "onboarding.helperSkipped": {
+    "en": "System component skipped. Closed-lid tasks are unavailable; Energy Mode changes may still ask for a password.",
+    "zh-Hans": "已跳过组件。合盖保活未就绪，切换能源模式仍可能询问密码。",
+    "zh-Hant": "已略過元件。合蓋保活未就緒，切換能源模式仍可能詢問密碼。",
+    "ja": "システムコンポーネントは未準備です。ふたを閉じた作業は使えず、モード変更時にパスワードを求める場合があります。",
+    "ko": "구성 요소를 건너뛰었습니다. 덮개 닫기 기능은 준비되지 않았으며 에너지 모드 변경 시 암호가 필요할 수 있습니다.",
+    "es": "Componente omitido. No se admite la tapa cerrada y cambiar energía puede pedir contraseña."
+  },
+  "onboarding.helperSkippedShort": {
+    "en": "Skipped",
+    "zh-Hans": "已跳过",
+    "zh-Hant": "已略過",
+    "ja": "スキップ済み",
+    "ko": "건너뜀",
+    "es": "Omitido"
+  },
+  "onboarding.downgradeTitle": {
+    "en": "Change to open-lid tasks?",
+    "zh-Hans": "改为开盖运行？",
+    "zh-Hant": "改為開蓋執行？",
+    "ja": "ふたを開いて使う設定に変更？",
+    "ko": "덮개를 열고 사용하도록 변경할까요?",
+    "es": "¿Cambiar a la tapa abierta?"
+  },
+  "onboarding.downgradeBody": {
+    "en": "This changes your plan: closing the lid may put the Mac to sleep. Charging and open-lid tasks remain available.",
+    "zh-Hans": "这会改变任务方案：合盖后不继续保活。充电与开盖保活仍可用。",
+    "zh-Hant": "這會改變工作方案：合蓋後不繼續保活。充電與開蓋保活仍可用。",
+    "ja": "ふたを閉じるとスリープする設定に変わります。充電と開いた状態の作業は引き続き使えます。",
+    "ko": "덮개를 닫으면 잠자기에 들어갈 수 있는 설정으로 바뀝니다. 충전과 열린 상태의 작업은 계속 사용할 수 있습니다.",
+    "es": "Al cerrar la tapa, el Mac podrá reposar. La carga y las tareas con tapa abierta seguirán disponibles."
+  },
+  "onboarding.cancel": {
+    "en": "Cancel",
+    "zh-Hans": "取消",
+    "zh-Hant": "取消",
+    "ja": "キャンセル",
+    "ko": "취소",
+    "es": "Cancelar"
+  },
+  "onboarding.continuityTitle": {
+    "en": "Get ready for everyday use",
+    "zh-Hans": "让日常使用，从这里准备好",
+    "zh-Hant": "讓日常使用，從這裡準備好",
+    "ja": "日々の利用に備えましょう",
+    "ko": "매일 사용할 준비하기",
+    "es": "Prepara el uso diario"
+  },
+  "onboarding.continuityBody": {
+    "en": "Complete the relevant system approvals here, or explicitly choose to enable them later.",
+    "zh-Hans": "在这里完成所需系统批准，也可明确选择稍后开启。",
+    "zh-Hant": "在這裡完成所需系統批准，也可明確選擇稍後開啟。",
+    "ja": "必要なシステム許可をここで完了するか、あとで有効にできます。",
+    "ko": "필요한 시스템 권한을 여기서 완료하거나 나중에 켜도록 선택하세요.",
+    "es": "Completa aquí los permisos necesarios o elige activarlos después."
+  },
+  "onboarding.loginTitle": {
+    "en": "Run automatically after login",
+    "zh-Hans": "登录后，自动继续运行",
+    "zh-Hant": "登入後，自動繼續執行",
+    "ja": "ログイン後に自動起動",
+    "ko": "로그인 후 자동 실행",
+    "es": "Ejecutar al iniciar sesión"
+  },
+  "onboarding.loginAwakeBody": {
+    "en": "Continue charging management and resume keep-awake that you have not stopped.",
+    "zh-Hans": "继续管理充电，并恢复尚未主动停止的保活。",
+    "zh-Hant": "繼續管理充電，並恢復尚未主動停止的保活。",
+    "ja": "充電管理を続け、停止していないスリープ防止を再開します。",
+    "ko": "충전을 관리하고 중지하지 않은 절전 방지를 재개합니다.",
+    "es": "Continúa la gestión de carga y reanuda las tareas que no hayas detenido."
+  },
+  "onboarding.loginBody": {
+    "en": "Manage charging without opening Coddle manually every day.",
+    "zh-Hans": "持续管理充电，不必每天手动打开 Coddle。",
+    "zh-Hant": "持續管理充電，不必每天手動開啟 Coddle。",
+    "ja": "毎日手動で開かなくても充電を管理します。",
+    "ko": "매일 직접 열지 않아도 충전을 관리합니다.",
+    "es": "Gestiona la carga sin abrir Coddle manualmente cada día."
+  },
+  "onboarding.loginStatusBody": {
+    "en": "Open Coddle at login so its status is available in the menu bar.",
+    "zh-Hans": "下次登录自动打开 Coddle，从菜单栏查看状态。",
+    "zh-Hant": "下次登入自動開啟 Coddle，從選單列查看狀態。",
+    "ja": "ログイン時に開き、メニューバーで状態を確認できます。",
+    "ko": "로그인할 때 열어 메뉴 막대에서 상태를 확인합니다.",
+    "es": "Abre Coddle al iniciar sesión y consulta su estado en la barra."
+  },
+  "onboarding.manualLogin": {
+    "en": "Open Coddle manually after login.",
+    "zh-Hans": "每次登录后需手动打开 Coddle。",
+    "zh-Hant": "每次登入後需手動開啟 Coddle。",
+    "ja": "ログイン後は手動で Coddle を開きます。",
+    "ko": "로그인 후 Coddle을 직접 열어야 합니다.",
+    "es": "Abre Coddle manualmente tras iniciar sesión."
+  },
+  "onboarding.loginSettings": {
+    "en": "Open Login Items…",
+    "zh-Hans": "打开登录项设置…",
+    "zh-Hant": "開啟登入項目設定…",
+    "ja": "ログイン項目を開く…",
+    "ko": "로그인 항목 열기…",
+    "es": "Abrir ítems de inicio…"
+  },
+  "onboarding.enableLogin": {
+    "en": "Enable automatic launch",
+    "zh-Hans": "启用登录运行",
+    "zh-Hant": "啟用登入執行",
+    "ja": "自動起動を有効にする",
+    "ko": "자동 실행 켜기",
+    "es": "Activar inicio automático"
+  },
+  "onboarding.skipLogin": {
+    "en": "I'll open it manually",
+    "zh-Hans": "我会手动打开",
+    "zh-Hant": "我會手動開啟",
+    "ja": "手動で開く",
+    "ko": "직접 열겠습니다",
+    "es": "Lo abriré manualmente"
+  },
+  "onboarding.installLocation": {
+    "en": "Move Coddle to Applications, reopen it and continue this setup. macOS could not locate the login item.",
+    "zh-Hans": "请将 Coddle 移到“应用程序”，重新打开后继续。系统暂未找到可注册的登录项。",
+    "zh-Hant": "請將 Coddle 移到「應用程式」，重新開啟後繼續。系統暫未找到可註冊的登入項目。",
+    "ja": "Coddle をアプリケーションに移動して開き直してください。ログイン項目を登録できません。",
+    "ko": "Coddle을 응용 프로그램으로 옮긴 뒤 다시 열어 계속하세요. 로그인 항목을 찾지 못했습니다.",
+    "es": "Mueve Coddle a Aplicaciones y vuelve a abrirlo. macOS no encontró el ítem de inicio."
+  },
+  "onboarding.notificationTitle": {
+    "en": "Let me know when battery is low",
+    "zh-Hans": "低电量时，及时提醒我",
+    "zh-Hant": "低電量時，及時提醒我",
+    "ja": "バッテリー残量低下を通知",
+    "ko": "배터리 부족 알림 받기",
+    "es": "Avisarme de batería baja"
+  },
+  "onboarding.notificationBody": {
+    "en": "Only for low-battery reminders. You can turn them off any time; we won't keep asking.",
+    "zh-Hans": "仅用于低电量提醒。可随时关闭，关闭后不会再主动打扰。",
+    "zh-Hant": "僅用於低電量提醒。可隨時關閉，關閉後不會再主動打擾。",
+    "ja": "残量低下のお知らせだけに使います。いつでもオフにでき、繰り返し許可を求めません。",
+    "ko": "배터리 부족 알림에만 사용합니다. 언제든 끌 수 있으며 반복해서 권한을 요청하지 않습니다.",
+    "es": "Solo para batería baja. Puedes desactivarlos cuando quieras; no insistiremos."
+  },
+  "onboarding.reminderDisabled": {
+    "en": "Low-battery reminders are off; no further automatic permission requests.",
+    "zh-Hans": "低电量提醒未启用，不会再次主动请求授权。",
+    "zh-Hant": "低電量提醒未啟用，不會再次主動請求授權。",
+    "ja": "残量低下通知はオフです。自動で許可を再要求しません。",
+    "ko": "배터리 부족 알림이 꺼져 있으며 권한을 자동으로 다시 요청하지 않습니다.",
+    "es": "Avisos desactivados; no se volverá a pedir permiso automáticamente."
+  },
+  "onboarding.reminderOffShort": {
+    "en": "Off",
+    "zh-Hans": "已关闭",
+    "zh-Hant": "已關閉",
+    "ja": "オフ",
+    "ko": "꺼짐",
+    "es": "Desactivados"
+  },
+  "onboarding.testNotification": {
+    "en": "Send a test notification",
+    "zh-Hans": "发送测试通知",
+    "zh-Hant": "傳送測試通知",
+    "ja": "テスト通知を送信",
+    "ko": "테스트 알림 보내기",
+    "es": "Enviar notificación de prueba"
+  },
+  "onboarding.notificationSettings": {
+    "en": "Open notification settings…",
+    "zh-Hans": "打开通知设置…",
+    "zh-Hant": "開啟通知設定…",
+    "ja": "通知設定を開く…",
+    "ko": "알림 설정 열기…",
+    "es": "Abrir ajustes de notificaciones…"
+  },
+  "onboarding.allowNotification": {
+    "en": "Allow low-battery alerts…",
+    "zh-Hans": "允许低电量通知…",
+    "zh-Hant": "允許低電量通知…",
+    "ja": "残量低下通知を許可…",
+    "ko": "배터리 부족 알림 허용…",
+    "es": "Permitir avisos…"
+  },
+  "onboarding.skipNotification": {
+    "en": "No reminders for now",
+    "zh-Hans": "暂不接收提醒",
+    "zh-Hant": "暫不接收提醒",
+    "ja": "今は通知しない",
+    "ko": "지금은 알림 받지 않기",
+    "es": "Sin avisos por ahora"
+  },
+  "onboarding.returnToCheck": {
+    "en": "Status is checked again when you return from System Settings. Opening Settings alone does not grant permission.",
+    "zh-Hans": "从系统设置回来会重新检查，不把打开设置当成已经批准。",
+    "zh-Hant": "從系統設定回來會重新檢查，不把開啟設定當成已經批准。",
+    "ja": "システム設定から戻ると再確認します。設定を開くだけでは許可されません。",
+    "ko": "시스템 설정에서 돌아오면 다시 확인합니다. 설정을 여는 것만으로 권한이 허용되지는 않습니다.",
+    "es": "Se comprueba de nuevo al volver. Abrir Ajustes no concede el permiso."
+  },
+  "onboarding.result.idle": {
+    "en": "Not started",
+    "zh-Hans": "尚未启用",
+    "zh-Hant": "尚未啟用",
+    "ja": "未開始",
+    "ko": "아직 시작 안 함",
+    "es": "Sin iniciar"
+  },
+  "onboarding.result.requested": {
+    "en": "Applying…",
+    "zh-Hans": "正在应用…",
+    "zh-Hant": "正在套用…",
+    "ja": "適用中…",
+    "ko": "적용 중…",
+    "es": "Aplicando…"
+  },
+  "onboarding.result.confirmed": {
+    "en": "Confirmed active",
+    "zh-Hans": "已确认生效",
+    "zh-Hant": "已確認生效",
+    "ja": "適用を確認済み",
+    "ko": "적용 확인됨",
+    "es": "Aplicación confirmada"
+  },
+  "onboarding.result.failed": {
+    "en": "Not active",
+    "zh-Hans": "未生效",
+    "zh-Hant": "未生效",
+    "ja": "未適用",
+    "ko": "적용되지 않음",
+    "es": "Sin aplicar"
+  },
+  "onboarding.result.unknown": {
+    "en": "Result not confirmed",
+    "zh-Hans": "结果待确认",
+    "zh-Hant": "結果待確認",
+    "ja": "結果未確認",
+    "ko": "결과 확인 필요",
+    "es": "Resultado sin confirmar"
+  },
+  "onboarding.chargeResult": {
+    "en": "Charging plan",
+    "zh-Hans": "充电方案",
+    "zh-Hant": "充電方案",
+    "ja": "充電プラン",
+    "ko": "충전 설정",
+    "es": "Plan de carga"
+  },
+  "onboarding.ordinaryResult": {
+    "en": "Automatic sleep prevention",
+    "zh-Hans": "防止自动休眠",
+    "zh-Hant": "防止自動睡眠",
+    "ja": "自動スリープ防止",
+    "ko": "자동 잠자기 방지",
+    "es": "Prevención del reposo automático"
+  },
+  "onboarding.lidResult": {
+    "en": "Closed-lid operation",
+    "zh-Hans": "合盖运行",
+    "zh-Hant": "闔蓋運作",
+    "ja": "蓋を閉じた状態での動作",
+    "ko": "덮개를 닫은 상태의 실행",
+    "es": "Funcionamiento con tapa cerrada"
+  },
+  "onboarding.confirmTitle": {
+    "en": "Confirm, then start your plan",
+    "zh-Hans": "确认后，开始你的使用方式",
+    "zh-Hant": "確認後，開始你的使用方式",
+    "ja": "確認して使い始めましょう",
+    "ko": "확인 후 설정 시작",
+    "es": "Confirma y empieza"
+  },
+  "onboarding.confirmBody": {
+    "en": "The button below applies your charging and sleep choices. Completed items stay completed if another item fails.",
+    "zh-Hans": "下方按钮才会改变充电或睡眠状态。部分失败会保留已成功的项目。",
+    "zh-Hant": "下方按鈕才會改變充電或睡眠狀態。部分失敗會保留已成功的項目。",
+    "ja": "下のボタンで充電やスリープ設定を適用します。一部が失敗しても成功した項目は保持されます。",
+    "ko": "아래 버튼을 눌러야 충전 및 잠자기 설정이 바뀝니다. 일부가 실패해도 성공한 항목은 유지됩니다.",
+    "es": "El botón aplica los cambios de carga y reposo. Si algo falla, se conservan los resultados correctos."
+  },
+  "onboarding.confirmNoChangesTitle": {
+    "en": "Confirm your setup",
+    "zh-Hans": "确认设置",
+    "zh-Hant": "確認設定",
+    "ja": "設定を確認",
+    "ko": "설정 확인",
+    "es": "Confirma tu configuración"
+  },
+  "onboarding.confirmNoChangesBody": {
+    "en": "Your charging and sleep settings will stay as they are.",
+    "zh-Hans": "保留当前充电和睡眠设置。",
+    "zh-Hant": "保留目前充電和睡眠設定。",
+    "ja": "充電とスリープの設定は現在のまま維持されます。",
+    "ko": "현재 충전 및 잠자기 설정이 유지됩니다.",
+    "es": "La configuración de carga y reposo se mantendrá como está."
+  },
+  "onboarding.limitChange": {
+    "en": "Current limit {n}% → daily {n}%. This does not discharge the battery or instantly lower its charge.",
+    "zh-Hans": "当前上限 {n}% → 日常 {n}%。不会主动放电，也不会立即降低当前电量。",
+    "zh-Hant": "目前上限 {n}% → 日常 {n}%。不會主動放電，也不會立即降低目前電量。",
+    "ja": "現在の上限 {n}% → 通常 {n}%。放電や残量の即時低下は行いません。",
+    "ko": "현재 한도 {n}% → 일상 {n}%. 배터리를 방전하거나 즉시 잔량을 낮추지 않습니다.",
+    "es": "Límite actual {n}% → diario {n}%. No descarga la batería ni reduce su nivel al instante."
+  },
+  "onboarding.lidPlan": {
+    "en": "Prevent automatic sleep and also keep running with the lid closed",
+    "zh-Hans": "开启防止自动休眠，并在合盖后继续运行",
+    "zh-Hant": "開啟防止自動睡眠，並在闔蓋後繼續運作",
+    "ja": "自動スリープを防ぎ、蓋を閉じても動作を続ける",
+    "ko": "자동 잠자기를 방지하고 덮개를 닫아도 계속 실행",
+    "es": "Evitar el reposo automático y seguir funcionando con la tapa cerrada"
+  },
+  "onboarding.openPlan": {
+    "en": "Prevent automatic system sleep; let the display turn off",
+    "zh-Hans": "系统自动睡眠暂停，屏幕可熄灭",
+    "zh-Hant": "系統自動睡眠暫停，螢幕可關閉",
+    "ja": "自動スリープを防止し、画面は消灯可能",
+    "ko": "시스템 자동 잠자기를 방지하며 화면은 꺼질 수 있음",
+    "es": "Evitar reposo; permitir apagar pantalla"
+  },
+  "onboarding.noChanges": {
+    "en": "Keep the current charging and sleep setup. Start from the menu bar whenever you need it.",
+    "zh-Hans": "这次不改变充电或睡眠设置，需要时从菜单栏开始。",
+    "zh-Hant": "這次不改變充電或睡眠設定，需要時從選單列開始。",
+    "ja": "充電とスリープ設定は維持します。必要なときにメニューバーから始められます。",
+    "ko": "현재 충전 및 잠자기 설정을 유지합니다. 필요할 때 메뉴 막대에서 시작하세요.",
+    "es": "Conserva la carga y el reposo actuales. Empieza desde la barra cuando lo necesites."
+  },
+  "onboarding.notNeeded": {
+    "en": "Not needed on this Mac",
+    "zh-Hans": "当前设备不需要",
+    "zh-Hant": "目前裝置不需要",
+    "ja": "この Mac では不要",
+    "ko": "이 Mac에서는 필요 없음",
+    "es": "No se necesita en este Mac"
+  },
+  "onboarding.loginReady": {
+    "en": "Enabled",
+    "zh-Hans": "已启用",
+    "zh-Hant": "已啟用",
+    "ja": "有効",
+    "ko": "켜짐",
+    "es": "Activado"
+  },
+  "onboarding.loginManualShort": {
+    "en": "Open manually",
+    "zh-Hans": "手动打开",
+    "zh-Hant": "手動開啟",
+    "ja": "手動で起動",
+    "ko": "수동 실행",
+    "es": "Abrir manualmente"
+  },
+  "onboarding.notificationReady": {
+    "en": "Allowed",
+    "zh-Hans": "已允许",
+    "zh-Hant": "已允許",
+    "ja": "許可済み",
+    "ko": "허용됨",
+    "es": "Permitido"
+  },
+  "onboarding.networkTitle": {
+    "en": "Set up away protection",
+    "zh-Hans": "设置离开保护",
+    "zh-Hant": "設定離開保護",
+    "ja": "不在時の保護を設定",
+    "ko": "자리 비움 보호 설정",
+    "es": "Configura la protección al ausentarse"
+  },
+  "onboarding.networkRemembered": {
+    "en": "Usual network saved locally. Protection still depends on power, absence and inactivity conditions.",
+    "zh-Hans": "常用网络已记录，只存本机；离开保护仍需满足供电、离网和无人使用等条件。",
+    "zh-Hant": "常用網路已記錄，只存本機；離開保護仍需滿足供電、離網和無人使用等條件。",
+    "ja": "通常のネットワークを本機に保存しました。電源、離席、未使用の条件を満たす必要があります。",
+    "ko": "평소 네트워크가 기기에 저장되었습니다. 전원, 이탈 및 미사용 조건도 충족해야 합니다.",
+    "es": "Red habitual guardada localmente. La protección depende también de energía, ausencia e inactividad."
+  },
+  "onboarding.networkBody": {
+    "en": "Optionally remember where you run tasks. Until protection is ready, stop keep-awake before putting the Mac in a bag.",
+    "zh-Hans": "可记住常跑任务的网络。离开保护未就绪时，装包前请停止保活。",
+    "zh-Hant": "可記住常執行工作的網路。離開保護未就緒時，裝包前請停止保活。",
+    "ja": "作業する場所のネットワークを記憶できます。準備完了前は、かばんに入れる前に停止してください。",
+    "ko": "작업하는 네트워크를 기억할 수 있습니다. 보호가 준비되기 전에는 가방에 넣기 전에 중지하세요.",
+    "es": "Puedes recordar la red de trabajo. Hasta que esté lista, detén la función antes de guardar el Mac."
+  },
+  "onboarding.rememberNetwork": {
+    "en": "This is my usual network",
+    "zh-Hans": "这是我的常用网络",
+    "zh-Hant": "這是我的常用網路",
+    "ja": "通常使うネットワークにする",
+    "ko": "평소 사용하는 네트워크입니다",
+    "es": "Esta es mi red habitual"
+  },
+  "onboarding.repairPreparation": {
+    "en": "Return to the item that needs attention",
+    "zh-Hans": "返回修复未就绪项目",
+    "zh-Hant": "返回修復未就緒項目",
+    "ja": "未準備の項目に戻る",
+    "ko": "준비되지 않은 항목으로 돌아가기",
+    "es": "Volver al elemento pendiente"
+  },
+  "onboarding.preparationNeedsAttention": {
+    "en": "Resolve the items below before continuing.",
+    "zh-Hans": "请先处理下方待确认项，再继续。",
+    "zh-Hant": "請先處理下方待確認項，再繼續。",
+    "ja": "続ける前に、下の項目を確認して対応してください。",
+    "ko": "계속하기 전에 아래 항목을 확인하고 해결하세요.",
+    "es": "Resuelve los elementos siguientes antes de continuar."
+  },
+  "onboarding.smartPrediction": {
+    "en": "Recorded power use suggests unplugging around {n}:00. The limit rises during the top-up window; a full battery at departure is not guaranteed.",
+    "zh-Hans": "根据接电记录，当前估计 {n}:00 附近离开电源。补电时段会提高上限，不保证出门时已充满。",
+    "zh-Hant": "根據接電記錄，目前估計 {n}:00 附近離開電源。補電時段會提高上限，不保證出門時已充滿。",
+    "ja": "電源利用の記録から {n}:00 ごろの取り外しを予測しています。その前に上限を上げますが、満充電は保証されません。",
+    "ko": "전원 사용 기록상 {n}:00쯤 전원을 분리할 것으로 예상합니다. 추가 충전 시간에 한도를 높이지만 외출 시 완충을 보장하지는 않습니다.",
+    "es": "Según el uso registrado, se estima desconexión hacia las {n}:00. Se elevará el límite antes; no se garantiza carga completa al salir."
+  },
+  "onboarding.smartLearning": {
+    "en": "No usable prediction yet. Keep the daily limit while recorded power use builds an estimate.",
+    "zh-Hans": "目前还没有可用预测。先按日常上限保护，根据接电记录估计补电时段。",
+    "zh-Hant": "目前還沒有可用預測。先按日常上限保護，根據接電記錄估計補電時段。",
+    "ja": "まだ予測できません。通常の上限を維持し、電源利用の記録から推定します。",
+    "ko": "아직 예측할 수 없습니다. 일상 한도를 유지하며 전원 사용 기록으로 시간을 추정합니다.",
+    "es": "Aún no hay una predicción útil. Se mantiene el límite diario mientras se registra el uso."
+  },
+  "onboarding.awakeStarted": {
+    "en": "Automatic sleep prevention is on",
+    "zh-Hans": "防止自动休眠已开启",
+    "zh-Hant": "防止自動睡眠已開啟",
+    "ja": "自動スリープ防止はオンです",
+    "ko": "자동 잠자기 방지가 켜졌습니다",
+    "es": "La prevención del reposo automático está activada"
+  },
+  "onboarding.awakeActiveBody": {
+    "en": "Turning the main switch off stops all sleep prevention and keeps your display and lid preferences. They resume when you turn it on again. Reopening Coddle only resumes sleep prevention if the main switch is on. Task completion is not detected automatically.",
+    "zh-Hans": "关闭主开关会停止全部保活并保留屏幕与合盖偏好，再次开启时沿用。重新打开 Coddle 只会在主开关仍开启时恢复保活。应用不会自动判断任务是否结束。",
+    "zh-Hant": "關閉主開關會停止全部保活並保留螢幕與闔蓋偏好，再次開啟時沿用。重新開啟 Coddle 只會在主開關仍開啟時恢復保活。應用程式不會自動判斷工作是否結束。",
+    "ja": "メインスイッチをオフにするとすべてのスリープ防止を停止し、画面と蓋の設定は次回オンにするときに引き継ぎます。Coddle を開き直しても、メインスイッチがオンの場合だけ再開します。作業完了の自動判定はしません。",
+    "ko": "기본 스위치를 끄면 모든 잠자기 방지가 중지되고 화면과 덮개 설정은 다음에 켤 때 다시 적용됩니다. Coddle을 다시 열어도 기본 스위치가 켜져 있어야만 잠자기 방지가 재개됩니다. 작업 완료는 자동 감지하지 않습니다.",
+    "es": "Desactivar el interruptor principal detiene toda prevención del reposo y conserva las preferencias de pantalla y tapa para la próxima activación. Abrir Coddle solo reanuda la prevención si el interruptor principal está activado. No detecta el fin de las tareas."
+  },
+  "onboarding.chargeStarted": {
+    "en": "Battery protection has started",
+    "zh-Hans": "电池保护，已经开始",
+    "zh-Hant": "電池保護，已經開始",
+    "ja": "バッテリー保護を開始しました",
+    "ko": "배터리 보호가 시작되었습니다",
+    "es": "La protección está activa"
+  },
+  "onboarding.readyTitle": {
+    "en": "Ready to view your Mac's status",
+    "zh-Hans": "已经准备好查看状态",
+    "zh-Hant": "已經準備好查看狀態",
+    "ja": "状態を確認できます",
+    "ko": "상태를 확인할 준비가 되었습니다",
+    "es": "Listo para consultar el estado"
+  },
+  "onboarding.resultsBody": {
+    "en": "These results have been checked.",
+    "zh-Hans": "以下为已确认的结果。",
+    "zh-Hant": "以下為已確認的結果。",
+    "ja": "以下は確認済みの結果です。",
+    "ko": "다음은 확인된 결과입니다.",
+    "es": "Estos resultados se han comprobado."
+  },
+  "onboarding.firstAction": {
+    "en": "Remember one thing for next time",
+    "zh-Hans": "下次用到时，记住这一件事",
+    "zh-Hant": "下次用到時，記住這一件事",
+    "ja": "次に使うときのポイント",
+    "ko": "다음에 사용할 때 기억할 한 가지",
+    "es": "Una cosa para la próxima vez"
+  },
+  "onboarding.firstStop": {
+    "en": "When the task ends or before packing your Mac, turn off sleep prevention in the menu bar and confirm it has stopped. This stops display and closed-lid control too, while keeping those preferences for next time.",
+    "zh-Hans": "任务结束或装包前，在菜单栏关闭防止休眠并确认已停止。屏幕常亮和合盖运行也会停止，但偏好保留供下次开启时使用。",
+    "zh-Hant": "工作結束或裝包前，在選單列關閉防止睡眠並確認已停止。螢幕常亮和闔蓋運作也會停止，但偏好保留供下次開啟時使用。",
+    "ja": "作業完了時や収納前に、メニューバーのスリープ防止をオフにし、停止を確認してください。画面の常時点灯と蓋を閉じた状態での動作維持も停止しますが、設定は次回のために保持します。",
+    "ko": "작업이 끝나거나 가방에 넣기 전에 메뉴 막대에서 잠자기 방지를 끄고 중지되었는지 확인하세요. 화면 켜짐 유지와 덮개를 닫은 상태의 실행도 중지되지만 설정은 다음 사용을 위해 유지됩니다.",
+    "es": "Al terminar o antes de guardar el Mac, desactiva la prevención del reposo en la barra de menús y confirma que se haya detenido. También se detienen la pantalla siempre encendida y el control con tapa cerrada; sus preferencias se conservan para la próxima vez."
+  },
+  "onboarding.firstFull": {
+    "en": "Before going out, choose “Charge to Full Now” in the menu bar. Temporary charging does not change your daily limit.",
+    "zh-Hans": "临时出门前，在菜单栏点“立即充满电”。本次补电不改动日常上限。",
+    "zh-Hant": "臨時出門前，在選單列點選「立即充滿電」。本次補電不改動日常上限。",
+    "ja": "外出前にメニューバーで「今すぐ満充電」を選べます。一時的な充電では通常の上限は変わりません。",
+    "ko": "외출 전에 메뉴 막대에서 “지금 완충”을 선택하세요. 일상 충전 한도는 바뀌지 않습니다.",
+    "es": "Antes de salir, elige «Cargar al máximo ahora». La carga temporal no cambia el límite diario."
+  },
+  "onboarding.firstConnect": {
+    "en": "The Mac is on battery now. Connect power, then check charging from the menu bar.",
+    "zh-Hans": "现在未接电。接上电源后，再从菜单栏查看充电状态。",
+    "zh-Hant": "現在未接電。接上電源後，再從選單列查看充電狀態。",
+    "ja": "現在はバッテリーで動作中です。電源をつないでメニューバーから充電状態を確認してください。",
+    "ko": "현재 배터리로 사용 중입니다. 전원을 연결한 후 메뉴 막대에서 충전 상태를 확인하세요.",
+    "es": "Ahora usa batería. Conecta la corriente y comprueba la carga en la barra."
+  },
+  "onboarding.firstStatus": {
+    "en": "Check status from the menu bar. If supported, adjust the daily charging limit when you need more charge.",
+    "zh-Hans": "从菜单栏查看状态；设备支持时，可按需要调整日常充电上限。",
+    "zh-Hant": "從選單列查看狀態；裝置支援時，可按需要調整日常充電上限。",
+    "ja": "メニューバーで状態を確認できます。対応機種では必要に応じて充電上限を変更できます。",
+    "ko": "메뉴 막대에서 상태를 확인하세요. 지원 기기에서는 필요에 따라 충전 한도를 바꿀 수 있습니다.",
+    "es": "Consulta el estado en la barra y ajusta el límite diario si el equipo lo admite."
+  },
+  "onboarding.findMenu": {
+    "en": "Open Coddle from its icon at the top of your screen.",
+    "zh-Hans": "以后从屏幕顶部的 Coddle 图标打开。",
+    "zh-Hant": "以後從螢幕頂部的 Coddle 圖示開啟。",
+    "ja": "画面上部の Coddle アイコンから開けます。",
+    "ko": "화면 상단의 Coddle 아이콘으로 여세요.",
+    "es": "Abre Coddle desde su icono en la parte superior."
+  },
+  "onboarding.stopTask": {
+    "en": "Turn Off Sleep Prevention",
+    "zh-Hans": "关闭防止休眠",
+    "zh-Hant": "關閉防止睡眠",
+    "ja": "スリープ防止をオフにする",
+    "ko": "잠자기 방지 끄기",
+    "es": "Desactivar la prevención del reposo"
+  },
+  "onboarding.retryStop": {
+    "en": "Retry Stopping",
+    "zh-Hans": "重试停止",
+    "zh-Hant": "重試停止",
+    "ja": "停止を再試行",
+    "ko": "중지 다시 시도",
+    "es": "Reintentar la detención"
+  },
+  "onboarding.stopping": {
+    "en": "Stopping and checking the system…",
+    "zh-Hans": "正在停止并检查系统状态…",
+    "zh-Hant": "正在停止並檢查系統狀態…",
+    "ja": "停止してシステム状態を確認中…",
+    "ko": "중지 및 시스템 상태 확인 중…",
+    "es": "Deteniendo y comprobando…"
+  },
+  "onboarding.stopped": {
+    "en": "All Coddle keep-awake controls are stopped. macOS and other apps now determine sleep behavior.",
+    "zh-Hans": "Coddle 保活已全部停止，后续按系统及其他应用的规则运行。",
+    "zh-Hant": "Coddle 保活已全部停止，後續按系統及其他應用程式的規則運作。",
+    "ja": "Coddle の動作維持をすべて停止しました。以降は macOS と他のアプリの設定に従います。",
+    "ko": "Coddle의 모든 실행 유지를 중지했습니다. 이후 잠자기는 macOS와 다른 앱의 설정을 따릅니다.",
+    "es": "Todos los controles de actividad de Coddle están detenidos. macOS y las demás apps determinan el reposo."
+  },
+  "onboarding.stopPartial": {
+    "en": "Some controls could not be confirmed off. Check the states below and retry before closing the lid or packing the Mac.",
+    "zh-Hans": "部分保活尚未确认关闭。请检查各项状态并重试，暂时不要合盖装包。",
+    "zh-Hant": "部分保活尚未確認關閉。請檢查各項狀態並重試，暫時不要闔蓋裝包。",
+    "ja": "一部の停止を確認できません。状態を確認して再試行するまで、蓋を閉じたり収納したりしないでください。",
+    "ko": "일부 제어가 꺼졌는지 확인하지 못했습니다. 상태를 확인하고 다시 시도하기 전에는 덮개를 닫거나 가방에 넣지 마세요.",
+    "es": "No se confirmó la desactivación de algunos controles. Revisa los estados y reintenta antes de cerrar la tapa o guardar el Mac."
+  },
+  "onboarding.stopSaveFailed": {
+    "en": "Current keep-awake was asked to stop, but saving failed. Restart behavior is not yet guaranteed. Retry saving and stopping.",
+    "zh-Hans": "已尝试停止当前保活，但保存失败，尚不能保证重启后的状态。请重试保存与停止。",
+    "zh-Hant": "已嘗試停止目前保活，但儲存失敗，尚不能保證重新啟動後的狀態。請重試儲存與停止。",
+    "ja": "停止を要求しましたが保存に失敗しました。再起動後の状態は保証できません。保存と停止を再試行してください。",
+    "ko": "중지를 요청했지만 저장에 실패했습니다. 재시작 후 상태를 보장할 수 없으니 다시 시도하세요.",
+    "es": "Se solicitó detener, pero no se pudo guardar. El estado tras reiniciar no está garantizado. Reinténtalo."
+  },
+  "onboarding.storageUnsupported": {
+    "en": "This setup record is from an unsupported version. Keep it intact and reopen with a compatible Coddle version.",
+    "zh-Hans": "设置记录版本不兼容，请保留记录并使用兼容的 Coddle 版本打开。",
+    "zh-Hant": "設定記錄版本不相容，請保留記錄並使用相容的 Coddle 版本開啟。",
+    "ja": "設定記録のバージョンに非対応です。記録を保持し、対応バージョンで開いてください。",
+    "ko": "설정 기록 버전이 호환되지 않습니다. 기록을 보존하고 호환 버전으로 여세요.",
+    "es": "El registro usa una versión incompatible. Consérvalo y abre una versión compatible de Coddle."
+  },
+  "onboarding.storageFailed": {
+    "en": "Setup progress or configuration could not be read or saved. Installation, authorization and activation are paused. Correct the file or access problem, then retry.",
+    "zh-Hans": "无法读取或保存设置进度及配置。安装、授权和启用已暂停；请修复文件或访问问题后重试。",
+    "zh-Hant": "無法讀取或儲存設定進度及配置。安裝、授權和啟用已暫停；請修復檔案或存取問題後重試。",
+    "ja": "設定記録を読み書きできません。インストール、許可、適用を停止しています。ファイルやアクセスの問題を修正し再試行してください。",
+    "ko": "설정 기록을 읽거나 저장할 수 없어 설치, 권한 요청 및 적용을 일시 중지했습니다. 파일 또는 접근 문제를 수정한 후 다시 시도하세요.",
+    "es": "No se pudo leer o guardar el progreso. Instalación, permisos y activación están pausados. Corrige el acceso o archivo y reintenta."
+  },
+  "onboarding.busy": {
+    "en": "Another operation is still running. Please wait.",
+    "zh-Hans": "另一项操作仍在进行，请稍候。",
+    "zh-Hant": "另一項操作仍在進行，請稍候。",
+    "ja": "別の処理が実行中です。お待ちください。",
+    "ko": "다른 작업이 진행 중입니다. 잠시 기다려 주세요.",
+    "es": "Hay otra operación en curso. Espera."
+  },
+  "onboarding.installCanceled": {
+    "en": "Administrator authorization was canceled. Your choices are saved; retry or choose open-lid use.",
+    "zh-Hans": "管理员授权已取消。选择已保留，可重试或改用开盖运行。",
+    "zh-Hant": "管理員授權已取消。選擇已保留，可重試或改用開蓋執行。",
+    "ja": "管理者の確認がキャンセルされました。選択は保存済みです。再試行するか、ふたを開いて使ってください。",
+    "ko": "관리자 승인이 취소되었습니다. 선택은 저장되었으며 다시 시도하거나 덮개를 열고 사용할 수 있습니다.",
+    "es": "Se canceló la autorización. Tus opciones están guardadas; reintenta o usa la tapa abierta."
+  },
+  "onboarding.installFailed": {
+    "en": "Installation did not finish. Retry; your plan has not been discarded.",
+    "zh-Hans": "安装未完成，请重试。你的方案已保留。",
+    "zh-Hant": "安裝未完成，請重試。你的方案已保留。",
+    "ja": "インストールが完了しませんでした。設定を保持して再試行できます。",
+    "ko": "설치가 완료되지 않았습니다. 설정은 보존되었으니 다시 시도하세요.",
+    "es": "La instalación no terminó. Reintenta; tu plan se conserva."
+  },
+  "onboarding.helperNotReady": {
+    "en": "The system component is not ready yet. Check its status below and update or repair it here.",
+    "zh-Hans": "组件尚未就绪，请按下方状态在这里更新或修复。",
+    "zh-Hant": "元件尚未就緒，請按下方狀態在這裡更新或修復。",
+    "ja": "システムコンポーネントは未準備です。下の状態に応じて更新または修復してください。",
+    "ko": "구성 요소가 준비되지 않았습니다. 아래 상태를 확인하고 업데이트하거나 복구하세요.",
+    "es": "El componente no está listo. Actualízalo o repáralo según el estado de abajo."
+  },
+  "onboarding.loginFailed": {
+    "en": "The login setting could not be changed. Retry or choose manual launch; do not assume it is enabled.",
+    "zh-Hans": "未能更改登录运行设置，请重试或选择手动打开。尚不能视为已启用。",
+    "zh-Hant": "未能更改登入執行設定，請重試或選擇手動開啟。尚不能視為已啟用。",
+    "ja": "ログイン設定を変更できませんでした。再試行または手動起動を選んでください。",
+    "ko": "로그인 설정을 바꾸지 못했습니다. 다시 시도하거나 수동 실행을 선택하세요.",
+    "es": "No se pudo cambiar el inicio. Reintenta o elige abrir manualmente."
+  },
+  "onboarding.settingsFailed": {
+    "en": "System Settings could not be opened. Open it manually, find Coddle under Login Items & Extensions or Notifications, then return to check again.",
+    "zh-Hans": "无法打开系统设置。请手动在“登录项与扩展”或“通知”中找到 Coddle，返回后重新检测。",
+    "zh-Hant": "無法開啟系統設定。請手動在「登入項目與延伸功能」或「通知」中找到 Coddle，返回後重新檢測。",
+    "ja": "システム設定を開けませんでした。ログイン項目または通知で Coddle を探し、戻って再確認してください。",
+    "ko": "시스템 설정을 열지 못했습니다. 로그인 항목 또는 알림에서 Coddle을 찾은 뒤 돌아와 다시 확인하세요.",
+    "es": "No se pudo abrir Ajustes. Busca Coddle en Ítems de inicio o Notificaciones y vuelve a comprobar."
+  },
+  "onboarding.notificationFailed": {
+    "en": "Notification authorization could not be confirmed. Check again or explicitly turn reminders off.",
+    "zh-Hans": "通知授权尚未确认，请重新检测或明确关闭提醒。",
+    "zh-Hant": "通知授權尚未確認，請重新檢測或明確關閉提醒。",
+    "ja": "通知の許可を確認できません。再確認するか通知をオフにしてください。",
+    "ko": "알림 권한을 확인하지 못했습니다. 다시 확인하거나 알림을 끄세요.",
+    "es": "No se confirmó el permiso. Comprueba de nuevo o desactiva los avisos."
+  },
+  "onboarding.networkUnavailable": {
+    "en": "The current network could not be identified or saved. Continue without it, and stop keep-awake before packing your Mac.",
+    "zh-Hans": "当前网络无法识别或保存。可暂不记录，装包前请停止保活。",
+    "zh-Hant": "目前網路無法識別或儲存。可暫不記錄，裝包前請停止保活。",
+    "ja": "ネットワークを識別または保存できません。記録せず続けられますが、収納前に停止してください。",
+    "ko": "현재 네트워크를 식별하거나 저장하지 못했습니다. 기록 없이 계속할 수 있지만 가방에 넣기 전에 중지하세요.",
+    "es": "No se pudo identificar o guardar la red. Continúa sin ella y detén la función antes de guardar el Mac."
+  },
+  "onboarding.prerequisitesChanged": {
+    "en": "A required item changed. Repair the item shown here before applying your plan.",
+    "zh-Hans": "所需准备状态发生变化，请在这里修复后再启用方案。",
+    "zh-Hant": "所需準備狀態發生變化，請在這裡修復後再啟用方案。",
+    "ja": "必要な状態が変わりました。該当項目を修復してから適用してください。",
+    "ko": "필수 준비 상태가 바뀌었습니다. 해당 항목을 복구한 후 적용하세요.",
+    "es": "Cambió un requisito. Repáralo aquí antes de aplicar el plan."
+  },
+  "onboarding.chargeFailed": {
+    "en": "The charging plan is not confirmed. Keep the successful items and check or retry only this operation.",
+    "zh-Hans": "充电方案尚未确认生效。已成功项目保留，请检测或重试本项。",
+    "zh-Hant": "充電方案尚未確認生效。已成功項目保留，請檢測或重試本項。",
+    "ja": "充電設定を確認できません。成功済みの項目を保持し、この操作を確認または再試行してください。",
+    "ko": "충전 설정 적용을 확인하지 못했습니다. 성공한 항목은 유지하고 이 작업만 확인하거나 다시 시도하세요.",
+    "es": "La carga no está confirmada. Conserva lo completado y comprueba o reintenta esta operación."
+  },
+  "onboarding.chargeChanged": {
+    "en": "The charging limit changed after it was confirmed. Review the result and retry explicitly if you still want this plan.",
+    "zh-Hans": "已确认后的充电上限又发生变化，请查看结果，再决定是否重试。",
+    "zh-Hant": "已確認後的充電上限又發生變化，請查看結果，再決定是否重試。",
+    "ja": "確認後に充電上限が変わりました。結果を確認し、必要なら再試行してください。",
+    "ko": "확인 후 충전 한도가 바뀌었습니다. 결과를 확인하고 필요하면 다시 시도하세요.",
+    "es": "El límite cambió tras confirmarlo. Revisa el resultado y reintenta si lo deseas."
+  },
+  "onboarding.awakeFailed": {
+    "en": "Sleep prevention is not fully confirmed. Check the individual results; retry or turn off the main switch. Away protection may also be pausing it.",
+    "zh-Hans": "防止休眠尚未完全确认。请查看逐项结果，重试或关闭主开关；离开保护也可能正在暂停该功能。",
+    "zh-Hant": "防止睡眠尚未完全確認。請查看逐項結果，重試或關閉主開關；離開保護也可能正在暫停此功能。",
+    "ja": "スリープ防止の適用をすべて確認できません。各項目を確認して再試行するか、メインスイッチをオフにしてください。離席保護による一時停止の場合もあります。",
+    "ko": "잠자기 방지가 완전히 확인되지 않았습니다. 각 결과를 확인한 후 다시 시도하거나 기본 스위치를 끄세요. 자리 비움 보호로 일시 중지되었을 수도 있습니다.",
+    "es": "La prevención del reposo no está totalmente confirmada. Revisa cada resultado; reintenta o desactiva el interruptor principal. La protección por ausencia también puede haberla pausado."
+  },
+  "notification.disabled": {
+    "en": "Reminders off",
+    "zh-Hans": "提醒已关闭",
+    "zh-Hant": "提醒已關閉",
+    "ja": "通知はオフ",
+    "ko": "알림 꺼짐",
+    "es": "Avisos desactivados"
+  },
+  "onboarding.stopConfirmed": {
+    "en": "Stopped",
+    "zh-Hans": "已停止",
+    "zh-Hant": "已停止",
+    "ja": "停止済み",
+    "ko": "중지됨",
+    "es": "Detenido"
+  },
+  "onboarding.stopUnconfirmed": {
+    "en": "Not confirmed",
+    "zh-Hans": "尚未确认",
+    "zh-Hant": "尚未確認",
+    "ja": "未確認",
+    "ko": "확인되지 않음",
+    "es": "Sin confirmar"
+  },
+  "display.sleepNow": {
+    "en": "Turn Display Off Now",
+    "zh-Hans": "立即熄屏",
+    "zh-Hant": "立即關閉螢幕",
+    "ja": "今すぐ画面を消す",
+    "ko": "지금 화면 끄기",
+    "es": "Apagar pantalla ahora"
+  },
+  "display.sleepNowHelp": {
+    "en": "With sleep prevention on and Keep display on off, request display sleep once without changing your selections or brightness. Use your keyboard or mouse to return. This does not lock the Mac.",
+    "zh-Hans": "在防止休眠开启、屏幕常亮关闭时，请求一次熄屏，不改变已有选择或亮度。使用键盘或鼠标即可返回，不会额外锁定 Mac。",
+    "zh-Hant": "在防止睡眠開啟、螢幕常亮關閉時，請求一次關閉螢幕，不改變既有選擇或亮度。使用鍵盤或滑鼠即可返回，不會額外鎖定 Mac。",
+    "ja": "スリープ防止がオンで画面の常時点灯がオフのとき、選択内容や明るさを変えずに消灯を一度だけ要求します。キーボードやマウスで戻れます。Mac をロックする操作ではありません。",
+    "ko": "잠자기 방지가 켜져 있고 화면 켜짐 유지가 꺼져 있을 때 선택한 설정이나 밝기를 바꾸지 않고 화면 끄기를 한 번 요청합니다. 키보드나 마우스로 돌아올 수 있으며 Mac을 추가로 잠그지 않습니다.",
+    "es": "Con la prevención del reposo activada y Mantener la pantalla encendida desactivado, solicita apagar la pantalla una vez sin cambiar tus opciones ni el brillo. Usa el teclado o el ratón para volver. No bloquea el Mac."
+  },
+  "display.requiresRunning": {
+    "en": "Turn on sleep prevention and turn off Keep display on to use this action.",
+    "zh-Hans": "开启防止休眠并关闭屏幕常亮后，可立即熄屏。",
+    "zh-Hant": "開啟防止睡眠並關閉螢幕常亮後，可立即關閉螢幕。",
+    "ja": "この操作を使うには、スリープ防止をオンにして画面の常時点灯をオフにしてください。",
+    "ko": "이 동작을 사용하려면 잠자기 방지를 켜고 화면 켜짐 유지를 끄세요.",
+    "es": "Para usar esta acción, activa la prevención del reposo y desactiva Mantener la pantalla encendida."
+  },
+  "display.systemSettings": {
+    "en": "Screen Timeout Settings…",
+    "zh-Hans": "屏幕超时设置…",
+    "zh-Hant": "螢幕逾時設定…",
+    "ja": "画面消灯の設定…",
+    "ko": "화면 꺼짐 시간 설정…",
+    "es": "Ajustes de apagado de pantalla…"
+  },
+  "display.preparing": {
+    "en": "Preparing to turn the screen off…",
+    "zh-Hans": "正在准备熄屏…",
+    "zh-Hant": "正在準備關閉螢幕…",
+    "ja": "画面の消灯を準備中…",
+    "ko": "화면 끄기 준비 중…",
+    "es": "Preparando el apagado de pantalla…"
+  },
+  "display.requested": {
+    "en": "Display sleep requested.",
+    "zh-Hans": "已请求熄屏。",
+    "zh-Hant": "已請求關閉螢幕。",
+    "ja": "画面の消灯を要求しました。",
+    "ko": "화면 끄기를 요청했습니다.",
+    "es": "Se ha solicitado apagar la pantalla."
+  },
+  "display.failed": {
+    "en": "Could not confirm the display-sleep request. Your selections are unchanged; try again.",
+    "zh-Hans": "未能确认熄屏请求。已有选择未改变，请重试。",
+    "zh-Hant": "未能確認關閉螢幕的請求。既有選擇未改變，請重試。",
+    "ja": "消灯要求を確認できません。選択内容は変更されていません。再試行してください。",
+    "ko": "화면 끄기 요청을 확인하지 못했습니다. 선택한 설정은 그대로입니다. 다시 시도하세요.",
+    "es": "No se pudo confirmar la solicitud de apagado. Tus opciones no han cambiado; vuelve a intentarlo."
+  },
+  "display.unavailable": {
+    "en": "No display is available. Your selections are unchanged.",
+    "zh-Hans": "当前没有可用显示器，已有选择未改变。",
+    "zh-Hant": "目前沒有可用顯示器，既有選擇未改變。",
+    "ja": "使用可能な画面がありません。選択内容は変更されていません。",
+    "ko": "사용 가능한 화면이 없습니다. 선택한 설정은 그대로입니다.",
+    "es": "No hay ninguna pantalla disponible. Tus opciones no han cambiado."
+  },
+  "display.assertionFailed": {
+    "en": "The current sleep-prevention state is unconfirmed. No display-sleep request was sent. Check the status and try again.",
+    "zh-Hans": "当前防止休眠状态尚未确认，未发送熄屏请求。请检查状态后重试。",
+    "zh-Hant": "目前防止睡眠狀態尚未確認，未傳送關閉螢幕請求。請檢查狀態後重試。",
+    "ja": "現在のスリープ防止状態を確認できないため、消灯は要求していません。状態を確認して再試行してください。",
+    "ko": "현재 잠자기 방지 상태를 확인하지 못해 화면 끄기를 요청하지 않았습니다. 상태를 확인한 후 다시 시도하세요.",
+    "es": "No se ha confirmado el estado actual de prevención del reposo. No se solicitó apagar la pantalla. Comprueba el estado y reinténtalo."
+  },
+  "display.protected": {
+    "en": "Away protection has paused sleep prevention. No display-sleep request was sent.",
+    "zh-Hans": "离开保护已暂停防止休眠，未发送熄屏请求。",
+    "zh-Hant": "離開保護已暫停防止睡眠，未傳送關閉螢幕請求。",
+    "ja": "離席保護でスリープ防止が一時停止しています。消灯は要求していません。",
+    "ko": "자리 비움 보호가 잠자기 방지를 일시 중지했습니다. 화면 끄기를 요청하지 않았습니다.",
+    "es": "La protección por ausencia ha pausado la prevención del reposo. No se solicitó apagar la pantalla."
+  },
+  "display.notReady": {
+    "en": "Wait for setup and the system check to finish.",
+    "zh-Hans": "请先完成引导并等待系统检查结束。",
+    "zh-Hant": "請先完成引導並等待系統檢查結束。",
+    "ja": "初期設定とシステム確認の完了をお待ちください。",
+    "ko": "초기 설정과 시스템 확인이 끝날 때까지 기다리세요.",
+    "es": "Espera a que finalicen la configuración y la comprobación del sistema."
+  },
+  "display.settingsFailed": {
+    "en": "Could not open System Settings. Open Lock Screen settings to change the screen timeout.",
+    "zh-Hans": "无法打开系统设置。请前往“锁定屏幕”调整屏幕超时。",
+    "zh-Hant": "無法開啟系統設定。請前往「鎖定畫面」調整螢幕逾時。",
+    "ja": "システム設定を開けません。「ロック画面」で画面消灯までの時間を変更してください。",
+    "ko": "시스템 설정을 열지 못했습니다. 잠금 화면 설정에서 화면 꺼짐 시간을 변경하세요.",
+    "es": "No se pudieron abrir los ajustes. Abre Pantalla de bloqueo para cambiar el tiempo de espera."
+  },
+  "display.restoreHelp": {
+    "en": "Stop all Coddle sleep prevention while keeping your display and lid preferences for the next time you turn the main switch on. Charging settings and macOS sleep preferences stay unchanged.",
+    "zh-Hans": "停止 Coddle 的全部保活作用，保留屏幕与合盖偏好，再次开启主开关时沿用。不更改充电设置和 macOS 原有睡眠偏好。",
+    "zh-Hant": "停止 Coddle 的全部保活作用，保留螢幕與闔蓋偏好，再次開啟主開關時沿用。不更改充電設定和 macOS 原有睡眠偏好。",
+    "ja": "Coddle のスリープ防止をすべて停止し、画面と蓋の設定はメインスイッチを次回オンにするときに引き継ぎます。充電設定や macOS のスリープ設定は変更しません。",
+    "ko": "Coddle의 모든 잠자기 방지를 중지하고 화면과 덮개 설정은 기본 스위치를 다음에 켤 때 다시 적용합니다. 충전 설정과 macOS 잠자기 설정은 변경하지 않습니다.",
+    "es": "Detiene toda prevención del reposo de Coddle y conserva las preferencias de pantalla y tapa para la próxima activación. Los ajustes de carga y reposo de macOS no cambian."
+  },
+  "awakeMenu.title": {
+    "en": "Sleep Prevention",
+    "zh-Hans": "防止休眠",
+    "zh-Hant": "防止睡眠",
+    "ja": "スリープ防止",
+    "ko": "잠자기 방지",
+    "es": "Evitar reposo"
+  },
+  "awakeMenu.master": {
+    "en": "Prevent automatic sleep",
+    "zh-Hans": "防止自动休眠",
+    "zh-Hant": "防止自動睡眠",
+    "ja": "自動スリープを防ぐ",
+    "ko": "자동 잠자기 방지",
+    "es": "Evitar el reposo automático"
+  },
+  "awakeMenu.display": {
+    "en": "Keep display on",
+    "zh-Hans": "屏幕常亮",
+    "zh-Hant": "螢幕常亮",
+    "ja": "画面を点灯したままにする",
+    "ko": "화면 켜짐 유지",
+    "es": "Mantener la pantalla encendida"
+  },
+  "awakeMenu.lid": {
+    "en": "Keep running with lid closed",
+    "zh-Hans": "合盖后继续运行",
+    "zh-Hant": "闔蓋後繼續運作",
+    "ja": "蓋を閉じても動作を続ける",
+    "ko": "덮개를 닫아도 계속 실행",
+    "es": "Seguir funcionando con la tapa cerrada"
+  },
+  "awakeMenu.on": {
+    "en": "On",
+    "zh-Hans": "已开启",
+    "zh-Hant": "已開啟",
+    "ja": "オン",
+    "ko": "켜짐",
+    "es": "Activado"
+  },
+  "awakeMenu.off": {
+    "en": "Off",
+    "zh-Hans": "已关闭",
+    "zh-Hant": "已關閉",
+    "ja": "オフ",
+    "ko": "꺼짐",
+    "es": "Desactivado"
+  },
+  "awakeMenu.pending": {
+    "en": "Applying…",
+    "zh-Hans": "正在调整…",
+    "zh-Hant": "正在調整…",
+    "ja": "適用中…",
+    "ko": "적용 중…",
+    "es": "Aplicando…"
+  },
+  "awakeMenu.stopping": {
+    "en": "Stopping…",
+    "zh-Hans": "正在停止…",
+    "zh-Hant": "正在停止…",
+    "ja": "停止中…",
+    "ko": "중지 중…",
+    "es": "Deteniendo…"
+  },
+  "awakeMenu.paused": {
+    "en": "Paused",
+    "zh-Hans": "已暂停",
+    "zh-Hant": "已暫停",
+    "ja": "一時停止中",
+    "ko": "일시 중지됨",
+    "es": "En pausa"
+  },
+  "awakeMenu.attention": {
+    "en": "Needs Attention",
+    "zh-Hans": "需处理",
+    "zh-Hant": "需處理",
+    "ja": "確認が必要",
+    "ko": "확인 필요",
+    "es": "Requiere atención"
+  },
+  "awakeMenu.moreSettings": {
+    "en": "More Settings…",
+    "zh-Hans": "更多设置…",
+    "zh-Hant": "更多設定…",
+    "ja": "その他の設定…",
+    "ko": "추가 설정…",
+    "es": "Más ajustes…"
+  },
+  "awakeMenu.help": {
+    "en": "Show or hide options without changing sleep prevention.",
+    "zh-Hans": "展开或收起选项，不改变防止休眠状态。",
+    "zh-Hant": "展開或收起選項，不改變防止睡眠狀態。",
+    "ja": "スリープ防止の状態を変えずに、オプションを表示または非表示にします。",
+    "ko": "잠자기 방지 상태를 바꾸지 않고 옵션을 펼치거나 접습니다.",
+    "es": "Muestra u oculta las opciones sin cambiar la prevención del reposo."
+  },
+  "awakeMenu.expand": {
+    "en": "Show Options",
+    "zh-Hans": "展开选项",
+    "zh-Hant": "展開選項",
+    "ja": "オプションを表示",
+    "ko": "옵션 펼치기",
+    "es": "Mostrar opciones"
+  },
+  "awakeMenu.collapse": {
+    "en": "Hide Options",
+    "zh-Hans": "收起选项",
+    "zh-Hant": "收起選項",
+    "ja": "オプションを隠す",
+    "ko": "옵션 접기",
+    "es": "Ocultar opciones"
+  },
+  "keepAwake.summary": {
+    "en": "When enabled, your Mac can keep running with the display off.",
+    "zh-Hans": "开启后，屏幕熄灭时 Mac 仍可继续运行。",
+    "zh-Hant": "開啟後，螢幕關閉時 Mac 仍可繼續運作。",
+    "ja": "オンにすると、画面が消えても Mac は動作を続けられます。",
+    "ko": "켜면 화면이 꺼져도 Mac이 계속 실행될 수 있습니다.",
+    "es": "Al activarlo, el Mac puede seguir funcionando con la pantalla apagada."
+  },
+  "keepAwake.learnMore": {
+    "en": "About sleep prevention",
+    "zh-Hans": "了解防止休眠",
+    "zh-Hant": "瞭解防止睡眠",
+    "ja": "スリープ防止について",
+    "ko": "잠자기 방지 알아보기",
+    "es": "Acerca de la prevención del reposo"
+  },
+  "keepAwake.helpPreferences": {
+    "en": "Turning this off stops sleep prevention and remembers both options.",
+    "zh-Hans": "关闭会停止保活，并记住两个子选项。",
+    "zh-Hant": "關閉會停止防止睡眠，並記住兩個子選項。",
+    "ja": "オフにするとスリープ防止を停止し、両方のオプションを次回のために保存します。",
+    "ko": "끄면 잠자기 방지가 중지되며 두 옵션은 다음 사용을 위해 저장됩니다.",
+    "es": "Al desactivarlo, se detiene la prevención del reposo y se conservan ambas opciones."
+  },
+  "keepAwake.helpDisplay": {
+    "en": "When Keep display on is off, the display follows the system timeout.",
+    "zh-Hans": "关闭屏幕常亮时，屏幕遵循系统的关闭时间。",
+    "zh-Hant": "關閉螢幕常亮時，螢幕會依系統設定的時間關閉。",
+    "ja": "画面の常時点灯がオフの場合、システムで設定した時間に画面が消えます。",
+    "ko": "화면 켜짐 유지를 끄면 시스템에 설정된 시간이 지난 후 화면이 꺼집니다.",
+    "es": "Si desactivas Mantener la pantalla encendida, se aplica el tiempo de apagado del sistema."
+  },
+  "keepAwake.helpLid": {
+    "en": "Closed-lid operation requires the system component, which also manages power modes.",
+    "zh-Hans": "合盖运行需要系统组件。组件也用于管理电源模式。",
+    "zh-Hant": "闔蓋運作需要系統元件。元件也用於管理電源模式。",
+    "ja": "蓋を閉じたままの動作にはシステムコンポーネントが必要です。このコンポーネントは電力モードも管理します。",
+    "ko": "덮개를 닫은 상태로 실행하려면 시스템 구성 요소가 필요합니다. 이 구성 요소는 전원 모드도 관리합니다.",
+    "es": "Para funcionar con la tapa cerrada se necesita el componente del sistema, que también gestiona los modos de energía."
+  },
+  "helper.lidRequired": {
+    "en": "Closed-lid operation requires a component.",
+    "zh-Hans": "合盖运行需要安装组件。",
+    "zh-Hant": "闔蓋運作需要安裝元件。",
+    "ja": "蓋を閉じたままの動作にはコンポーネントが必要です。",
+    "ko": "덮개를 닫은 상태로 실행하려면 구성 요소가 필요합니다.",
+    "es": "Para funcionar con la tapa cerrada se necesita un componente."
+  },
+  "helper.installApproval": {
+    "en": "Installation requires administrator approval.",
+    "zh-Hans": "安装需要管理员授权。",
+    "zh-Hant": "安裝需要管理員授權。",
+    "ja": "インストールには管理者の承認が必要です。",
+    "ko": "설치하려면 관리자 승인이 필요합니다.",
+    "es": "La instalación requiere autorización de administrador."
+  },
+  "keepAwake.manualSleep": {
+    "en": "Turn off sleep prevention before sleeping your Mac manually.",
+    "zh-Hans": "手动休眠前，请先关闭防止休眠。",
+    "zh-Hant": "手動睡眠前，請先關閉防止睡眠。",
+    "ja": "手動で Mac をスリープさせる前に、スリープ防止をオフにしてください。",
+    "ko": "Mac을 수동으로 잠자기에 넣기 전에 잠자기 방지를 끄세요.",
+    "es": "Desactiva la prevención del reposo antes de poner el Mac en reposo manualmente."
+  },
+  "smart.learnMore": {
+    "en": "About smart charging",
+    "zh-Hans": "了解智能充电",
+    "zh-Hant": "瞭解智慧充電",
+    "ja": "スマート充電について",
+    "ko": "스마트 충전 알아보기",
+    "es": "Acerca de la carga inteligente"
+  },
+  "smart.topupLeadLabel": {
+    "en": "Start top-up before unplug",
+    "zh-Hans": "提前补电",
+    "zh-Hant": "提前補電",
+    "ja": "電源を外す前の充電開始",
+    "ko": "전원 분리 전 추가 충전",
+    "es": "Anticipación de la carga final"
+  },
+  "smart.minSamplesLabel": {
+    "en": "Minimum observations per hour",
+    "zh-Hans": "每个时段最少观察次数",
+    "zh-Hant": "每個時段最少觀察次數",
+    "ja": "時間帯ごとの最低観測回数",
+    "ko": "시간대별 최소 관찰 횟수",
+    "es": "Observaciones mínimas por hora"
+  },
+  "settings.advanced": {
+    "en": "Advanced",
+    "zh-Hans": "高级",
+    "zh-Hant": "進階",
+    "ja": "詳細設定",
+    "ko": "고급",
+    "es": "Avanzado"
+  },
+  "helper.manage": {
+    "en": "Manage",
+    "zh-Hans": "管理",
+    "zh-Hant": "管理",
+    "ja": "管理",
+    "ko": "관리",
+    "es": "Gestionar"
+  },
+  "awayGuard.details": {
+    "en": "Detection details",
+    "zh-Hans": "检测详情",
+    "zh-Hant": "偵測詳細資訊",
+    "ja": "検出の詳細",
+    "ko": "감지 세부 정보",
+    "es": "Detalles de detección"
+  },
+  "awayGuard.awayAfterLabel": {
+    "en": "Wait after leaving usual networks",
+    "zh-Hans": "离开常用网络后等待",
+    "zh-Hant": "離開常用網路後等待",
+    "ja": "普段のネットワークを離れてから",
+    "ko": "평소 네트워크 이탈 후 대기",
+    "es": "Espera al salir de redes habituales"
+  },
+  "awayGuard.offlineAfterLabel": {
+    "en": "Wait after going offline",
+    "zh-Hans": "断网后等待",
+    "zh-Hant": "斷網後等待",
+    "ja": "オフラインになってから",
+    "ko": "오프라인 전환 후 대기",
+    "es": "Espera sin conexión"
+  },
+  "awayGuard.requireBattery": {
+    "en": "Only on battery power",
+    "zh-Hans": "仅在电池供电时",
+    "zh-Hant": "僅在電池供電時",
+    "ja": "バッテリー駆動時のみ",
+    "ko": "배터리 전원에서만",
+    "es": "Solo con batería"
+  },
+  "awayGuard.networkSampleLabel": {
+    "en": "Check networks every",
+    "zh-Hans": "网络检测间隔",
+    "zh-Hant": "網路偵測間隔",
+    "ja": "ネットワークの確認間隔",
+    "ko": "네트워크 확인 간격",
+    "es": "Intervalo de comprobación de red"
+  },
+  "awayGuard.usualDwellLabel": {
+    "en": "Time to learn a usual network",
+    "zh-Hans": "学习常用网络所需时间",
+    "zh-Hant": "學習常用網路所需時間",
+    "ja": "普段のネットワークの学習時間",
+    "ko": "평소 네트워크 학습 시간",
+    "es": "Tiempo para aprender una red habitual"
+  },
+  "awayGuard.idleLabel": {
+    "en": "Idle time",
+    "zh-Hans": "闲置判定时间",
+    "zh-Hant": "閒置判定時間",
+    "ja": "未使用とみなすまでの時間",
+    "ko": "유휴 상태 판정 시간",
+    "es": "Tiempo de inactividad"
+  },
+  "unit.minutes": {
+    "en": "{n} min",
+    "zh-Hans": "{n} 分钟",
+    "zh-Hant": "{n} 分鐘",
+    "ja": "{n} 分",
+    "ko": "{n}분",
+    "es": "{n} min"
+  },
+  "unit.hours": {
+    "en": "{n} hr",
+    "zh-Hans": "{n} 小时",
+    "zh-Hant": "{n} 小時",
+    "ja": "{n} 時間",
+    "ko": "{n}시간",
+    "es": "{n} h"
+  },
+  "awakeFeedback.details": {
+    "en": "Details",
+    "zh-Hans": "详细状态",
+    "zh-Hant": "詳細狀態",
+    "ja": "詳細",
+    "ko": "상세 상태",
+    "es": "Detalles"
+  },
+  "awakeFeedback.retry": {
+    "en": "Retry",
+    "zh-Hans": "重试",
+    "zh-Hant": "重試",
+    "ja": "再試行",
+    "ko": "다시 시도",
+    "es": "Reintentar"
+  },
+  "awakeFeedback.controlsUnconfirmed": {
+    "en": "Sleep prevention is not confirmed.",
+    "zh-Hans": "防止休眠尚未确认生效。",
+    "zh-Hant": "防止睡眠尚未確認生效。",
+    "ja": "スリープ防止が有効か確認できません。",
+    "ko": "잠자기 방지가 적용되었는지 확인되지 않았습니다.",
+    "es": "No se ha confirmado la prevención del reposo."
+  },
+  "awakeFeedback.stopControlsUnconfirmed": {
+    "en": "Some sleep-prevention controls are not confirmed stopped.",
+    "zh-Hans": "部分防止休眠控制尚未确认停止。",
+    "zh-Hant": "部分防止睡眠控制尚未確認停止。",
+    "ja": "一部のスリープ防止が停止したか確認できません。",
+    "ko": "일부 잠자기 방지 기능의 중지가 확인되지 않았습니다.",
+    "es": "No se ha confirmado la desactivación de algunas funciones de prevención del reposo."
+  },
+  "awakeFeedback.lidUnconfirmed": {
+    "en": "Closed-lid operation is not confirmed.",
+    "zh-Hans": "尚未确认合盖后能继续运行。",
+    "zh-Hant": "尚未確認闔蓋後能繼續運作。",
+    "ja": "蓋を閉じたまま動作できるか確認できません。",
+    "ko": "덮개를 닫아도 계속 실행되는지 확인되지 않았습니다.",
+    "es": "No se ha confirmado el funcionamiento con la tapa cerrada."
+  },
+  "awakeFeedback.stopLidUnconfirmed": {
+    "en": "Closed-lid sleep is not confirmed. Keep the lid open and retry.",
+    "zh-Hans": "尚未确认恢复合盖休眠。请保持开盖并重试。",
+    "zh-Hant": "尚未確認恢復闔蓋睡眠。請保持開蓋並重試。",
+    "ja": "蓋を閉じたときにスリープできるか確認できません。蓋を開いたまま再試行してください。",
+    "ko": "덮개를 닫았을 때 잠자기가 가능한지 확인되지 않았습니다. 덮개를 열어 둔 채 다시 시도하세요.",
+    "es": "No se ha confirmado el reposo con la tapa cerrada. Mantén la tapa abierta y vuelve a intentarlo."
+  },
+  "awakeFeedback.stoppedSaveFailed": {
+    "en": "Stopped for now, but the off setting wasn’t saved. Retry before restarting.",
+    "zh-Hans": "当前已停止，但关闭设置未保存。重启前请重试。",
+    "zh-Hant": "目前已停止，但關閉設定未儲存。重新啟動前請重試。",
+    "ja": "現在は停止していますが、オフの設定を保存できませんでした。再起動する前に再試行してください。",
+    "ko": "현재는 중지되었지만 끄기 설정이 저장되지 않았습니다. 다시 시작하기 전에 재시도하세요.",
+    "es": "Se ha detenido por ahora, pero no se ha guardado la desactivación. Vuelve a intentarlo antes de reiniciar."
+  },
+  "awakeFeedback.stopSaveFailed": {
+    "en": "The off setting wasn’t saved.",
+    "zh-Hans": "关闭设置尚未保存。",
+    "zh-Hant": "關閉設定尚未儲存。",
+    "ja": "オフの設定を保存できませんでした。",
+    "ko": "끄기 설정이 저장되지 않았습니다.",
+    "es": "No se ha guardado la desactivación."
+  },
+  "awakeFeedback.guardUnavailable": {
+    "en": "Away protection isn’t ready.",
+    "zh-Hans": "离开保护尚未就绪。",
+    "zh-Hant": "離開保護尚未就緒。",
+    "ja": "不在時の保護は準備中です。",
+    "ko": "자리 비움 보호가 아직 준비되지 않았습니다.",
+    "es": "La protección al ausentarse aún no está lista."
+  },
+  "awakeFeedback.guardDisabled": {
+    "en": "Away protection is off.",
+    "zh-Hans": "离开保护已关闭。",
+    "zh-Hant": "離開保護已關閉。",
+    "ja": "不在時の保護はオフです。",
+    "ko": "자리 비움 보호가 꺼져 있습니다.",
+    "es": "La protección al ausentarse está desactivada."
+  },
+  "awakeFeedback.pauseUnconfirmed": {
+    "en": "Pause not confirmed.",
+    "zh-Hans": "暂停尚未确认。",
+    "zh-Hant": "暫停尚未確認。",
+    "ja": "一時停止を確認できません。",
+    "ko": "일시 중지가 확인되지 않았습니다.",
+    "es": "No se ha confirmado la pausa."
+  },
+  "awakeFeedback.paused": {
+    "en": "Paused by away protection.",
+    "zh-Hans": "已因离开保护暂停。",
+    "zh-Hant": "已因離開保護暫停。",
+    "ja": "不在時の保護により一時停止中です。",
+    "ko": "자리 비움 보호로 일시 중지되었습니다.",
+    "es": "En pausa por la protección al ausentarse."
+  },
+  "awakeFeedback.componentUnavailable": {
+    "en": "The system component needs attention.",
+    "zh-Hans": "系统组件需要处理。",
+    "zh-Hant": "系統元件需要處理。",
+    "ja": "システムコンポーネントの確認が必要です。",
+    "ko": "시스템 구성 요소를 확인해야 합니다.",
+    "es": "El componente del sistema requiere atención."
+  },
+  "awakeFeedback.configureProtection": {
+    "en": "Review protection",
+    "zh-Hans": "查看保护设置",
+    "zh-Hant": "查看保護設定",
+    "ja": "保護の設定を確認",
+    "ko": "보호 설정 확인",
+    "es": "Revisar protección"
+  },
+  "updates.title": {
+    "en": "Software Updates",
+    "zh-Hans": "软件更新",
+    "zh-Hant": "軟體更新",
+    "ja": "ソフトウェアアップデート",
+    "ko": "소프트웨어 업데이트",
+    "es": "Actualizaciones"
+  },
+  "updates.check": {
+    "en": "Check for Updates…",
+    "zh-Hans": "检查更新…",
+    "zh-Hant": "檢查更新…",
+    "ja": "アップデートを確認…",
+    "ko": "업데이트 확인…",
+    "es": "Buscar actualizaciones…"
+  },
+  "updates.automaticChecks": {
+    "en": "Automatically check for updates",
+    "zh-Hans": "自动检查更新",
+    "zh-Hant": "自動檢查更新",
+    "ja": "アップデートを自動確認",
+    "ko": "자동으로 업데이트 확인",
+    "es": "Buscar actualizaciones automáticamente"
+  },
+  "updates.automaticDownloads": {
+    "en": "Automatically download and install updates",
+    "zh-Hans": "自动下载并安装更新",
+    "zh-Hant": "自動下載並安裝更新",
+    "ja": "アップデートを自動でダウンロードしてインストール",
+    "ko": "자동으로 업데이트 다운로드 및 설치",
+    "es": "Descargar e instalar automáticamente"
+  },
+  "updates.detail": {
+    "en": "Updates come from Coddle’s GitHub releases. Automatic installation normally happens when you quit Coddle.",
+    "zh-Hans": "更新来自 Coddle 的 GitHub 发布版本。自动安装通常在退出 Coddle 时完成。",
+    "zh-Hant": "更新來自 Coddle 的 GitHub 發布版本。自動安裝通常在結束 Coddle 時完成。",
+    "ja": "更新は Coddle の GitHub リリースから取得します。自動インストールは通常、Coddle の終了時に行われます。",
+    "ko": "업데이트는 Coddle의 GitHub 릴리스에서 제공됩니다. 자동 설치는 일반적으로 Coddle을 종료할 때 진행됩니다.",
+    "es": "Las actualizaciones provienen de las versiones de Coddle en GitHub. Normalmente se instalan al cerrar Coddle."
+  },
+  "updates.unavailable": {
+    "en": "Automatic updates are unavailable in this build.",
+    "zh-Hans": "此构建暂不支持自动更新。",
+    "zh-Hant": "此組建暫不支援自動更新。",
+    "ja": "このビルドでは自動アップデートを利用できません。",
+    "ko": "이 빌드에서는 자동 업데이트를 사용할 수 없습니다.",
+    "es": "Las actualizaciones automáticas no están disponibles en esta compilación."
+  }
+}
