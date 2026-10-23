@@ -23,7 +23,7 @@ LICENSES = {"LICENSE-MIT"}
 DOCUMENT_EXTENSIONS = {".md", ".markdown", ".mdx", ".rst", ".adoc", ".txt", ".pdf", ".doc", ".docx"}
 REQUIRED = {
     "index.html", "install.html", "privacy.html", "styles.css", "app.js",
-    "assets/coddle-icon.png", "assets/coddle-panel.png",
+    "assets/coddle-icon.png", "assets/coddle-panel.png", "assets/social-card.png",
     f"downloads/{APP_NAME}", f"downloads/{SOURCE_NAME}",
     "downloads/SHA256SUMS.txt", "downloads/release.json",
 }
