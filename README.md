@@ -9,7 +9,7 @@
 [GitHub 源码](https://github.com/MrEasonYang/coddle) · [官网](https://coddle.kyun.si/) · [下载最新 macOS 预览版 (Universal)](https://github.com/MrEasonYang/coddle/releases/latest) · [安装说明](https://coddle.kyun.si/install.html)
 
 > [!NOTE]
-> **0.2.0 早期预览版**，支持 Apple Silicon 与 Intel 架构（macOS 13.0+ 部署目标）。采用临时签名（ad-hoc），**未进行 Developer ID 签名与 Apple 公证**。系统原生充电上限依赖 Apple Silicon 及较新 macOS，各项能力在运行时由硬件与系统实际检测决定；首次启动请参考[安装说明](https://coddle.kyun.si/install.html)。
+> **0.2.1 早期预览版**，支持 Apple Silicon 与 Intel 架构（macOS 13.0+ 部署目标）。采用临时签名（ad-hoc），**未进行 Developer ID 签名与 Apple 公证**。系统原生充电上限依赖 Apple Silicon 及较新 macOS，各项能力在运行时由硬件与系统实际检测决定；首次启动请参考[安装说明](https://coddle.kyun.si/install.html)。
 
 <img src="site/public/assets/coddle-panel.png" width="340" alt="Coddle 界面：电池状态、功率流向、手动限充、智能充电、电源模式与防止休眠">
 

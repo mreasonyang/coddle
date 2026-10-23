@@ -9,7 +9,7 @@ Set a custom charge limit for desk work, top up before heading out, and keep lon
 [GitHub Source](https://github.com/MrEasonYang/coddle) · [Website](https://coddle.kyun.si/) · [Download Latest macOS Preview (Universal)](https://github.com/MrEasonYang/coddle/releases/latest) · [Installation Notes](https://coddle.kyun.si/install.html)
 
 > [!NOTE]
-> **0.2.0 Early Preview**, targeting Apple Silicon and Intel Macs (macOS 13.0+ deployment target). Currently ad-hoc signed and **not Developer ID signed or notarized by Apple**. Native charge limits rely on Apple Silicon and recent macOS releases; feature availability is determined at runtime via dynamic hardware capability checks. Refer to the [installation notes](https://coddle.kyun.si/install.html) before first launch.
+> **0.2.1 Early Preview**, targeting Apple Silicon and Intel Macs (macOS 13.0+ deployment target). Currently ad-hoc signed and **not Developer ID signed or notarized by Apple**. Native charge limits rely on Apple Silicon and recent macOS releases; feature availability is determined at runtime via dynamic hardware capability checks. Refer to the [installation notes](https://coddle.kyun.si/install.html) before first launch.
 
 <img src="site/public/assets/coddle-panel.png" width="340" alt="Coddle interface: battery status, power flow, manual charge limit, smart charging, power mode, and sleep prevention">
 

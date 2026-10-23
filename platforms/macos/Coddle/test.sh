@@ -26,6 +26,7 @@ python3 Resources/i18n/check.py --sources
 "$BUILD/coddle-policy-tests"
 "$BUILD/coddle-assertion-tests"
 "$BUILD/coddle-integration-tests"
+bash tests/menu-lifecycle/run.sh "$RUN/menu-lifecycle"
 "$BUILD/coddle-selftest"
 # Render the real panel and measure it the way the menu bar popover sizes
 # itself. The fixed-size Dock window cannot catch a collapsed scroll region.

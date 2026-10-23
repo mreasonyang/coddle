@@ -19,7 +19,6 @@ jobs:
     timeout-minutes: 35
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
-      CODDLE_TEST_FAILURE_DIR: ${{ runner.temp }}/coddle-test-failure
     permissions:
       contents: write
     steps:
@@ -32,6 +31,8 @@ jobs:
           python3 -m unittest discover -s tools/tests -v
       - name: build and test
         working-directory: platforms/macos/Coddle
+        env:
+          CODDLE_TEST_FAILURE_DIR: ${{ runner.temp }}/coddle-test-failure
         run: |
           ./build.sh
           ./test.sh
@@ -66,6 +67,10 @@ jobs:
         run: |
           cat > "$RUNNER_TEMP/coddle-release-notes.txt" <<'NOTES'
           Universal macOS preview for Apple Silicon and Intel (macOS 13+).
+
+          Fixes a retain cycle when selecting or dismissing the Language and Appearance menus. Menu callbacks and option values are now released after native menu tracking ends. Regression coverage exercises native selection, cancellation, repeated use, and missing anchors.
+
+          A separate approximately 19.5 KiB startup XPC leak was reproduced in macOS AppIntents without Coddle code. Its duplicate connection creation during retry is diagnosed but is not fixed by this release; no private framework patch is included.
 
           Download the versioned ZIP, extract Coddle.app, and move it to /Applications. This preview is ad-hoc signed and is not Developer ID signed or notarized by Apple. See https://coddle.kyun.si/install.html for first-launch guidance.
 

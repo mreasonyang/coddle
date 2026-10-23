@@ -1137,7 +1137,7 @@ public struct CoddleDropdownRow<Value: Hashable>: View {
                 menuCoordinator.presentMenu(
                     options: options,
                     selection: selection
-                ) { chosenValue in
+                ) { [onSelect, reduceMotion] chosenValue in
                     if reduceMotion {
                         onSelect(chosenValue)
                     } else {
@@ -1189,7 +1189,7 @@ public struct CoddleDropdownRow<Value: Hashable>: View {
 }
 
 @MainActor
-private final class CoddleMenuCoordinator<Value: Hashable>: NSObject {
+final class CoddleMenuCoordinator<Value: Hashable>: NSObject {
     weak var anchorView: NSView?
     private var optionValues: [Value] = []
     private var onSelect: ((Value) -> Void)?
@@ -1204,6 +1204,12 @@ private final class CoddleMenuCoordinator<Value: Hashable>: NSObject {
         }
         self.optionValues = options.map(\.value)
         self.onSelect = onSelect
+        // AppKit tracks this menu synchronously. Release the callback and its
+        // captured view state on both selection and cancellation.
+        defer {
+            self.onSelect = nil
+            self.optionValues.removeAll()
+        }
 
         let menu = NSMenu(title: "")
         menu.autoenablesItems = false
