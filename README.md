@@ -129,6 +129,7 @@
   python3 -m http.server 4186 --bind 0.0.0.0 --directory site/public
   ```
   本地访问地址为 `http://127.0.0.1:4186/`。
+- **迁移状态**：仓库构建配置与官网校验已完成；Cloudflare GitHub App 的 Coddle 仓库授权、新项目创建和正式域名切换尚待完成。当前线上仍由旧 Direct Upload 项目 `coddle` 提供服务。以下为目标部署配置。
 - **仓库自动部署**：官网通过 Cloudflare Workers and Pages GitHub App 连接 `mreasonyang/coddle`，生产分支为 `main`。Pages 项目 `coddle-site` 从仓库根目录执行 `bash site/scripts/cloudflare-build.sh`，发布目录为 `site/public`；Python 版本由 `.python-version` 固定。推送 `main` 后由 Cloudflare 自动构建和发布，无需配置 Cloudflare API Token。
 - **本地校验与打包**：运行 `bash site/scripts/cloudflare-build.sh`，检查公开资源、下载文件校验值与 JavaScript 语法，并生成 `site/dist/coddle-site.zip` 和文件校验清单。GitHub 的 [官网校验工作流](.github/workflows/site.yml) 执行相同检查并保留提交绑定的产物；部署由 Cloudflare 原生集成完成。
 - **域名与恢复**：`coddle.kyun.si` 绑定 `coddle-site`。旧 Direct Upload 项目 `coddle` 保留既有部署作为恢复来源。需要调整 GitHub App 授权时，只增加所需仓库，保留其他已有授权。
