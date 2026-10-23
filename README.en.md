@@ -129,7 +129,9 @@ When supported by your hardware, connected to power, not yet full, and with a li
   python3 -m http.server 4186 --bind 0.0.0.0 --directory site/public
   ```
   Access locally at `http://127.0.0.1:4186/`.
-- **Packaging and Deployment**: Run `python3 site/scripts/package.py` to validate public resources and build `site/dist/coddle-site.zip`. Upload the generated archive to Cloudflare Pages (project `coddle`) via manual Direct Upload; no automated push is performed.
+- **Git-based deployment**: The Cloudflare Workers and Pages GitHub App connects to `mreasonyang/coddle`, with `main` as the production branch. The Pages project `coddle-site` runs `bash site/scripts/cloudflare-build.sh` from the repository root and publishes `site/public`; `.python-version` pins Python. Cloudflare builds and deploys automatically after pushes to `main`, without a Cloudflare API token.
+- **Local validation and packaging**: Run `bash site/scripts/cloudflare-build.sh` to validate public assets, download checksums, and JavaScript syntax, and generate `site/dist/coddle-site.zip` plus a file checksum manifest. The [website validation workflow](.github/workflows/site.yml) runs the same checks and retains commit-bound artifacts; the native Cloudflare integration handles deployment.
+- **Domain and recovery**: `coddle.kyun.si` points to `coddle-site`. The old Direct Upload project `coddle` retains its previous deployment for recovery. When changing GitHub App access, add only the required repository and preserve existing selections.
 - **Updating Release Downloads**: Update download artifacts and checksums using (substitute actual input paths):
   ```bash
   python3 site/scripts/package.py --prepare-downloads \

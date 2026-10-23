@@ -1,0 +1,39 @@
+name: website
+
+on:
+  push:
+    branches: [main]
+    paths: ['site/**', '.python-version', '.github/workflows/site.yml']
+  pull_request:
+    paths: ['site/**', '.python-version', '.github/workflows/site.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate and package public website
+        run: bash site/scripts/cloudflare-build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Coddle-website-${{ github.sha }}
+          path: site/dist/
+          if-no-files-found: error
+          retention-days: 14
