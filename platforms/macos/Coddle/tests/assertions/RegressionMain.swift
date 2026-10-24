@@ -1,5 +1,20 @@
 import Foundation
 
+private final class BlockingGate: @unchecked Sendable {
+    let entered = DispatchSemaphore(value: 0)
+    private let release = DispatchSemaphore(value: 0)
+    private let lock = NSLock()
+    private var expired = false
+    var timedOut: Bool { lock.lock(); defer { lock.unlock() }; return expired }
+    func hold() {
+        entered.signal()
+        if release.wait(timeout: .now() + 5) == .timedOut {
+            lock.lock(); expired = true; lock.unlock()
+        }
+    }
+    func open() { release.signal() }
+}
+
 private final class FakeAssertions: KeepAwakeControlling {
     var system = false
     var display = false
@@ -39,18 +54,24 @@ private final class FakeAssertions: KeepAwakeControlling {
     @MainActor private static var checks = 0
     @MainActor private static func expect(_ condition: @autoclosure () -> Bool, _ message: String) {
         checks += 1
-        precondition(condition(), "assertion worker regression failed: \(message)")
+        if !condition() {
+            print("FAIL: assertion worker regression: \(message)")
+            fflush(stdout)
+            exit(1)
+        }
     }
 
     @MainActor static func main() async {
         let fake = FakeAssertions()
-        let started = DispatchSemaphore(value: 0)
-        fake.beforeCreate = {
-            started.signal()
-            Thread.sleep(forTimeInterval: 0.15)
-        }
+        let gate = BlockingGate()
+        defer { gate.open() }
+        fake.beforeCreate = { gate.hold() }
         let worker = KeepAwakeWorker {
-            precondition(!Thread.isMainThread, "assertion initialization must run off main")
+            if Thread.isMainThread {
+                print("FAIL: assertion initialization must run off main")
+                fflush(stdout)
+                exit(1)
+            }
             return fake
         }
         var createFinished = false
@@ -59,18 +80,18 @@ private final class FakeAssertions: KeepAwakeControlling {
             createFinished = true
             return result
         }
-        let began = await waitForSignal(started)
+        let began = await waitForSignal(gate.entered)
         expect(began, "delayed create entered worker")
         create.cancel()
         var heartbeat = false
         let pulse = Task { @MainActor in
-            try? await Task.sleep(for: .milliseconds(10))
             heartbeat = true
         }
         let release = Task { await worker.release() }
-        try? await Task.sleep(for: .milliseconds(30))
-        expect(heartbeat && !createFinished, "main actor heartbeat runs during delayed powerd call")
         _ = await pulse.value
+        expect(heartbeat && !createFinished && !gate.timedOut,
+               "main actor heartbeat runs during delayed powerd call")
+        gate.open()
         let created = await create.value
         let released = await release.value
         expect(created && released, "caller cancellation does not abandon an admitted create")
@@ -97,7 +118,7 @@ private final class FakeAssertions: KeepAwakeControlling {
     private static func waitForSignal(_ signal: DispatchSemaphore) async -> Bool {
         await withCheckedContinuation { continuation in
             DispatchQueue.global().async {
-                continuation.resume(returning: signal.wait(timeout: .now() + 2) == .success)
+                continuation.resume(returning: signal.wait(timeout: .now() + 5) == .success)
             }
         }
     }
