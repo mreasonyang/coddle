@@ -715,14 +715,16 @@ import Foundation
         // refresh requests must be coalesced instead of spawning 30 reads.
         do {
             let f = ModelFixture(); defer { f.clean() }
-            f.hardwareReadDelay = .milliseconds(400)
-            let model = AppModel(services: f.services())
-            await Task.yield()
-            let started = ContinuousClock.now
+            let gate = AsyncTestGate(); defer { gate.open() }
+            var services = f.services()
+            let read = services.readHardware
+            services.readHardware = { await gate.hold(); return await read() }
+            let model = AppModel(services: services)
+            let entered = await gate.waitForEntry()
             for _ in 0..<30 { model.refresh() }
-            try? await Task.sleep(for: .milliseconds(15))
-            expect(ContinuousClock.now - started < .milliseconds(250) && model.refreshBusy,
+            expect(entered && model.refreshBusy,
                    "main actor remains responsive while the hardware snapshot is delayed")
+            gate.open()
             await model.waitForPendingOperations()
             expect(f.hardwareReads <= 2, "rapid refresh notifications coalesce into at most one follow-up read")
             model.shutdownKeepAwake(); await model.waitForPendingOperations()

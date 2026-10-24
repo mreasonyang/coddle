@@ -22,28 +22,28 @@ extension IntegrationTests {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent("coddle-persistence-\(UUID())")
         defer { try? FileManager.default.removeItem(at: root) }
 
-        // The delay is a real blocking operation on the production persistence
+        // The gate is a real blocking operation on the production persistence
         // executor. The UI must continue while defaults remain unable to write.
         do {
             let f = ModelFixture(); defer { f.clean() }
             f.supportsLimit = true
             var loaded = f.config; loaded.smartEnabled = true; loaded.holdLimit = 85
             let snapshot = loaded
+            let gate = BlockingTestGate(); defer { gate.open() }
             var services = f.services()
             services.loadConfig = {
                 try await PersistenceIO.shared.run {
-                    Thread.sleep(forTimeInterval: 0.25)
+                    gate.hold()
                     return snapshot
                 }
             }
             let model = AppModel(services: services)
-            await Task.yield()
-            let started = ContinuousClock.now
-            try? await Task.sleep(for: .milliseconds(20))
-            expect(ContinuousClock.now - started < .milliseconds(150) && model.startupLoading,
+            let entered = await gate.waitForEntry()
+            expect(entered && !gate.timedOut && model.startupLoading,
                    "slow configuration load leaves the main actor responsive")
             expect(f.limitWrites.isEmpty && !f.systemAssertions.contains(true) && !f.helper.writes.contains(true),
                    "startup placeholders never apply a default charging or keep-awake intent")
+            gate.open()
             await model.waitForPendingOperations()
             expect(f.limitWrites == [85] && !model.startupLoading,
                    "only the loaded charging intent is applied after storage startup")
@@ -56,10 +56,11 @@ extension IntegrationTests {
             let f = ModelFixture(); defer { f.clean() }
             let probe = PersistenceProbe()
             let file = root.appendingPathComponent("ordered/config.json")
+            let gate = BlockingTestGate(); defer { gate.open() }
             var services = f.services()
             services.saveConfig = { snapshot in
                 try await PersistenceIO.shared.run {
-                    if snapshot.lowBatteryWarnPercent == 21 { Thread.sleep(forTimeInterval: 0.2) }
+                    if snapshot.lowBatteryWarnPercent == 21 { gate.hold() }
                     try ConfigStore.save(snapshot, at: file)
                     probe.append(snapshot.lowBatteryWarnPercent)
                 }
@@ -69,9 +70,10 @@ extension IntegrationTests {
             model.lowBatteryWarnPercent = 21
             model.lowBatteryWarnPercent = 22
             model.lowBatteryWarnPercent = 23
-            let started = ContinuousClock.now
-            try? await Task.sleep(for: .milliseconds(20))
-            expect(ContinuousClock.now - started < .milliseconds(150), "slow configuration save never occupies the main actor")
+            let entered = await gate.waitForEntry()
+            expect(entered && !gate.timedOut && probe.saved.isEmpty,
+                   "slow configuration save never occupies the main actor")
+            gate.open()
             await model.waitForPendingOperations()
             let stored = try? await ConfigStore.readAsync(at: file)
             expect(probe.saved == [21, 22, 23] && stored?.lowBatteryWarnPercent == 23 && model.configError == nil,
@@ -101,11 +103,12 @@ extension IntegrationTests {
             let f = ModelFixture(); defer { f.clean() }
             let probe = PersistenceProbe()
             var store = OnboardingStore(directory: root.appendingPathComponent("slow-journal"))
+            let gate = BlockingTestGate(); defer { gate.open() }
             store.writeData = { data, url in
                 let record = try JSONDecoder().decode(OnboardingRecord.self, from: data)
                 if record.ordinary == .requested {
                     probe.markRequested()
-                    Thread.sleep(forTimeInterval: 0.2)
+                    gate.hold()
                 }
                 try data.write(to: url, options: .atomic)
             }
@@ -115,12 +118,11 @@ extension IntegrationTests {
             await flow.refresh(); flow.chooseHabit(.unchanged); flow.chooseTask(.open); flow.skipHelper()
             await flow.chooseLogin(false); await flow.chooseReminder(false)
             let applying = Task { await flow.apply() }
-            for _ in 0..<100 where !probe.requested { try? await Task.sleep(for: .milliseconds(5)) }
-            let started = ContinuousClock.now
-            try? await Task.sleep(for: .milliseconds(20))
-            expect(probe.requested && ContinuousClock.now - started < .milliseconds(150),
+            let entered = await gate.waitForEntry()
+            expect(entered && probe.requested && !gate.timedOut,
                    "journal atomic writes run outside the main actor")
             expect(!f.systemAssertions.contains(true), "setup waits for the requested journal to finish before enabling awake")
+            gate.open()
             await applying.value; await model.waitForPendingOperations()
             expect(flow.record.completed && f.systemAssertions.contains(true), "successful journal commit permits setup and durable completion")
             model.shutdownKeepAwake(); await model.waitForPendingOperations()
@@ -155,12 +157,15 @@ extension IntegrationTests {
             let f = ModelFixture(); defer { f.clean() }
             var loaded = f.config; loaded.keepAwake = true; loaded.keepAwakeOnLidClosed = true
             let snapshot = loaded
+            let gate = BlockingTestGate(); defer { gate.open() }
             var services = f.services()
             services.loadConfig = {
-                try await PersistenceIO.shared.run { Thread.sleep(forTimeInterval: 0.1); return snapshot }
+                try await PersistenceIO.shared.run { gate.hold(); return snapshot }
             }
             let model = AppModel(services: services)
-            model.shutdownKeepAwake(); await model.waitForPendingOperations()
+            let entered = await gate.waitForEntry()
+            expect(entered && !gate.timedOut, "startup load is pending before quit")
+            model.shutdownKeepAwake(); gate.open(); await model.waitForPendingOperations()
             expect(!f.systemAssertions.contains(true) && !f.helper.writes.contains(true) && f.limitWrites.isEmpty,
                    "quitting during startup cannot apply a late persisted ON intent")
         }
@@ -169,12 +174,13 @@ extension IntegrationTests {
             let f = ModelFixture(); defer { f.clean() }
             f.config.lowBatteryReminder = .undecided
             let probe = PersistenceProbe()
+            let gate = BlockingTestGate(); defer { gate.open() }
             var services = f.services()
             services.saveConfig = { snapshot in
                 try await PersistenceIO.shared.run {
                     if snapshot.lowBatteryReminder == .enabled {
                         probe.markRequested()
-                        Thread.sleep(forTimeInterval: 0.15)
+                        gate.hold()
                         throw NSError(domain: "old-save", code: 1)
                     }
                 }
@@ -182,10 +188,12 @@ extension IntegrationTests {
             }
             let model = AppModel(services: services); await model.waitForPendingOperations()
             let oldSave = Task { await model.setSetupReminder(.enabled) }
-            for _ in 0..<100 where !probe.requested { try? await Task.sleep(for: .milliseconds(5)) }
+            let entered = await gate.waitForEntry()
+            expect(entered && probe.requested && !gate.timedOut, "older reminder save remains pending before a newer edit")
             // This is a direct settings edit, so the old async method cannot
             // rely only on a method-local generation to detect supersession.
             model.lowBatteryReminder = .disabled
+            gate.open()
             _ = await oldSave.value; await model.waitForPendingOperations()
             expect(model.lowBatteryReminder == .disabled && f.config.lowBatteryReminder == .disabled && model.configError == nil,
                    "a failed old reminder save cannot roll back a newer successful configuration")
@@ -216,6 +224,7 @@ extension IntegrationTests {
             f.supportsLimit = true
             let probe = PersistenceProbe()
             var slowReload = false
+            let gate = BlockingTestGate(); defer { gate.open() }
             var services = f.services()
             services.loadConfig = {
                 guard slowReload else { return f.config }
@@ -224,14 +233,15 @@ extension IntegrationTests {
                 let snapshot = config
                 return try await PersistenceIO.shared.run {
                     probe.markRequested()
-                    Thread.sleep(forTimeInterval: 0.15)
+                    gate.hold()
                     return snapshot
                 }
             }
             let model = AppModel(services: services); await model.waitForPendingOperations()
             slowReload = true; model.reloadConfig()
-            for _ in 0..<100 where !probe.requested { try? await Task.sleep(for: .milliseconds(5)) }
-            model.shutdownKeepAwake(); await model.waitForPendingOperations()
+            let entered = await gate.waitForEntry()
+            expect(entered && probe.requested && !gate.timedOut, "reload remains pending before quit")
+            model.shutdownKeepAwake(); gate.open(); await model.waitForPendingOperations()
             expect(!model.smartEnabled && f.limitWrites.isEmpty && !f.systemAssertions.contains(true) && model.configReloadTask == nil,
                    "quit cancels a pending reload without applying its late intent or retaining a completed task")
         }

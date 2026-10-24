@@ -7,10 +7,10 @@ extension IntegrationTests {
         // OFF must win even when an old assertion creation completes later.
         do {
             let f = ModelFixture(); defer { f.clean() }
-            var started = false
+            let gate = AsyncTestGate(); defer { gate.open() }
             var services = f.services()
             services.setSystemAwake = { on in
-                if on { started = true; try? await Task.sleep(for: .milliseconds(120)) }
+                if on { await gate.hold() }
                 f.systemAssertions.append(on)
                 return true
             }
@@ -18,8 +18,10 @@ extension IntegrationTests {
             var states: [Bool] = []
             let token = m.$systemAwakeApplied.sink { states.append($0) }
             m.keepAwake = true
-            for _ in 0..<50 where !started { try? await Task.sleep(for: .milliseconds(2)) }
+            let entered = await gate.waitForEntry()
+            expect(entered, "old assertion creation is pending before OFF")
             m.keepAwake = false
+            gate.open()
             await m.waitForPendingOperations()
             expect(f.systemAssertions.suffix(2) == [true, false], "late assertion creation is followed by newest OFF")
             expect(!states.contains(true) && !m.systemAwakeApplied,
@@ -30,18 +32,21 @@ extension IntegrationTests {
         // fails. Do not present the desired OFF as a confirmed release.
         do {
             let f = ModelFixture(); defer { f.clean() }
-            var began = false, rejectOff = false
+            var rejectOff = false
+            let gate = AsyncTestGate(); defer { gate.open() }
             var services = f.services()
             services.setSystemAwake = { on in
-                if on { began = true; try? await Task.sleep(for: .milliseconds(100)) }
+                if on { await gate.hold() }
                 if !on && rejectOff { return false }
                 f.systemAssertions.append(on)
                 return true
             }
             let m = AppModel(services: services); await m.waitForPendingOperations()
             m.keepAwake = true
-            for _ in 0..<50 where !began { try? await Task.sleep(for: .milliseconds(2)) }
+            let entered = await gate.waitForEntry()
+            expect(entered, "old assertion creation is pending before a failing OFF")
             rejectOff = true; m.keepAwake = false
+            gate.open()
             await m.waitForPendingOperations()
             expect(!m.keepAwake && m.systemAwakeApplied && m.awakeFeedbackError != nil,
                    "failed newest OFF retains actual ON from a superseded successful creation")
