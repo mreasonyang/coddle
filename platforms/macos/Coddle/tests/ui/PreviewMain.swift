@@ -957,6 +957,7 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
                     .environment(\.colorScheme, dark ? .dark : .light))
                 let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 440, height: 520),
                     styleMask: [.titled, .closable], backing: .buffered, defer: false)
+                window.title = "Coddle Typography — \(language) — \(dark ? "dark" : "light")"
                 window.isReleasedWhenClosed = false
                 window.contentView = host
                 window.setContentSize(NSSize(width: 440, height: 520))
@@ -964,11 +965,14 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
                 defer { window.close() }
                 try await settle(session)
                 host.layoutSubtreeIfNeeded()
+                try await waitForAccessibleControls(
+                    CoddleSettingsTab.allCases.map { "settings-tab-" + $0.rawValue }, in: host)
                 for tab in CoddleSettingsTab.allCases {
                     guard let button = accessibilityNodes(in: host).first(where: {
                         attribute("accessibilityIdentifier", of: $0) == "settings-tab-" + tab.rawValue
                     }), let frame = button.value(forKey: "accessibilityFrame") as? NSValue else {
-                        throw NSError(domain: "CoddleUIReview", code: 29)
+                        throw NSError(domain: "CoddleUIReview", code: 29,
+                            userInfo: [NSLocalizedDescriptionKey: "Typography control geometry missing: \(language)/\(tab.rawValue)"])
                     }
                     let labelWidth = frame.rectValue.width - 16
                     var sizes: [NSSize] = []
