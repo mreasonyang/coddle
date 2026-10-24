@@ -1074,15 +1074,39 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
             let own = (view as? NSVisualEffectView).map { [$0] } ?? []
             return own + view.subviews.flatMap { desktopBlurs(in: $0) }
         }
+        func opaqueCoverage(in view: NSView) throws -> [Double] {
+            guard let bitmap = view.bitmapImageRepForCachingDisplay(in: view.bounds) else {
+                throw NSError(domain: "CoddleUIReview", code: 1)
+            }
+            view.cacheDisplay(in: view.bounds, to: bitmap)
+            var alphas: [Double] = []
+            for (x, y) in [(0.05, 0.05), (0.95, 0.05), (0.05, 0.95), (0.95, 0.95), (0.5, 0.5)] {
+                let color = bitmap.colorAt(x: Int(Double(bitmap.pixelsWide - 1) * x),
+                                           y: Int(Double(bitmap.pixelsHigh - 1) * y))?.usingColorSpace(.deviceRGB)
+                let alpha = Double(color?.alphaComponent ?? 0)
+                try require(alpha >= 0.98, "Reduced-transparency background leaves an uncovered viewport sample")
+                alphas.append(alpha)
+            }
+            return alphas
+        }
+        let reducedTransparency = NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency
+        var dockBackdrops: [[String: Any]] = []
         for height in [480.0, 640.0, 760.0] {
             dashboard.setContentSize(NSSize(width: 340, height: height))
             try await settle(session)
             panel.layoutSubtreeIfNeeded()
             let backdrops = desktopBlurs(in: panel).filter { $0.blendingMode == .behindWindow }
-            try require(backdrops.count == 1, "Dock must have one desktop blur, not one per scroll layer; count=\(backdrops.count), theme=\(session.model.theme), systemReduceTransparency=\(NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency)")
-            let coverage = backdrops[0].convert(backdrops[0].bounds, to: panel)
-            try require(coverage.insetBy(dx: -1, dy: -1).contains(panel.bounds),
-                        "Dock backdrop does not cover the \(height)-point viewport")
+            try require(backdrops.count == (reducedTransparency ? 0 : 1),
+                        "Dock backdrop does not match accessibility mode; count=\(backdrops.count), reduceTransparency=\(reducedTransparency)")
+            var evidence: [String: Any] = ["height": height, "desktopBlurCount": backdrops.count]
+            if reducedTransparency {
+                evidence["opaqueCoverageAlphas"] = try opaqueCoverage(in: panel)
+            } else {
+                let coverage = backdrops[0].convert(backdrops[0].bounds, to: panel)
+                try require(coverage.insetBy(dx: -1, dy: -1).contains(panel.bounds),
+                            "Dock backdrop does not cover the \(height)-point viewport")
+            }
+            dockBackdrops.append(evidence)
         }
         dashboard.setContentSize(NSSize(width: 340, height: 640))
         try await settle(session)
@@ -1131,11 +1155,16 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
                 try await settle(session)
                 content.layoutSubtreeIfNeeded()
                 let blurs = desktopBlurs(in: content).filter { $0.blendingMode == .behindWindow }
-                try require(blurs.count == 1, "Settings must share one full-window desktop blur")
-                let coverage = blurs[0].convert(blurs[0].bounds, to: nil)
-                let fullFrame = NSRect(origin: .zero, size: settings.frame.size)
-                try require(coverage.insetBy(dx: -1, dy: -1).contains(fullFrame),
-                            "Settings glass does not cover the native title bar")
+                try require(blurs.count == (reducedTransparency ? 0 : 1),
+                            "Settings backdrop does not match accessibility mode")
+                if reducedTransparency {
+                    _ = try opaqueCoverage(in: content.superview ?? content)
+                } else {
+                    let coverage = blurs[0].convert(blurs[0].bounds, to: nil)
+                    let fullFrame = NSRect(origin: .zero, size: settings.frame.size)
+                    try require(coverage.insetBy(dx: -1, dy: -1).contains(fullFrame),
+                                "Settings glass does not cover the native title bar")
+                }
                 let safeFrame = settings.convertToScreen(settings.contentLayoutRect)
                 for tab in CoddleSettingsTab.allCases {
                     guard let node = accessibilityNodes(in: content).first(where: {
@@ -1284,6 +1313,7 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
                     "Closing and reopening the dashboard must preserve keep-awake preferences")
         let report: [String: Any] = [
             "passed": true, "fixtureOnly": true, "tabsVisited": visited, "settingsChrome": settingsChrome,
+            "reducedTransparency": reducedTransparency, "dockBackdrops": dockBackdrops,
             "settingsTabTypography": try await settingsTabTypographyAudit(session: session),
             "settingsEntry": try await settingsEntryAudit(session: session),
             "checks": ["hardware read error and confirmed recovery", "Dock-only dashboard", "single full-viewport backdrop at 480/640/760 pt", "Activity Monitor routing", "Energy Mode action", "charge to full + resume",
