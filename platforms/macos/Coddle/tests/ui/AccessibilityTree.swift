@@ -33,9 +33,9 @@ enum CoddleAccessibilityTree {
         var raw: CFTypeRef?
         let result = AXUIElementCopyAttributeValue(application, kAXWindowsAttribute as CFString, &raw)
         let windows = elements(in: raw)
-        let identifiers = windows.flatMap { identifiers(in: $0, depth: 0) }
-        let sample = identifiers.prefix(8).joined(separator: ", ")
-        return "axError=\(result.rawValue) axWindows=\(windows.count) axIdentifiers=\(identifiers.count) [\(sample)]"
+        let publishedIdentifiers = windows.flatMap { Self.identifiers(in: $0, depth: 0) }
+        let sample = publishedIdentifiers.prefix(8).joined(separator: ", ")
+        return "axError=\(result.rawValue) axWindows=\(windows.count) axIdentifiers=\(publishedIdentifiers.count) [\(sample)]"
     }
 
     private static func prime(_ window: NSWindow?) {
