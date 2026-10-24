@@ -105,9 +105,17 @@ import SwiftUI
         if !value { throw NSError(domain: "SetupReview", code: 1, userInfo: [NSLocalizedDescriptionKey: "[\(currentCase)] \(message)"]) }
     }
     func nodes(_ node: NSObject, depth: Int = 0) -> [NSObject] {
+        if depth == 0, let view = node as? NSView {
+            return CoddleAccessibilityTree.nodes(in: view, native: { nativeNodes(view) }) {
+                attribute($0, "accessibilityIdentifier") != nil
+            }
+        }
+        return nativeNodes(node, depth: depth)
+    }
+    func nativeNodes(_ node: NSObject, depth: Int = 0) -> [NSObject] {
         guard depth < 30 else { return [] }
         guard node.responds(to: NSSelectorFromString("accessibilityChildren")), let children = node.value(forKey: "accessibilityChildren") as? [NSObject] else { return [node] }
-        return [node] + children.flatMap { nodes($0, depth: depth + 1) }
+        return [node] + children.flatMap { nativeNodes($0, depth: depth + 1) }
     }
     func attribute(_ node: NSObject, _ key: String) -> String? {
         let getter = key == "accessibilityEnabled" ? "isAccessibilityEnabled" : key == "accessibilityFocused" ? "isAccessibilityFocused" : key

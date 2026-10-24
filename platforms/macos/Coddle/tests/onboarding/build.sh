@@ -14,9 +14,9 @@ APP="$OUTPUT/CoddleOnboardingReview.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$OUTPUT/evidence"
 clang -fobjc-arc -O2 -c PowerUI.m -o "$OUTPUT/PowerUI.o"
 swiftc -D CODDLE_TESTING -parse-as-library -import-objc-header PowerUI.h \
-  Sources/*.swift tests/integration/Fixture.swift tests/onboarding/PreviewMain.swift \
+  Sources/*.swift tests/integration/Fixture.swift tests/ui/AccessibilityTree.swift tests/onboarding/PreviewMain.swift \
   "$OUTPUT/PowerUI.o" -o "$APP/Contents/MacOS/CoddleReviewUI" \
-  -framework Foundation -framework AppKit -framework SwiftUI -framework IOKit
+  -framework Foundation -framework AppKit -framework ApplicationServices -framework SwiftUI -framework IOKit
 cp tests/ui/Info.plist "$APP/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c 'Set :CFBundleIdentifier com.coddle.onboarding-review.app' "$APP/Contents/Info.plist"
 for resource in Resources/*.lproj; do cp -R "$resource" "$APP/Contents/Resources/"; done

@@ -463,6 +463,7 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
         throw NSError(domain: "CoddleUIReview", code: 44,
             userInfo: [NSLocalizedDescriptionKey:
                 "Accessibility readiness timed out: \(lastError). Required: \(identifiers); available: \(available); "
+                + "\(CoddleAccessibilityTree.diagnostic(for: window)); "
                 + "keyWindow=\(window.isKeyWindow), appActive=\(NSApplication.shared.isActive)"])
     }
 
@@ -704,25 +705,28 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
     /// control is still present and named, not just drawn somewhere.
     private func accessibilityLabels(in view: NSView) -> [String] {
         var labels: [String] = []
-        func walk(_ node: Any, _ depth: Int) {
-            guard depth < 14, let object = node as? NSObject else { return }
+        for object in accessibilityNodes(in: view) {
             if let label = object.value(forKey: "accessibilityLabel") as? String, !label.isEmpty {
                 labels.append(label)
             }
             if let value = object.value(forKey: "accessibilityValue") as? String, !value.isEmpty {
                 labels.append(value)
             }
-            if let children = object.value(forKey: "accessibilityChildren") as? [Any] {
-                for child in children { walk(child, depth + 1) }
-            }
         }
-        walk(view, 0)
         return labels
     }
 
     /// Read native AX nodes as well as SwiftUI nodes. Attribute presence alone
     /// never counts as an interaction: tests below execute the actual actions.
+    /// When SwiftUI has not published identifiers, use the system accessibility
+    /// tree documented in tests/ui/AccessibilityTree.swift.
     private func accessibilityNodes(in view: NSView) -> [NSObject] {
+        CoddleAccessibilityTree.nodes(in: view, native: { nativeAccessibilityNodes(in: view) }) {
+            attribute("accessibilityIdentifier", of: $0) != nil
+        }
+    }
+
+    private func nativeAccessibilityNodes(in view: NSView) -> [NSObject] {
         var nodes: [NSObject] = []
         func walk(_ node: Any, _ depth: Int) {
             guard depth < 24, let object = node as? NSObject else { return }

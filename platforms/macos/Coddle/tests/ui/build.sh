@@ -23,9 +23,9 @@ mkdir -p "$CACHE" "$APP/Contents/MacOS" "$APP/Contents/Resources"
 clang -target "$TARGET" -fobjc-arc -O2 -c PowerUI.m -o "$OUTPUT_DIR/PowerUI.o"
 swiftc -O -D CODDLE_TESTING -parse-as-library -target "$TARGET" \
   -module-cache-path "$CACHE" -import-objc-header PowerUI.h \
-  Sources/*.swift tests/integration/Fixture.swift tests/ui/PreviewMain.swift \
+  Sources/*.swift tests/integration/Fixture.swift tests/ui/AccessibilityTree.swift tests/ui/PreviewMain.swift \
   "$OUTPUT_DIR/PowerUI.o" -o "$OUTPUT_DIR/CoddleReviewUI" \
-  -framework Foundation -framework AppKit -framework SwiftUI -framework IOKit
+  -framework Foundation -framework AppKit -framework ApplicationServices -framework SwiftUI -framework IOKit
 cp "$OUTPUT_DIR/CoddleReviewUI" "$APP/Contents/MacOS/CoddleReviewUI"
 cp tests/ui/Info.plist "$APP/Contents/Info.plist"
 /usr/libexec/PlistBuddy -c "Set :LSMinimumSystemVersion $TARGET_OS" "$APP/Contents/Info.plist"
