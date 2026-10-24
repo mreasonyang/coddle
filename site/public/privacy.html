@@ -25,7 +25,7 @@
   <meta name="twitter:image:alt" content="Coddle: Charge with care. Stay in flow. A free, open-source macOS menu bar utility.">
   <link rel="icon" type="image/png" href="/assets/coddle-icon.png">
   <link rel="stylesheet" href="/styles.css?v=2c3f425b4543">
-  <script src="/app.js?v=b5168c049ead" defer></script>
+  <script src="/app.js?v=f5a156634127" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
@@ -39,7 +39,7 @@
     <article data-locale="en">
       <p class="eyebrow">A LITTLE CLARITY</p>
       <h1>Your routine<br>On your Mac</h1>
-      <p>This describes the Coddle 0.1.0 preview and the website source published with it. Updated 22 October 2026.</p>
+      <p>This describes the Coddle 0.2.1 preview and this website. Updated 24 October 2026.</p>
       <h2>The app</h2>
       <p>Coddle has no account system or cloud charging service. Its smart-charging decisions use local hourly samples of whether your Mac is plugged in. The app source includes no analytics SDK or remote telemetry service.</p>
       <ul>
@@ -47,19 +47,20 @@
         <li><strong>Charging routine:</strong> hourly plugged-in observations are saved locally in macOS UserDefaults. They help estimate when you might unplug.</li>
         <li><strong>Away detection:</strong> the app can read macOS network fingerprints and learn time spent on usual networks. These learned records stay in local UserDefaults; a manual usual-network list may be saved in your configuration. A short hash is used for compact display, but the internal record is not guaranteed to contain only hashed identifiers.</li>
         <li><strong>Battery and activity display:</strong> Coddle reads local system battery and power information, plus running-app activity estimates, to present its panel. These are not sent to a Coddle server.</li>
+        <li><strong>Software updates:</strong> checking for updates and downloading them contacts GitHub through Sparkle. Automatic checks and automatic download/installation can be controlled in Settings. Sparkle system profiling is disabled in the app configuration.</li>
       </ul>
       <p>You can turn off smart charging and away detection in Settings. Turning a feature off does not promise to erase its existing local history. Removing the app also does not automatically remove preferences or an installed helper. Keep sleep prevention off and uninstall the optional helper through Settings before removing the app if you no longer want those controls.</p>
       <h2>This website</h2>
       <p>The website source includes no analytics SDK, advertising scripts, tracking pixels, or cookie-setting code. It uses your browser’s <code>localStorage</code> to remember the language you select. Clearing this site’s browser storage removes that preference. The site has no account or email-subscription form.</p>
-      <p>The site and its downloads are served through Cloudflare. Delivering a page requires the hosting service to process request metadata, which can include IP address, browser information, requested URL, and time. Hosting-level logs, security features, or analytics configured by the operator may process additional request information; the absence of an analytics SDK in this source does not establish that the hosting service keeps no logs. Hosting retention and optional injected services depend on the deployed configuration.</p>
+      <p>The site is served through Cloudflare; current app releases, source, and update files are hosted on GitHub. Delivering pages or downloads requires these services to process request metadata, which can include IP address, browser information, requested URL, and time. Hosting-level logs, security features, or analytics configured by the operator may process additional request information; the absence of an analytics SDK in this source does not establish that the hosting service keeps no logs. Hosting retention and optional injected services depend on the deployed configuration.</p>
       <h2>Inspect it yourself</h2>
-      <p>The <a href="/downloads/Coddle-source-preview.tar.gz?v=bb425cc31a60">app source</a> is available under MIT. The <a href="/downloads/release.json?v=f9842a83e1aa">release metadata</a> and <a href="/downloads/SHA256SUMS.txt?v=3f8fde30d08a">checksums</a> identify this preview.</p>
+      <p>The <a href="https://github.com/MrEasonYang/coddle/tree/v0.2.1">app source</a> is available under MIT. The <a href="https://github.com/MrEasonYang/coddle/releases/tag/v0.2.1">GitHub release</a> and <a href="https://github.com/MrEasonYang/coddle/releases/download/v0.2.1/SHA256SUMS.txt">checksums</a> identify this preview.</p>
       <p><a href="/">← Back to Coddle</a></p>
     </article>
     <article data-locale="zh-CN" lang="zh-CN" hidden>
       <p class="eyebrow">关于你的数据</p>
       <h1>你的使用习惯，<br>保存在你的 Mac</h1>
-      <p>本文说明 Coddle 0.1.0 预览版及随其发布的网站源码。更新日期：2026 年 10 月 22 日。</p>
+      <p>本文说明 Coddle 0.2.1 预览版及本网站。更新日期：2026 年 10 月 24 日。</p>
       <h2>应用本身</h2>
       <p>Coddle 没有账户系统，也不依赖云端充电服务。智能充电使用本机按小时记录的插电状态进行判断。应用源码未包含分析 SDK 或远程遥测服务。</p>
       <ul>
@@ -67,17 +68,18 @@
         <li><strong>充电习惯：</strong>按小时采集的插电观察记录保存在本机 macOS UserDefaults 中，用来估计可能的拔电时间。</li>
         <li><strong>离开检测：</strong>应用可以读取 macOS 网络指纹，学习你在常用网络上的停留时间。学习记录保存在本机 UserDefaults；手动指定的常用网络列表可能保存在配置中。界面使用短哈希简化显示，但内部记录不保证仅包含哈希标识。</li>
         <li><strong>电池和活动展示：</strong>Coddle 读取本地系统的电池、电源信息及运行中应用的活动估算，用于展示面板。这些信息不会发送至 Coddle 服务器。</li>
+        <li><strong>软件更新：</strong>检查和下载更新时，Sparkle 会连接 GitHub。自动检查、自动下载与安装可在设置中控制。应用配置已关闭 Sparkle 系统信息采集。</li>
       </ul>
       <p>你可以在设置中关闭智能充电和离开检测。关闭功能并不意味着自动删除已有本地记录。移除应用也不会自动删除偏好或已安装的辅助组件。若不再需要这些控制，请先关闭防止休眠，并在设置中卸载可选辅助组件，再移除应用。</p>
       <h2>这个网站</h2>
       <p>网站源码没有加入分析 SDK、广告脚本、追踪像素或设置 Cookie 的代码。它使用浏览器 <code>localStorage</code> 记住你选择的语言；清除本站浏览器存储即可移除这一偏好。网站不提供账户或邮件订阅表单。</p>
-      <p>网站及下载文件通过 Cloudflare 提供服务。传输页面时，托管服务需要处理请求元数据，其中可能包括 IP 地址、浏览器信息、请求网址和时间。运营者在托管平台配置的日志、安全功能或分析服务也可能处理请求信息；源码没有分析 SDK，并不代表托管服务完全不保留日志。托管侧的保留期限与可选注入服务取决于实际部署配置。</p>
+      <p>网站由 Cloudflare 提供服务；当前应用版本、源码与更新文件托管于 GitHub。传输页面或下载文件时，这些服务需要处理请求元数据，其中可能包括 IP 地址、浏览器信息、请求网址和时间。运营者在托管平台配置的日志、安全功能或分析服务也可能处理请求信息；源码没有分析 SDK，并不代表托管服务完全不保留日志。托管侧的保留期限与可选注入服务取决于实际部署配置。</p>
       <h2>你可以自行查看</h2>
-      <p><a href="/downloads/Coddle-source-preview.tar.gz?v=bb425cc31a60">应用源码</a>采用 MIT 许可。<a href="/downloads/release.json?v=f9842a83e1aa">版本信息</a>与 <a href="/downloads/SHA256SUMS.txt?v=3f8fde30d08a">校验值</a>标识了此预览版内容。</p>
+      <p><a href="https://github.com/MrEasonYang/coddle/tree/v0.2.1">应用源码</a>采用 MIT 许可。<a href="https://github.com/MrEasonYang/coddle/releases/tag/v0.2.1">GitHub 发布页</a>与 <a href="https://github.com/MrEasonYang/coddle/releases/download/v0.2.1/SHA256SUMS.txt">校验值</a>标识了此预览版内容。</p>
       <p><a href="/">← 返回 Coddle</a></p>
     </article>
   </main>
-  <footer class="footer"><a class="brand" href="/"><img src="/assets/coddle-icon.png" width="30" height="30" alt=""><span>Coddle</span></a><span data-i18n="footerNote">A little care for your Mac</span><div><a href="/install.html" data-i18n="installLink">Installation guide ↗</a><a href="/downloads/Coddle-source-preview.tar.gz?v=bb425cc31a60" data-i18n="footerSource">Open source ↗</a><span>© 2026 Coddle</span></div></footer>
+  <footer class="footer"><a class="brand" href="/"><img src="/assets/coddle-icon.png" width="30" height="30" alt=""><span>Coddle</span></a><span data-i18n="footerNote">A little care for your Mac</span><div><a href="/install.html" data-i18n="installLink">Installation guide ↗</a><a href="https://github.com/MrEasonYang/coddle/tree/v0.2.1" data-i18n="footerSource">Open source ↗</a><span>© 2026 Coddle</span></div></footer>
 </div>
 </body>
 </html>

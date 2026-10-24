@@ -24,9 +24,9 @@
       faqThreeQ: '需要管理员权限吗？', faqThreeA: '限充与普通防止休眠无需特权辅助组件。合盖运行需要可选辅助组件，只有你主动选择安装并完成 macOS 管理员授权后才会安装。部分系统电源模式更改也需要授权。',
       faqFourQ: '关闭防止休眠后，会发生什么？', faqFourA: '关闭“防止休眠”总开关后，Coddle 会停止它管理的电脑、屏幕和合盖保活。屏幕与合盖偏好会保留，供下次使用；充电设置与系统屏幕休眠时间不变。如果无法确认保活已停止，应用会显示状态并重试。',
       faqFiveQ: '智能充电会使用云端 AI 或上传数据吗？', faqFiveA: '它通过本机按小时记录的插电样本和简单规则工作，不使用在线 AI 模型。需要积累足够记录才能识别习惯，预测并非保证。配置和充电习惯均保存在你的 Mac 上。',
-      faqSixQ: 'Coddle 开源吗？', faqSixA: '是的。Coddle 采用 MIT 许可证。你可以下载与预览版对应的源码快照，查看实现或自行构建。', sourceLink: '获取源码 ↗',
+      faqSixQ: 'Coddle 开源吗？', faqSixA: '是的。Coddle 采用 MIT 许可证。你可以在 GitHub 查看此版本对应的源码，了解实现或自行构建。', sourceLink: '获取源码 ↗',
       downloadEyebrow: '准备好开始了吗？', downloadTitle: '给你的 Mac，', downloadEm: '更合适的节奏', downloadDescription: '试用免费开源的预览版，管理充电上限、本地智能充电与长任务防休眠。',
-      downloadButton: '下载 macOS 预览版', downloadMeta: 'v0.1.0 预览版 · Universal（Apple Silicon / Intel）· 最低构建目标 macOS 13 · 约 3.0 MB', downloadCaveat: '采用 ad-hoc 临时签名，未经 Apple 公证，macOS 可能阻止打开；请先阅读安装指引。限充支持因机型和系统而异。',
+      downloadButton: '前往 GitHub 获取预览版', downloadMeta: 'v0.2.1 预览版 · Universal（Apple Silicon / Intel）· 最低构建目标 macOS 13', downloadCaveat: '采用 ad-hoc 临时签名，未经 Apple 公证，macOS 可能阻止打开；请先阅读安装指引。限充支持因机型和系统而异。',
       installLink: '安装指引 ↗', sourceShort: '源代码 ↗', checksumLink: 'SHA-256 校验值 ↗', footerNote: '给你的 Mac，一点点照顾', privacyLink: '隐私说明', footerSource: '开放源代码 ↗'
     }
   };

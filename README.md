@@ -132,7 +132,8 @@
 - **仓库自动部署**：官网通过 Cloudflare Workers and Pages GitHub App 连接 `mreasonyang/coddle`，生产分支为 `main`。Pages 项目 `coddle-site` 从仓库根目录执行 `bash site/scripts/cloudflare-build.sh`，发布目录为 `site/public`；Python 版本由 `.python-version` 固定。推送 `main` 后由 Cloudflare 自动构建和发布，无需配置 Cloudflare API Token。
 - **本地校验与打包**：运行 `bash site/scripts/cloudflare-build.sh`，检查公开资源、下载文件校验值与 JavaScript 语法，并生成 `site/dist/coddle-site.zip` 和文件校验清单。GitHub 的 [官网校验工作流](.github/workflows/site.yml) 执行相同检查并保留提交绑定的产物；部署由 Cloudflare 原生集成完成。
 - **域名与恢复**：`coddle.kyun.si` 绑定 `coddle-site`。旧 Direct Upload 项目 `coddle` 保留既有部署作为恢复来源。需要调整 GitHub App 授权时，只增加所需仓库，保留其他已有授权。
-- **更新发布下载项**：使用以下命令成对更新下载资源与校验信息（请将参数替换为实际输入路径）：
+- **当前版本下载**：应用包、签名更新源和校验文件由 GitHub Release 工作流发布。发布成功后，将官网的版本文案、下载链接、源码标签及校验链接一起更新为该版本；不要提前指向尚不存在的发布资源。
+- **历史静态归档维护**：`site/public/downloads` 保留旧版冻结资源，已不作为官网当前版本下载入口。只有维护历史归档时才使用以下命令（请将参数替换为实际输入路径）；此校验器不适用于含 Sparkle 框架符号链接的新版应用包：
   ```bash
   python3 site/scripts/package.py --prepare-downloads \
     --app-archive "dist/Coddle-preview-universal.zip" \
