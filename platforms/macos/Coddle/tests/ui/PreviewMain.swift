@@ -1023,6 +1023,8 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
 
     private func interactionAudit(output: URL) async throws {
         try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true)
+        print("UI environment: reduceTransparency=\(NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency), reduceMotion=\(NSWorkspace.shared.accessibilityDisplayShouldReduceMotion)")
+        fflush(stdout)
         let session = ReviewSession(language: "en", theme: "liquidGlass", output: output)
         self.session = session
         // Native glass remains enabled for every interaction and backdrop check.
@@ -1077,7 +1079,7 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
             try await settle(session)
             panel.layoutSubtreeIfNeeded()
             let backdrops = desktopBlurs(in: panel).filter { $0.blendingMode == .behindWindow }
-            try require(backdrops.count == 1, "Dock must have one desktop blur, not one per scroll layer")
+            try require(backdrops.count == 1, "Dock must have one desktop blur, not one per scroll layer; count=\(backdrops.count), theme=\(session.model.theme), systemReduceTransparency=\(NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency)")
             let coverage = backdrops[0].convert(backdrops[0].bounds, to: panel)
             try require(coverage.insetBy(dx: -1, dy: -1).contains(panel.bounds),
                         "Dock backdrop does not cover the \(height)-point viewport")
