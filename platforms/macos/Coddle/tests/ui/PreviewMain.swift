@@ -590,7 +590,11 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
             scroll.contentView.bounds.height > 0 &&
                 (scroll.documentView?.frame.height ?? 0) > scroll.contentView.bounds.height + 1
         } ?? false
-        let maximumPanelHeight: CGFloat = 680
+        // Production also caps the viewport to the screen's usable height.
+        // Hosted macOS runners can have a 624-point cap rather than 680.
+        let configuredMaximum = options["--maximum-panel-height"].flatMap(Double.init).map { CGFloat($0) }
+            ?? PopoverControlPanel().maximumHeight
+        let maximumPanelHeight = min(CGFloat(680), configuredMaximum)
         let controls = try controlGeometry(
             ["energy-mode-0", "keep-awake-menu-entry", "keep-awake-master", "open-settings"],
             in: host, requireVisible: !hasPopoverOverflow)
