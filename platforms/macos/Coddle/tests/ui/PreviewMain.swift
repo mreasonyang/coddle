@@ -1027,9 +1027,9 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
         fflush(stdout)
         let session = ReviewSession(language: "en", theme: "liquidGlass", output: output)
         self.session = session
-        // Native glass remains enabled for every interaction and backdrop check.
-        // cacheDisplay cannot capture its composited layers; snapshot the same
-        // settled controls in Classic, then restore glass before continuing.
+        // Native windows keep the system accessibility settings throughout.
+        // cacheDisplay cannot capture composited glass; snapshot the settled
+        // controls in Classic, then restore the selected theme before continuing.
         func captureLayout(_ view: NSView, to url: URL) async throws {
             let theme = session.model.theme
             session.model.theme = "classic"
@@ -1068,8 +1068,8 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
         try require(!hasControl("coddle-error-message", in: panel) && session.model.lastError == nil,
                     "Confirmed hardware-read recovery must remove the obsolete global banner")
         // Exercise the production window at both shorter and taller viewport
-        // sizes. Exactly one desktop blur must span the full viewport; card
-        // materials are in-window and must not accidentally satisfy this check.
+        // sizes. Glass needs one desktop blur; reduced transparency needs an
+        // opaque viewport. Card materials cannot satisfy the glass coverage check.
         func desktopBlurs(in view: NSView) -> [NSVisualEffectView] {
             let own = (view as? NSVisualEffectView).map { [$0] } ?? []
             return own + view.subviews.flatMap { desktopBlurs(in: $0) }
@@ -1084,7 +1084,8 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
                 let color = bitmap.colorAt(x: Int(Double(bitmap.pixelsWide - 1) * x),
                                            y: Int(Double(bitmap.pixelsHigh - 1) * y))?.usingColorSpace(.deviceRGB)
                 let alpha = Double(color?.alphaComponent ?? 0)
-                try require(alpha >= 0.98, "Reduced-transparency background leaves an uncovered viewport sample")
+                try require(alpha >= 0.98,
+                            "Reduced-transparency background leaves an uncovered viewport sample: x=\(x), y=\(y), alpha=\(alpha)")
                 alphas.append(alpha)
             }
             return alphas
@@ -1154,6 +1155,8 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
                 settings.setContentSize(size)
                 try await settle(session)
                 content.layoutSubtreeIfNeeded()
+                try await waitForAccessibleControls(
+                    CoddleSettingsTab.allCases.map { "settings-tab-" + $0.rawValue }, in: content)
                 let blurs = desktopBlurs(in: content).filter { $0.blendingMode == .behindWindow }
                 try require(blurs.count == (reducedTransparency ? 0 : 1),
                             "Settings backdrop does not match accessibility mode")
@@ -1170,7 +1173,8 @@ private final class ReviewAppDelegate: NSObject, NSApplicationDelegate {
                     guard let node = accessibilityNodes(in: content).first(where: {
                         attribute("accessibilityIdentifier", of: $0) == "settings-tab-" + tab.rawValue
                     }), let value = node.value(forKey: "accessibilityFrame") as? NSValue else {
-                        throw NSError(domain: "CoddleUIReview", code: 29)
+                        throw NSError(domain: "CoddleUIReview", code: 29,
+                            userInfo: [NSLocalizedDescriptionKey: "Settings tab geometry disappeared after readiness: \(tab.rawValue)"])
                     }
                     try require(safeFrame.insetBy(dx: -1, dy: -1).contains(value.rectValue),
                                 "Settings tab overlaps native window controls")
