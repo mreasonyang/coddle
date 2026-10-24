@@ -60,12 +60,17 @@ extension IntegrationTests {
             services.loginStatus = { await worker.status() }
             services.setLogin = { try await worker.setEnabled($0) }
             let m = AppModel(services: services); await m.waitForPendingOperations()
-            let start = ContinuousClock.now
+            defer { fake.releaseRegistration() }
             m.setLaunchAtLogin(true)
-            try? await Task.sleep(for: .milliseconds(20))
-            expect(ContinuousClock.now - start < .milliseconds(100) && m.loginBusy && !m.launchAtLogin,
+            let deadline = ContinuousClock.now.advanced(by: .seconds(5))
+            while !fake.registrationStarted && ContinuousClock.now < deadline {
+                try? await Task.sleep(for: .milliseconds(2))
+            }
+            expect(fake.registrationStarted, "login worker reaches the held registration boundary")
+            expect(!fake.registrationTimedOut && m.loginBusy && !m.launchAtLogin,
                    "slow login registration keeps UI responsive without premature success")
             m.setLaunchAtLogin(false)
+            fake.releaseRegistration()
             await m.waitForPendingOperations()
             expect(!m.launchAtLogin && !m.loginBusy && fake.writes == [true, false],
                    "login changes stay ordered and read back the final state")
@@ -80,6 +85,9 @@ private final class LoginWorkerState: @unchecked Sendable {
     private var enabled = false
     private var recordedWrites: [Bool] = []
     private var mainThread = false
+    private let registrationGate = DispatchSemaphore(value: 0)
+    private var beganRegistration = false
+    private var registrationWaitExpired = false
     var status: SMAppService.Status {
         lock.lock(); defer { lock.unlock() }
         mainThread = mainThread || Thread.isMainThread
@@ -87,10 +95,21 @@ private final class LoginWorkerState: @unchecked Sendable {
     }
     var writes: [Bool] { lock.lock(); defer { lock.unlock() }; return recordedWrites }
     var usedMainThread: Bool { lock.lock(); defer { lock.unlock() }; return mainThread }
+    var registrationStarted: Bool { lock.lock(); defer { lock.unlock() }; return beganRegistration }
+    var registrationTimedOut: Bool { lock.lock(); defer { lock.unlock() }; return registrationWaitExpired }
+    func releaseRegistration() { registrationGate.signal() }
     func set(_ on: Bool) {
-        Thread.sleep(forTimeInterval: 0.15)
-        lock.lock(); defer { lock.unlock() }
+        lock.lock()
         mainThread = mainThread || Thread.isMainThread
+        if on { beganRegistration = true }
+        lock.unlock()
+        // The main actor must be able to inspect the pending state and queue
+        // OFF while this synchronous boundary remains blocked. A timeout also
+        // fails if a regression accidentally runs the boundary on that actor.
+        if on && registrationGate.wait(timeout: .now() + 5) == .timedOut {
+            lock.lock(); registrationWaitExpired = true; lock.unlock()
+        }
+        lock.lock(); defer { lock.unlock() }
         enabled = on; recordedWrites.append(on)
     }
 }
