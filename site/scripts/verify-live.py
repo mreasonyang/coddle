@@ -8,6 +8,7 @@ import re
 import sys
 import subprocess
 import tempfile
+from urllib.request import Request, urlopen
 
 root = Path(__file__).resolve().parents[1]
 base = sys.argv[1].rstrip('/')
@@ -46,10 +47,21 @@ def check(path):
             'csp': headers.get('content-security-policy') if route == '/' else None}
 
 files = [p for p in sorted((root / 'public').rglob('*')) if p.is_file() and not p.name.startswith('_') and p.name != '404.html']
+installer = json.loads((root / 'public/installer.json').read_text())
+with urlopen(Request(installer['download'], headers={'User-Agent': 'Coddle-download-verification/1.0'}), timeout=30) as response:
+    installer_data = response.read()
+with urlopen(Request(installer['checksum'], headers={'User-Agent': 'Coddle-download-verification/1.0'}), timeout=30) as response:
+    installer_checksum = response.read().decode().strip()
+installer_name = installer['download'].rsplit('/', 1)[-1]
+installer_passed = (len(installer_data) == installer['bytes'] and digest(installer_data) == installer['sha256']
+    and installer_data[-512:-508] == b'koly' and installer_checksum == f"{installer['sha256']}  {installer_name}")
+installer_result = {'url': installer['download'], 'bytes': len(installer_data),
+    'sha256': digest(installer_data), 'format': 'dmg', 'passed': installer_passed,
+    'developerIdSigned': installer['developerIdSigned'], 'appleNotarized': installer['appleNotarized']}
 with ThreadPoolExecutor(max_workers=4) as pool:
     results = list(pool.map(check, files))
 not_found = fetch('/coddle-acceptance-missing-page')[1]['http_code']
-passed = all(r['status'] == 200 and r['tlsVerifyResult'] == 0 and (r['exactBytes'] or r['edgeAnalyticsOnly']) for r in results) and not_found == 404
-report = {'baseUrl': base, 'tlsVerified': True, 'files': results, 'notFoundStatus': not_found, 'passed': passed}
+passed = installer_passed and all(r['status'] == 200 and r['tlsVerifyResult'] == 0 and (r['exactBytes'] or r['edgeAnalyticsOnly']) for r in results) and not_found == 404
+report = {'baseUrl': base, 'tlsVerified': True, 'files': results, 'installer': installer_result, 'notFoundStatus': not_found, 'passed': passed}
 print(json.dumps(report, indent=2))
 raise SystemExit(0 if passed else 1)

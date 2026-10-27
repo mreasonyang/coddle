@@ -6,7 +6,7 @@
 
 Set a custom charge limit for desk work, top up before heading out, and keep long compiles, downloads, or automated tasks running quietly while your display sleeps. Charging routines are learned strictly on-device, respecting your privacy and hardware boundaries.
 
-[GitHub Source](https://github.com/MrEasonYang/coddle) · [Website](https://coddle.kyun.si/) · [Download Latest macOS Preview (Universal)](https://github.com/MrEasonYang/coddle/releases/latest) · [Installation Notes](https://coddle.kyun.si/install.html)
+[GitHub Source](https://github.com/MrEasonYang/coddle) · [Website](https://coddle.kyun.si/) · [Download macOS DMG Preview (Universal)](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg) · [Installation Notes](https://coddle.kyun.si/install.html)
 
 > [!NOTE]
 > **0.2.1 Early Preview**, targeting Apple Silicon and Intel Macs (macOS 13.0+ deployment target). Currently ad-hoc signed and **not Developer ID signed or notarized by Apple**. Native charge limits rely on Apple Silicon and recent macOS releases; feature availability is determined at runtime via dynamic hardware capability checks. Refer to the [installation notes](https://coddle.kyun.si/install.html) before first launch.
@@ -37,11 +37,11 @@ When supported by your hardware, connected to power, not yet full, and with a li
 
 ## Installation and Quick Start
 
-1. **Download**: Grab the latest [universal preview ZIP from GitHub Releases](https://github.com/MrEasonYang/coddle/releases/latest), extract it, and move `Coddle.app` into your `/Applications` folder.
+1. **Download**: [Download the Universal DMG from GitHub](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg), open it, and drag Coddle on the left onto the Applications shortcut on the right.
 2. **First Launch**: Because this preview is not notarized by Apple, Gatekeeper may block direct launch. Review the [installation notes](https://coddle.kyun.si/install.html) for detailed first-open instructions.
 3. **Setup Guide**: An initial onboarding guide will walk you through setting your charging plan, background task defaults, and optional permissions. You can adjust your plan at any time from the menu bar.
 
-- **Integrity Verification**: Each [GitHub Release](https://github.com/MrEasonYang/coddle/releases) includes `SHA256SUMS.txt` for checking the downloaded ZIP. In-app updates also verify Sparkle Ed25519 signatures.
+- **Integrity Verification**: Each [GitHub Release](https://github.com/MrEasonYang/coddle/releases) includes `SHA256SUMS.txt` for the update ZIP. Check the manual-install DMG against its [matching checksum](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg.sha256). In-app updates also verify Sparkle Ed25519 signatures.
 - **Software Updates**: Starting with 0.2.0, use **Settings → General → Software Updates → Check for Updates…**, or enable automatic checks. You can also opt into **Automatically download and install updates**; installation normally completes when Coddle quits. Version 0.1.0 has no updater and requires one manual installation of 0.2.0 or later.
 - **Source and Older Downloads**: Current source is in the [GitHub repository](https://github.com/MrEasonYang/coddle), and each Release includes source archives. The website’s existing 0.1.0 app and source downloads are older snapshots and do not update automatically with GitHub Releases.
 

@@ -6,7 +6,7 @@
 
 日常插电办公时自定义充电上限，外出前一键临时充满；挂机下载、代码编译、模型渲染或运行自动化任务时，无需让屏幕常亮耗电。充电作息严格在本地学习，尊重隐私与硬件边界。
 
-[GitHub 源码](https://github.com/MrEasonYang/coddle) · [官网](https://coddle.kyun.si/) · [下载最新 macOS 预览版 (Universal)](https://github.com/MrEasonYang/coddle/releases/latest) · [安装说明](https://coddle.kyun.si/install.html)
+[GitHub 源码](https://github.com/MrEasonYang/coddle) · [官网](https://coddle.kyun.si/) · [下载 macOS DMG 预览版 (Universal)](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg) · [安装说明](https://coddle.kyun.si/install.html)
 
 > [!NOTE]
 > **0.2.1 早期预览版**，支持 Apple Silicon 与 Intel 架构（macOS 13.0+ 部署目标）。采用临时签名（ad-hoc），**未进行 Developer ID 签名与 Apple 公证**。系统原生充电上限依赖 Apple Silicon 及较新 macOS，各项能力在运行时由硬件与系统实际检测决定；首次启动请参考[安装说明](https://coddle.kyun.si/install.html)。
@@ -37,11 +37,11 @@
 
 ## 安装与快速上手
 
-1. **下载应用**：从 [GitHub Releases 下载最新 universal ZIP](https://github.com/MrEasonYang/coddle/releases/latest) 并解压，将 `Coddle.app` 移入系统的「应用程序」（`/Applications`）目录。
+1. **下载应用**：从 [GitHub 下载 Universal DMG](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg)，打开镜像，将左侧 `Coddle` 拖入右侧「应用程序」（`/Applications`）快捷方式。
 2. **首次启动**：由于当前预览版未经 Apple 公证，直接打开可能会受到 macOS 安全拦截，详细操作请查阅[安装说明](https://coddle.kyun.si/install.html)。
 3. **设置向导**：初次启动会展示配置向导，协助你选择充电模式、长任务运行方案以及按需授权。向导完成后即可从菜单栏日常使用。
 
-- **完整性校验**：每个 [GitHub Release](https://github.com/MrEasonYang/coddle/releases) 附带 `SHA256SUMS.txt`，可对照下载 ZIP 的 SHA-256。应用内更新还会验证 Sparkle 的 Ed25519 签名。
+- **完整性校验**：每个 [GitHub Release](https://github.com/MrEasonYang/coddle/releases) 附带 `SHA256SUMS.txt`，用于核对自动更新 ZIP。手动安装的 DMG 使用[同名校验文件](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg.sha256)核对 SHA-256。应用内更新还会验证 Sparkle 的 Ed25519 签名。
 - **软件更新**：0.2.0 起，在「设置 → 通用 → 软件更新」中点击「检查更新…」，或开启「自动检查更新」。还可主动开启「自动下载并安装更新」，安装通常在退出 Coddle 时完成。0.1.0 没有更新器，需先手动安装一次 0.2.0 或更高版本。
 - **源码与旧版下载**：当前源码位于 [GitHub 仓库](https://github.com/MrEasonYang/coddle)，每个 Release 也提供源码归档。官网原有的 0.1.0 应用与源码下载属于旧版快照，不随 GitHub Release 自动更新。
 
@@ -132,7 +132,7 @@
 - **仓库自动部署**：官网通过 Cloudflare Workers and Pages GitHub App 连接 `mreasonyang/coddle`，生产分支为 `main`。Pages 项目 `coddle-site` 从仓库根目录执行 `bash site/scripts/cloudflare-build.sh`，发布目录为 `site/public`；Python 版本由 `.python-version` 固定。推送 `main` 后由 Cloudflare 自动构建和发布，无需配置 Cloudflare API Token。
 - **本地校验与打包**：运行 `bash site/scripts/cloudflare-build.sh`，检查公开资源、下载文件校验值与 JavaScript 语法，并生成 `site/dist/coddle-site.zip` 和文件校验清单。GitHub 的 [官网校验工作流](.github/workflows/site.yml) 执行相同检查并保留提交绑定的产物；部署由 Cloudflare 原生集成完成。
 - **域名与恢复**：`coddle.kyun.si` 绑定 `coddle-site`。旧 Direct Upload 项目 `coddle` 保留既有部署作为恢复来源。需要调整 GitHub App 授权时，只增加所需仓库，保留其他已有授权。
-- **当前版本下载**：应用包、签名更新源和校验文件由 GitHub Release 工作流发布。发布成功后，将官网的版本文案、下载链接、源码标签及校验链接一起更新为该版本；不要提前指向尚不存在的发布资源。
+- **当前版本下载**：官网所有下载按钮均直接指向 GitHub DMG，当前安装包的版本、字节大小和 SHA-256 记录于 `site/public/installer.json`，由 `site/scripts/check-downloads.py` 校验。应用包、签名更新源和校验文件由 GitHub Release 工作流发布。发布成功后，将官网的版本文案、下载链接、源码标签及校验链接一起更新为该版本；不要提前指向尚不存在的发布资源。
 - **历史静态归档维护**：`site/public/downloads` 保留旧版冻结资源，已不作为官网当前版本下载入口。只有维护历史归档时才使用以下命令（请将参数替换为实际输入路径）；此校验器不适用于含 Sparkle 框架符号链接的新版应用包：
   ```bash
   python3 site/scripts/package.py --prepare-downloads \
