@@ -157,6 +157,8 @@ class ReleaseIntegrityTests(unittest.TestCase):
 
     def test_failed_uploaded_byte_check_keeps_release_as_draft(self):
         (self.root / "SHA256SUMS.txt").write_text("fixture")
+        (self.root / "Coddle-0.2.0-universal.dmg").write_bytes(b"fixture disk image")
+        (self.root / "Coddle-0.2.0-universal.dmg.sha256").write_text("fixture checksum")
         calls = []
 
         def fake_gh(*arguments, **_kwargs):
@@ -166,6 +168,12 @@ class ReleaseIntegrityTests(unittest.TestCase):
         with patch.object(release_publish, "gh", side_effect=fake_gh), self.assertRaisesRegex(ValueError, "byte verification"):
             release_publish.publish("v0.2.0", self.root, self.root / "notes")
         self.assertEqual([call[1] for call in calls], ["create", "download"])
+
+    def test_release_without_the_installer_cannot_be_published(self):
+        (self.root / "SHA256SUMS.txt").write_text("fixture")
+        with patch.object(release_publish, "gh") as client, self.assertRaisesRegex(ValueError, "incomplete"):
+            release_publish.publish("v0.2.0", self.root, self.root / "notes")
+        client.assert_not_called()
 
 
 if __name__ == "__main__":

@@ -25,6 +25,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+      - name: install pinned Finder layout tools
+        run: python3 -m pip install --require-hashes -r platforms/macos/Coddle/Assets/Installer/requirements.lock
       - name: validate repository and release logic
         run: |
           python3 tools/check_repository.py
@@ -60,6 +65,14 @@ jobs:
           python3 tools/release.py --tag "$RELEASE_TAG" \
             --package-dir "$RUNNER_TEMP/coddle-package" --sparkle-dir "$SPARKLE_DIR" \
             --output-dir "$RUNNER_TEMP/coddle-release" "${PREVIOUS[@]}"
+      - name: build and verify drag-to-install DMG
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python3 tools/package_dmg.py --archive "$RUNNER_TEMP/coddle-package/Coddle-universal.zip" \
+            --tag "$RELEASE_TAG" --output "$RUNNER_TEMP/coddle-release/Coddle-${RELEASE_TAG#v}-universal.dmg"
+          cd "$RUNNER_TEMP/coddle-release"
+          shasum -a 256 "Coddle-${RELEASE_TAG#v}-universal.dmg" "Coddle-${RELEASE_TAG#v}-universal.dmg.sha256" >> SHA256SUMS.txt
       - name: publish verified GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
@@ -72,7 +85,7 @@ jobs:
 
           A separate approximately 19.5 KiB startup XPC leak was reproduced in macOS AppIntents without Coddle code. Its duplicate connection creation during retry is diagnosed but is not fixed by this release; no private framework patch is included.
 
-          Download the versioned ZIP, extract Coddle.app, and move it to /Applications. This preview is ad-hoc signed and is not Developer ID signed or notarized by Apple. See https://coddle.kyun.si/install.html for first-launch guidance.
+          Download the versioned DMG, open it, and drag Coddle onto Applications. This preview is ad-hoc signed and is not Developer ID signed or notarized by Apple. See https://coddle.kyun.si/install.html for first-launch guidance.
 
           Coddle 0.1.0 users need one manual upgrade to 0.2.0 or later. Subsequent updates use Sparkle, a signed appcast, and a signed archive hosted in GitHub Releases. Use Check for Updates in Settings, enable automatic update checks, or opt into automatic download and installation (normally completed when Coddle quits).
 

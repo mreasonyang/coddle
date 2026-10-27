@@ -1,0 +1,74 @@
+name: Add drag-to-install DMG to an existing release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published stable release to wrap without rebuilding the app
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coddle-release
+  cancel-in-progress: false
+
+jobs:
+  dmg:
+    if: github.repository == 'mreasonyang/coddle' && github.ref == 'refs/heads/main'
+    runs-on: macos-15
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+      - name: Install pinned Finder layout tools
+        run: python3 -m pip install --require-hashes -r platforms/macos/Coddle/Assets/Installer/requirements.lock
+      - name: Download and verify the exact public ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os, re
+          assert re.fullmatch(r'v(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)', os.environ['RELEASE_TAG'])
+          PY
+          mkdir -p build/source build/release
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" > build/source/release.json
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "Coddle-${RELEASE_TAG#v}-universal.zip" --dir build/source
+          python3 - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          release = json.loads(Path('build/source/release.json').read_text())
+          assert not release['draft'] and not release['prerelease']
+          name = f"Coddle-{os.environ['RELEASE_TAG'][1:]}-universal.zip"
+          assert not any(a['name'].endswith('.dmg') for a in release['assets']), 'DMG already exists; never overwrite assets'
+          asset, = [a for a in release['assets'] if a['name'] == name]
+          data = (Path('build/source') / name).read_bytes()
+          assert len(data) == asset['size'] and asset['digest'] == 'sha256:' + hashlib.sha256(data).hexdigest()
+          print('PASS: published ZIP digest and size match GitHub metadata')
+          PY
+      - name: Build and verify the Finder installer
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: python3 tools/package_dmg.py --archive "build/source/Coddle-${RELEASE_TAG#v}-universal.zip" --tag "$RELEASE_TAG" --output "build/release/Coddle-${RELEASE_TAG#v}-universal.dmg"
+      - name: Publish without replacing existing assets and verify uploaded bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          cd build/release
+          installer="Coddle-${RELEASE_TAG#v}-universal.dmg"
+          shasum -a 256 --check "$installer.sha256"
+          gh release upload "$RELEASE_TAG" "$installer" "$installer.sha256" --repo "$GITHUB_REPOSITORY"
+          gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" --pattern "$installer*" --dir downloaded
+          (cd downloaded && shasum -a 256 --check "$installer.sha256")

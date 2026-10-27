@@ -16,7 +16,8 @@ def gh(*arguments, capture=False):
 
 
 def publish(tag, assets_dir, notes_file):
-    names = [f"Coddle-{tag[1:]}-universal.zip", "appcast.xml", "SHA256SUMS.txt"]
+    names = [f"Coddle-{tag[1:]}-universal.zip", f"Coddle-{tag[1:]}-universal.dmg",
+             f"Coddle-{tag[1:]}-universal.dmg.sha256", "appcast.xml", "SHA256SUMS.txt"]
     assets = [assets_dir / name for name in names]
     require(all(asset.is_file() for asset in assets), "Release assets are incomplete")
     # Creation refuses to replace any existing release, including a partially
