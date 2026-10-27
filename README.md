@@ -114,7 +114,8 @@
   git push origin v0.2.1
   ```
   标签必须与应用版本完全一致，且版本号和构建号均高于当前已发布版本。
-- **发布过程**：[Release 工作流](.github/workflows/release.yml) 在 macOS runner 上构建、测试并打包，使用 Sparkle 生成和验证签名更新源，然后上传 `Coddle-VERSION-universal.zip`、`appcast.xml`、`SHA256SUMS.txt`。先创建草稿并下载核对上传字节，全部通过后才发布为 Latest。上传失败的草稿需维护者检查并删除后再重试，不覆盖已发布版本。
+- **发布过程**：[Release 工作流](.github/workflows/release.yml) 在 macOS runner 上构建、测试并打包，使用 Sparkle 生成和验证签名更新源，制作带 Finder 拖拽窗口的 DMG，然后上传 `Coddle-VERSION-universal.dmg`、同名 `.dmg.sha256`、自动更新 ZIP、`appcast.xml` 和 `SHA256SUMS.txt`。先创建草稿并下载核对上传字节，全部通过后才发布为 Latest。上传失败的草稿需维护者检查并删除后再重试，不覆盖已发布版本。
+- **为已有版本补充 DMG**：在 `main` 手动运行 [DMG 工作流](.github/workflows/release-dmg.yml)，输入已公开的稳定版本标签。流程核对 GitHub 原 ZIP 的大小和摘要，保留应用原始字节及签名，只新增 DMG 与校验文件。Finder 布局、Retina 背景和锁定的打包依赖位于 `platforms/macos/Coddle/Assets/Installer`；此流程不需要或读取 Sparkle 私钥。
 - **更新来源**：应用固定读取 [GitHub 最新发布的 appcast](https://github.com/MrEasonYang/coddle/releases/latest/download/appcast.xml)，其中的 ZIP 地址固定到具体版本标签。该流程不使用 GitHub 的 prerelease 标记，以保证 Latest 地址可用；软件成熟度仍为早期预览。
 - **签名与验证范围**：Sparkle 的更新签名验证发布来源和包完整性，不等同于 Developer ID 签名或 Apple 公证。当前包仍为 ad-hoc 签名。自动构建、签名与上传校验不能替代旧版本安装、下载、退出替换、重新启动的完整更新验收；CI 不执行用户设备上的合盖、充电写入或系统组件升级。
 
