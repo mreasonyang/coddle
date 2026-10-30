@@ -1229,9 +1229,9 @@ do {
     expect(handleCommand("set_disablesleep 1", runPmset: ok) == "err lease-required", "helper: legacy unbounded ON is rejected")
     expect(handleCommand("lease_disablesleep 1", runPmset: ok, enableLease: { "ok" }) == "ok", "helper: leased ON dispatched separately")
     expect(handleCommand("lease_disablesleep 0", runPmset: ok) == "err bad-args", "helper: lease opcode accepts only ON")
-    expect(HelperManager.disablesleepCommand(true) == "lease_disablesleep 1", "client: distinct lease opcode prevents unsafe old-daemon fallback")
-    expect(HelperManager.disablesleepCommand(false) == "set_disablesleep 0", "client: OFF remains old-daemon compatible")
-    expect(handleCommand("set_disablesleep 0", runPmset: ok) == "ok", "helper: set_disablesleep 0 -> ok")
+    expect(HelperManager.disablesleepCommand(true) == "lease_sleep 1", "client: state-preserving ON requires new daemon")
+    expect(HelperManager.disablesleepCommand(false) == "release_sleep", "client: OFF cannot reach legacy global reset")
+    expect(handleCommand("set_disablesleep 0", runPmset: ok, releaseLease: { "ok" }) == "ok", "helper: legacy OFF uses scoped release")
     expect(handleCommand("set_disablesleep", runPmset: ok) == "err bad-args",
            "helper: missing arg -> err bad-args")
     expect(handleCommand("set_disablesleep 2", runPmset: ok) == "err bad-args",
@@ -1248,13 +1248,17 @@ do {
 
     // A non-zero pmset status surfaces the code plus the trimmed output.
     let failing: ([String]) -> (status: Int32, output: String) = { _ in (1, "pmset: Operation not permitted\n") }
-    expect(handleCommand("set_disablesleep 0", runPmset: failing) == "err rc=1 pmset: Operation not permitted",
-           "helper: pmset failure -> err rc=<n> <output>")
+    expect(handleCommand("set_powermode 0", runPmset: failing) == "err rc=1 pmset: Operation not permitted",
+           "helper: energy pmset failure -> err rc=<n> <output>")
 
     // Argument mapping and that ping never shells out.
     var seen: [String] = []
     _ = handleCommand("set_disablesleep 0", runPmset: { a in seen = a; return (0, "") })
-    expect(seen == ["-a", "disablesleep", "0"], "helper: set_disablesleep maps to pmset args")
+    expect(seen.isEmpty, "helper: sleep OFF never bypasses ownership controller")
+    expect(handleCommand("release_sleep", runPmset: ok, releaseLease: { "err restore-failed" }) == "err restore-failed", "helper: scoped release failures are preserved")
+    expect(handleCommand("lid_state", runPmset: ok, leaseStatus: { "ok lid=0" }) == "ok lid=0", "helper: state query routes to lease owner")
+    expect(HelperManager.parseLidState("ok lid=0") == false && HelperManager.parseLidState("ok lid=1") == true && HelperManager.parseLidState("ok lid=2") == nil,
+           "client: only exact scoped state replies prove release or application")
 
     var called = false
     _ = handleCommand("ping", runPmset: { _ in called = true; return (0, "") })
@@ -1333,10 +1337,10 @@ do {
         return .failure(HelperError(message: "err unknown-command"))
     }
     let result = HelperManager.setDisablesleep(true, request: oldDaemon)
-    expect(commands == ["lease_disablesleep 1", "set_disablesleep 0"], "client: old daemon receives only lease attempt then safe cleanup OFF")
+    expect(commands == ["lease_sleep 1"], "client: old daemon never receives destructive fallback OFF")
     if case .failure(let error) = result {
         expect(error.message.contains("outdated"), "client: incompatible daemon explains explicit upgrade path")
-        expect(error.message.contains("Sleep reset failed"), "client: failed legacy cleanup stays visible")
+        expect(!error.message.contains("Sleep reset"), "client: incompatible daemon cannot imply a reset was attempted")
     } else { expect(false, "client: old daemon cannot claim leased ON success") }
     var inheritedOn = true
     let legacyStateful: (String) -> Result<String, HelperError> = { command in
@@ -1344,7 +1348,7 @@ do {
         return .failure(HelperError(message: "err unknown-command"))
     }
     _ = HelperManager.setDisablesleep(true, request: legacyStateful)
-    expect(!inheritedOn, "client: incompatible old helper clears inherited permanent ON")
+    expect(inheritedOn, "client: incompatible old helper preserves unknown global ownership")
     let install = HelperManager.installationScript(helper: "/tmp/fixture's helper", sha256: "abcd")
     expect(install.contains("mktemp -d /Library/PrivilegedHelperTools/"), "install: stage is created under root-owned directory")
     expect(install.contains("[ \"$actual\" = 'abcd' ]"), "install: staged bytes must match selected digest")
@@ -1355,10 +1359,9 @@ do {
     expect(HelperManager.powerModeScript(2) == "/usr/bin/pmset -a powermode 2", "energy mode: privilege script only performs requested change")
     expect(HelperManager.powerModeScript(3) == nil, "energy mode: invalid mode has no script")
     let removal = HelperManager.uninstallationScript
-    expect(removal.range(of: "pmset -a disablesleep 0")!.lowerBound < removal.range(of: "launchctl bootout")!.lowerBound,
-           "uninstall: root OFF completes before removing watchdog")
-    expect(removal.range(of: "launchctl bootout")!.lowerBound < removal.range(of: "pmset -a disablesleep 0", options: .backwards)!.lowerBound,
-           "uninstall: final OFF follows stopped daemon so queued ON cannot overtake it")
+    expect(!removal.contains("pmset"), "uninstall: never unconditionally overwrites system power state")
+    expect(removal.range(of: "launchctl bootout")!.lowerBound < removal.range(of: "--restore-sleep")!.lowerBound,
+           "uninstall: recorded recovery follows stopped daemon so queued ON cannot overtake it")
     let start = BoundedIO.now
     let timed = BoundedIO.run("/bin/sleep", arguments: ["3"], timeout: 0.1)
     expect(timed.status == -1 && BoundedIO.now - start < 1, "process: timeout kills and reaps child within bound")
@@ -1806,9 +1809,9 @@ do {
 // 8. HelperCommand: tab and extra whitespace handling.
 do {
     let ok: ([String]) -> (status: Int32, output: String) = { _ in (0, "") }
-    expect(handleCommand("set_disablesleep\t0", runPmset: ok) == "ok",
+    expect(handleCommand("set_disablesleep\t0", runPmset: ok, releaseLease: { "ok" }) == "ok",
            "helper: tab separator accepted")
-    expect(handleCommand("  set_disablesleep   0  ", runPmset: ok) == "ok",
+    expect(handleCommand("  set_disablesleep   0  ", runPmset: ok, releaseLease: { "ok" }) == "ok",
            "helper: leading/trailing and multi-space accepted")
 }
 

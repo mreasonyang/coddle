@@ -81,9 +81,9 @@ jobs:
           cat > "$RUNNER_TEMP/coddle-release-notes.txt" <<'NOTES'
           Universal macOS preview for Apple Silicon and Intel (macOS 13+).
 
-          Fixes a retain cycle when selecting or dismissing the Language and Appearance menus. Menu callbacks and option values are now released after native menu tracking ends. Regression coverage exercises native selection, cancellation, repeated use, and missing anchors.
+          Fixes Keep Awake overwriting an existing macOS disablesleep setting when stopped. The helper now saves the original value before taking control and restores only changes recorded as Coddle's responsibility. Startup, lease expiry, normal exit, crash recovery, and uninstall preserve pre-existing external settings. Lock Screen timeout and password preferences are unchanged.
 
-          A separate approximately 19.5 KiB startup XPC leak was reproduced in macOS AppIntents without Coddle code. Its duplicate connection creation during retry is diagnosed but is not fixed by this release; no private framework patch is included.
+          Existing users of lid-closed Keep Awake must remove and reinstall the optional helper in Settings to enable this fix. The app rejects old sleep-control commands instead of falling back to an unconditional system reset. Settings already overwritten by an older helper cannot be reconstructed automatically.
 
           Download the versioned DMG, open it, and drag Coddle onto Applications. This preview is ad-hoc signed and is not Developer ID signed or notarized by Apple. See https://coddle.kyun.si/install.html for first-launch guidance.
 

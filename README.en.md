@@ -83,6 +83,7 @@ When supported by your hardware, connected to power, not yet full, and with a li
 - **Location and Identifier**: The optional helper executable is installed at `/Library/PrivilegedHelperTools/com.coddle.helper` under the LaunchDaemon label `com.coddle.helper`.
 - **Management**: Under **Settings → Sleep Prevention → System component**, click **Manage** to install or remove the helper via standard macOS administrator prompts. Removing the helper automatically requests stopping closed-lid keep-awake beforehand.
 - **Boundaries**: The helper exists solely for privileged closed-lid sleep control (`pmset -a disablesleep`) and promptless energy mode switching. Installing it does not turn on closed-lid keep-awake, nor does it enable native charge limiting on unsupported hardware.
+- **Sleep state restoration**: Starting with 0.2.2, the helper records the original setting before taking control and restores only Coddle's changes on stop, lease expiry, crash recovery, and uninstall. It never changes Lock Screen timeout or password requirements. Existing users must remove and reinstall the helper in Settings. Settings already overwritten by an older helper cannot be reconstructed automatically.
 </details>
 
 <details>

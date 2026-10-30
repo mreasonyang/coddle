@@ -63,8 +63,15 @@ func runPmset(_ arguments: [String]) -> (status: Int32, output: String) {
         #if CODDLE_HELPER_TESTING
         // Exercise the production socket and command queues with a delayed,
         // observable write. This dependency is absent from release builds.
-        guard let statePath = environment["CODDLE_HELPER_TEST_STATE"],
-              let value = arguments.last else { return (-1, "missing test state") }
+        guard let statePath = environment["CODDLE_HELPER_TEST_STATE"] else { return (-1, "missing test state") }
+        if arguments == ["-g"] {
+            if let failure = environment["CODDLE_HELPER_TEST_READ_FAILURE"], FileManager.default.fileExists(atPath: failure) {
+                return (1, "fixture read failure")
+            }
+            let value = (try? String(contentsOfFile: statePath, encoding: .utf8)) ?? "unknown"
+            return (0, " SleepDisabled\t\t\(value)\n")
+        }
+        guard let value = arguments.last else { return (-1, "missing test value") }
         writeStderr("test pmset begin \(value)")
         if arguments.contains("disablesleep") && value == "1" {
             let delay = Double(environment["CODDLE_HELPER_TEST_ENABLE_DELAY"] ?? "0") ?? 0
@@ -89,70 +96,53 @@ func runPmset(_ arguments: [String]) -> (status: Int32, output: String) {
 
 // MARK: - Renewable global lease
 
-// One current console user's app owns this global system setting. Requests
-// never create permanent ON state. All writes, including retries, share one
-// queue; a timed-out client's delayed ON cannot overtake a later OFF.
+// Serialize writes and durable recovery. No journal means no state to restore.
 let powerWriteQueue = DispatchQueue(label: "com.coddle.helper.power-writes")
 #if CODDLE_HELPER_TESTING
 let leaseDuration = min(30, max(0.2, Double(environment["CODDLE_HELPER_TEST_LEASE_SECONDS"] ?? "30") ?? 30))
+guard let journalPath = environment["CODDLE_HELPER_TEST_JOURNAL"] else { fatal("missing test journal") }
 #else
 let leaseDuration: TimeInterval = 30
+let journalPath = "/var/db/com.coddle.helper.sleep-state"
 #endif
-var leaseDeadline: TimeInterval? = nil
-var needsOff = true
+let sleepLease = SleepLease(journal: journalPath, read: {
+    let result = runPmset(["-g"])
+    guard result.status == 0 else { return nil }
+    for line in result.output.split(separator: "\n") {
+        let parts = line.split(whereSeparator: { $0.isWhitespace })
+        if parts.count == 2, parts[0] == "SleepDisabled", ["0", "1"].contains(parts[1]) {
+            return parts[1] == "1"
+        }
+    }
+    return nil
+}, write: { runPmset(["-a", "disablesleep", $0 ? "1" : "0"]).status == 0 }, now: { BoundedIO.now })
 
-@Sendable
-func disableSleep() -> (status: Int32, output: String) {
-    leaseDeadline = nil
-    let result = runPmset(["-a", "disablesleep", "0"])
-    needsOff = result.status != 0
-    return result
-}
-
-func reconcileLease() {
-    if needsOff || leaseDeadline.map({ BoundedIO.now >= $0 }) == true { _ = disableSleep() }
+// Offline recovery runs only after launchd stops the daemon during uninstall.
+if CommandLine.arguments.dropFirst().contains("--restore-sleep") {
+    let result = sleepLease.release()
+    if result != "ok" { writeStderr(result) }
+    exit(result == "ok" ? 0 : 1)
 }
 
 func handle(_ line: String) -> String {
     // Capture acceptance time before waiting behind earlier power writes.
     let expires = BoundedIO.now + leaseDuration
     return handleCommand(line, runPmset: { arguments in
-        powerWriteQueue.sync {
-            if arguments == ["-a", "disablesleep", "0"] { return disableSleep() }
-            return runPmset(arguments)
-        }
+        powerWriteQueue.sync { runPmset(arguments) }
     }, enableLease: {
-        powerWriteQueue.sync {
-            guard BoundedIO.now < expires else { return "err lease-expired" }
-            if needsOff {
-                guard disableSleep().status == 0 else { return "err cleanup-pending" }
-            }
-            if let active = leaseDeadline, active > BoundedIO.now {
-                leaseDeadline = expires
-                return "ok"
-            }
-            leaseDeadline = expires
-            let result = runPmset(["-a", "disablesleep", "1"])
-            if result.status != 0 {
-                // A timed-out subprocess may already have performed the write.
-                _ = disableSleep()
-                return "err rc=\(result.status) \(result.output.trimmingCharacters(in: .whitespacesAndNewlines))"
-            }
-            if BoundedIO.now >= expires {
-                _ = disableSleep()
-                return "err lease-expired"
-            }
-            return "ok"
-        }
+        powerWriteQueue.sync { sleepLease.acquire(until: expires) }
+    }, releaseLease: {
+        powerWriteQueue.sync { sleepLease.release() }
+    }, leaseStatus: {
+        powerWriteQueue.sync { sleepLease.status() }
     })
 }
 
-// Reset before accepting clients after daemon startup/restart. If the system
-// write fails, the timer retries and ON requests remain blocked until cleanup.
-powerWriteQueue.sync { _ = disableSleep() }
+// Replay only recorded Coddle changes; preserve external ON at startup.
+powerWriteQueue.sync { _ = sleepLease.release() }
 let leaseTimer = DispatchSource.makeTimerSource(queue: powerWriteQueue)
 leaseTimer.schedule(deadline: .now() + 0.2, repeating: 0.2)
-leaseTimer.setEventHandler { reconcileLease() }
+leaseTimer.setEventHandler { sleepLease.reconcile() }
 leaseTimer.resume()
 
 // MARK: - Unix socket plumbing
@@ -216,7 +206,7 @@ for number in [SIGTERM, SIGINT] {
     signal(number, SIG_IGN)
     let source = DispatchSource.makeSignalSource(signal: number, queue: shutdownQueue)
     source.setEventHandler {
-        powerWriteQueue.sync { _ = disableSleep() }
+        powerWriteQueue.sync { _ = sleepLease.release() }
         unlink(socketPath)
         exit(0)
     }

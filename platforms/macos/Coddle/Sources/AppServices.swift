@@ -14,6 +14,7 @@ struct HelperOperations: Sendable {
 
     var filesPresent: @Sendable () -> Bool = { false }
     var inspectCapabilities: @Sendable () -> HelperReadiness = { .absent }
+    /// Readback of Coddle's lease, including confirmation of the global effect.
     var readSleepDisabled: @Sendable () -> Bool? = { nil }
 
     static let live = HelperOperations(
@@ -24,7 +25,7 @@ struct HelperOperations: Sendable {
         waitForHelper: { HelperManager.waitForHelper() },
         uninstall: { HelperManager.uninstall() }, filesPresent: { HelperManager.filesPresent() },
         inspectCapabilities: { HelperManager.inspectCapabilities() },
-        readSleepDisabled: { HelperManager.sleepDisabledFromPmset() })
+        readSleepDisabled: { HelperManager.lidControlActive() })
 }
 
 /// System boundaries for the real AppModel. Tests supply isolated stores and

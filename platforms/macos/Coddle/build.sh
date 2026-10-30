@@ -35,7 +35,7 @@ cp Assets/AppIcon.icns Assets/MenuBarIconTemplate.png Assets/MenuBarIconTemplate
 for lproj in Resources/*.lproj; do
   cp -R "$lproj" "$APP/Contents/Resources/"
 done
-swiftc "${SWIFT_FLAGS[@]}" helper/main.swift Sources/HelperCommand.swift Sources/BoundedIO.swift \
+swiftc "${SWIFT_FLAGS[@]}" helper/main.swift helper/SleepLease.swift Sources/HelperCommand.swift Sources/BoundedIO.swift \
   -o "$BUILD/coddle-helper" -framework Foundation
 cp "$BUILD/coddle-helper" "$APP/Contents/Resources/"
 chmod 755 "$APP/Contents/Resources/coddle-helper"

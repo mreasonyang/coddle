@@ -1404,9 +1404,8 @@ final class AppModel: ObservableObject {
                 let result: Result<Void, HelperError> = installed
                     ? (verifyOnly ? .success(()) : helper.setDisablesleep(want))
                     : .failure(HelperError(message: "error.helperNotRunning"))
-                // An RPC acknowledgement (including lease renewal) does not
-                // establish the current global flag. Read after the write on
-                // the same serialized worker, including when the write fails.
+                // Verify the helper-owned lease and its actual global effect
+                // after the write. External ON is not a failed Coddle release.
                 let actual = shouldConfirm ? helper.readSleepDisabled() : nil
                 return (installed, files, result, actual, shouldConfirm)
             }
@@ -1920,10 +1919,8 @@ final class AppModel: ObservableObject {
         }
     }
 
-    /// Quit hook: release our assertions and make sure we never leave the
-    /// system stuck with `disablesleep=1`. The app owns that flag, so if the app
-    /// is going away nothing should keep the lid-closed behavior — always revert
-    /// to 0 (only when the helper is already installed; never prompts).
+    /// Quit hook: release our assertions and ask an installed helper to restore
+    /// its recorded baseline. Never reset global state owned by another app.
     func shutdownKeepAwake() {
         isShuttingDown = true
         configReloadTask?.cancel()

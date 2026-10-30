@@ -1,7 +1,7 @@
 import Foundation
 
 struct HelperCapabilities: Equatable, Sendable {
-    static let response = "ok protocol=1 version=2 capabilities=lease_disablesleep,set_disablesleep,set_powermode"
+    static let response = "ok protocol=1 version=3 capabilities=lease_disablesleep,set_disablesleep,set_powermode,preserve_sleep,lid_state"
     var protocolVersion: Int
     var componentVersion: Int
     var features: Set<String>
@@ -16,7 +16,7 @@ struct HelperCapabilities: Equatable, Sendable {
             features: Set(parts[3].dropFirst(13).split(separator: ",").map(String.init)))
     }
     func supports(lid: Bool, energy: Bool) -> Bool {
-        (!lid || features.isSuperset(of: ["lease_disablesleep", "set_disablesleep"])) &&
+        (!lid || features.isSuperset(of: ["preserve_sleep", "lid_state"])) &&
         (!energy || features.contains("set_powermode"))
     }
 }
@@ -28,22 +28,25 @@ enum HelperReadiness: Equatable, Sendable {
 
 /// Pure command dispatch for the privileged helper (see `helper/main.swift`).
 ///
-/// The one side-effecting operation — `pmset -a disablesleep` — is injected so
-/// the dispatch can be unit-tested without root or a real power-management
-/// change; the daemon passes its own `runPmset`. Arguments are whitelisted to
-/// the literal `0` / `1`, so there is no arbitrary command execution.
+/// Energy writes and sleep lease operations are injected independently so the
+/// dispatcher cannot bypass durable ownership when releasing sleep control.
 ///
 /// Returns `ok` on success or `err <msg>` on any failure:
 ///   * `ping`                 -> `ok`
-///   * `set_disablesleep 0`   -> safe legacy OFF
+///   * `set_disablesleep 0`   -> release only a recorded Coddle lease
 ///   * `lease_disablesleep 1` -> renewable ON; rejects legacy unbounded ON
+///   * `lease_sleep 1`        -> state-preserving ON (requires helper v3)
+///   * `release_sleep`        -> restore this helper's recorded baseline
+///   * `lid_state`            -> verified Coddle lease, excluding external ON
 ///   * bad arity/argument     -> `err bad-args`
 ///   * empty line             -> `err empty-command`
 ///   * anything else          -> `err unknown-command`
 func handleCommand(
     _ line: String,
     runPmset: ([String]) -> (status: Int32, output: String),
-    enableLease: (() -> String)? = nil
+    enableLease: (() -> String)? = nil,
+    releaseLease: (() -> String)? = nil,
+    leaseStatus: (() -> String)? = nil
 ) -> String {
     let parts = line
         .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -65,11 +68,15 @@ func handleCommand(
             return "err bad-args"
         }
         guard parts[1] == "0" else { return "err lease-required" }
-        let (status, output) = runPmset(["-a", "disablesleep", "0"])
-        let trimmed = output.trimmingCharacters(in: .whitespacesAndNewlines)
-        return status == 0 ? "ok" : "err rc=\(status) \(trimmed)"
+        return releaseLease?() ?? "err lease-required"
 
-    case "lease_disablesleep":
+    case "release_sleep":
+        guard parts.count == 1 else { return "err bad-args" }
+        return releaseLease?() ?? "err lease-required"
+    case "lid_state":
+        guard parts.count == 1 else { return "err bad-args" }
+        return leaseStatus?() ?? "err state-unconfirmed"
+    case "lease_sleep", "lease_disablesleep":
         guard parts.count == 2, parts[1] == "1" else { return "err bad-args" }
         return enableLease?() ?? "err lease-required"
 

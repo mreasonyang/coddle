@@ -142,7 +142,7 @@ case "$1" in
     count=$(/bin/cat "$CODDLE_TEST_POWER_COUNT")
     count=$((count + 1))
     /usr/bin/printf '%s' "$count" > "$CODDLE_TEST_POWER_COUNT"
-    if [ "$CODDLE_TEST_MODE" = fail_final_once ] && [ "$count" -eq 2 ]; then exit 1; fi
+    if [ "$CODDLE_TEST_MODE" = fail_final_once ] && [ "$count" -eq 1 ]; then exit 1; fi
     ;;
   bootout)
     if [ "$CODDLE_TEST_MODE" = bootout_failure ] || [ "$CODDLE_TEST_MODE" = probe_failure ]; then exit 5; fi
@@ -162,8 +162,11 @@ esac
             assert generated.returncode == 0, generated.stderr
             removal = generated.stdout
             fixture_cmd = shlex.quote(str(fixture))
-            assert removal.count('/usr/bin/pmset -a disablesleep 0') == 2
-            removal = removal.replace('/usr/bin/pmset -a disablesleep 0', fixture_cmd + ' power')
+            assert 'pmset' not in removal and removal.count('--restore-sleep') == 1
+            removal = removal.replace("'/Library/PrivilegedHelperTools/com.coddle.helper' --restore-sleep", fixture_cmd + ' power')
+            journal = work / "sleep-journal"
+            journal.touch()
+            removal = removal.replace('/var/db/com.coddle.helper.sleep-state', shlex.quote(str(journal)))
             removal = removal.replace('/bin/launchctl bootout system/com.coddle.helper', fixture_cmd + ' bootout')
             removal = removal.replace('/bin/launchctl print system/com.coddle.helper', fixture_cmd + ' print')
             remove_lines = [line for line in removal.splitlines() if line.startswith('/bin/rm -f ')]
@@ -182,18 +185,26 @@ esac
             first = run(["/bin/bash", "-x", "-c", removal], env=environment)
             assert first.returncode == 1 and service_state.read_text() == "absent" and not removed.exists()
             retry = run(["/bin/bash", "-x", "-c", removal], env=environment)
-            assert retry.returncode == 0 and removed.read_text() == "yes" and power_count.read_text() == "4"
+            assert retry.returncode == 0 and removed.read_text() == "yes" and power_count.read_text() == "2"
             (args.output_dir / "helper-uninstall-retry.log").write_text(first.stderr + retry.stderr)
-            log("PASS: uninstall final-OFF failure preserves files; retry confirms service absent, performs final OFF, then removes files")
+            log("PASS: uninstall recovery failure preserves files; retry confirms service absent, restores recorded state, then removes files")
             for mode in ("bootout_failure", "probe_failure"):
                 removed.unlink(missing_ok=True)
                 power_count.write_text("0")
                 service_state.write_text("active")
                 environment["CODDLE_TEST_MODE"] = mode
                 failed = run(["/bin/bash", "-x", "-c", removal], env=environment)
-                assert failed.returncode == 5 and not removed.exists() and power_count.read_text() == "1"
+                assert failed.returncode == 5 and not removed.exists() and power_count.read_text() == "0"
                 (args.output_dir / f"helper-uninstall-{mode}.log").write_text(failed.stderr)
             log("PASS: genuine bootout failure or inconclusive service probe never proceeds to deletion")
+            journal.unlink()
+            environment["CODDLE_TEST_MODE"] = "normal"
+            removed.unlink(missing_ok=True)
+            power_count.write_text("0")
+            service_state.write_text("active")
+            unowned = run(["/bin/bash", "-x", "-c", removal], env=environment)
+            assert unowned.returncode == 0 and removed.exists() and power_count.read_text() == "0"
+            log("PASS: uninstall without ownership record performs no power writes")
         log("PASS: scoped installer-integrity and substituted uninstall control flow; no administrator installation, payload execution, launchctl or power writes")
     except BaseException:
         log(traceback.format_exc())

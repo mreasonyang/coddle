@@ -37,7 +37,7 @@ def main():
             build = subprocess.run([
                 "swiftc", "-O", "-D", "CODDLE_HELPER_TESTING",
                 "-module-cache-path", str(args.output_dir / "module-cache-helper"),
-                str(source / "helper/main.swift"), str(source / "Sources/HelperCommand.swift"),
+                str(source / "helper/main.swift"), str(source / "helper/SleepLease.swift"), str(source / "Sources/HelperCommand.swift"),
                 str(source / "Sources/BoundedIO.swift"),
                 "-o", str(binary), "-framework", "Foundation",
             ], capture_output=True, text=True, timeout=60)
@@ -51,6 +51,8 @@ def main():
             log("PASS: test binary cannot reach real pmset without isolated flags")
             state = work / "state"
             failure = work / "fail-off"
+            journal = work / "journal"
+            read_failure = work / "fail-read"
             # UNIX sockaddr_un is short on macOS; keep socket path independent
             # from the artifact directory's intentionally long retained path.
             socket_directory = tempfile.TemporaryDirectory(prefix="ch-", dir="/tmp")
@@ -58,13 +60,16 @@ def main():
             index = 0
 
             @contextmanager
-            def server(ttl=1.2, delay=0):
+            def server(ttl=1.2, delay=0, initial="0", reset=True):
                 nonlocal index
                 index += 1
                 path.unlink(missing_ok=True)
-                state.write_text("1")  # daemon startup must reset stale ON
+                if reset:
+                    state.write_text(initial)
+                    journal.unlink(missing_ok=True)
                 env = dict(clean_env, CODDLE_HELPER_ALLOW_NONROOT="1", CODDLE_HELPER_DRYRUN="1",
-                           CODDLE_HELPER_TEST_STATE=str(state), CODDLE_HELPER_TEST_LEASE_SECONDS=str(ttl),
+                           CODDLE_HELPER_TEST_STATE=str(state), CODDLE_HELPER_TEST_JOURNAL=str(journal),
+                           CODDLE_HELPER_TEST_READ_FAILURE=str(read_failure), CODDLE_HELPER_TEST_LEASE_SECONDS=str(ttl),
                            CODDLE_HELPER_TEST_ENABLE_DELAY=str(delay), CODDLE_HELPER_TEST_OFF_FAILURE=str(failure))
                 with (args.output_dir / f"helper-server-{index}.log").open("w") as stderr:
                     process = subprocess.Popen([str(binary), str(path)], env=env,
@@ -160,8 +165,9 @@ def main():
                 process.kill()
                 process.wait(timeout=5)
                 assert state.read_text() == "1"
-            with server():
+            with server(reset=False):
                 assert state.read_text() == "0"
+                assert not journal.exists()
                 log("PASS: daemon restart clears state remaining after SIGKILL")
             with server(ttl=0.7, delay=1.1):
                 assert call("lease_disablesleep 1") == "err lease-expired"
@@ -186,6 +192,85 @@ def main():
                 assert call("lease_disablesleep 1") == "ok"
             assert state.read_text() == "0"
             log("PASS: graceful daemon termination resets OFF")
+            for ending in ("release_sleep", "set_disablesleep 0", "expiry", "exit", "crash"):
+                with server(initial="1") as process:
+                    assert state.read_text() == "1" and not journal.exists()
+                    assert call("release_sleep") == "ok"
+                    assert call("lid_state") == "ok lid=0"
+                    assert call("lease_sleep 1") == "ok"
+                    assert journal.read_text() == "v1 baseline=1\n"
+                    assert call("lid_state") == "ok lid=1"
+                    if ending in ("release_sleep", "set_disablesleep 0"):
+                        assert call(ending) == "ok"
+                        assert call(ending) == "ok"
+                        assert call("lid_state") == "ok lid=0"
+                        assert not journal.exists()
+                    elif ending == "expiry":
+                        eventually(lambda: not journal.exists())
+                        assert call("lid_state") == "ok lid=0"
+                    elif ending == "crash":
+                        process.kill(); process.wait(timeout=5)
+                assert state.read_text() == "1", ending
+                if ending == "crash":
+                    with server(reset=False):
+                        assert state.read_text() == "1" and not journal.exists()
+                        assert call("lid_state") == "ok lid=0"
+                log(f"PASS: existing external ON preserved across {ending}")
+            with server():
+                state.write_text("unknown")
+                assert call("lease_sleep 1") == "err state-unavailable"
+                assert not journal.exists()
+                state.write_text("0")
+                read_failure.touch()
+                assert call("lease_sleep 1") == "err state-unavailable"
+                read_failure.unlink()
+                assert call("lease_sleep 1") == "ok"
+                failure.touch()
+                assert call("release_sleep") == "err restore-failed"
+                assert call("lid_state") == "err state-unconfirmed" and journal.exists()
+                failure.unlink()
+                eventually(lambda: not journal.exists())
+                assert state.read_text() == "0"
+                log("PASS: unknown baseline refuses ON; failed recovery stays pending and retries")
+            with server():
+                journal.symlink_to(state)
+                assert call("lease_sleep 1") in ("err journal-unavailable", "err cleanup-pending")
+                assert call("release_sleep") == "err journal-unavailable"
+                assert state.read_text() == "0"
+                journal.unlink()
+                eventually(lambda: call("release_sleep") == "ok")
+                journal.write_text("corrupt")
+                journal.chmod(0o600)
+                assert call("lease_sleep 1") in ("err journal-unavailable", "err cleanup-pending")
+                assert state.read_text() == "0"
+                journal.unlink()
+                log("PASS: symlink and corrupt ownership records never cause power writes")
+            with server(initial="1"):
+                assert call("lease_sleep 1") == "ok"
+                state.write_text("0")
+                assert call("release_sleep") == "ok" and state.read_text() == "0"
+                log("PASS: external OFF during our lease is preserved")
+            with server() as process:
+                assert call("lease_sleep 1") == "ok"
+                assert journal.stat().st_mode & 0o777 == 0o600
+                process.kill(); process.wait(timeout=5)
+            offline_env = dict(clean_env, CODDLE_HELPER_ALLOW_NONROOT="1", CODDLE_HELPER_DRYRUN="1",
+                               CODDLE_HELPER_TEST_STATE=str(state), CODDLE_HELPER_TEST_JOURNAL=str(journal))
+            restored = subprocess.run([str(binary), "--restore-sleep"], env=offline_env,
+                                      capture_output=True, timeout=5)
+            assert restored.returncode == 0 and state.read_text() == "0" and not journal.exists()
+            state.write_text("1")
+            unowned = subprocess.run([str(binary), "--restore-sleep"], env=offline_env,
+                                     capture_output=True, timeout=5)
+            assert unowned.returncode == 0 and state.read_text() == "1"
+            log("PASS: offline uninstall recovery restores owned state; absent journal preserves external ON")
+            with server():
+                journal.write_text("v1 baseline=0\n")
+                journal.chmod(0o666)
+                assert call("lease_sleep 1") in ("err journal-unavailable", "err cleanup-pending")
+                assert state.read_text() == "0"
+                journal.unlink()
+                log("PASS: untrusted journal permissions refuse acquisition without writing ON")
             socket_directory.cleanup()
         log("PASS: helper socket regression; no installation or real power writes")
     except BaseException:

@@ -182,20 +182,29 @@ enum HelperManager {
     /// Daemon leases expire after 30 seconds; renew independently of UI refresh.
     static let leaseRenewalInterval: TimeInterval = 10
 
+    /// Scoped readback: an external global ON must not look like our lease.
+    static func parseLidState(_ response: String) -> Bool? {
+        switch response {
+        case "ok lid=0": return false
+        case "ok lid=1": return true
+        default: return nil
+        }
+    }
+
+    static func lidControlActive() -> Bool? {
+        guard case .success(let response) = call("lid_state") else { return nil }
+        return parseLidState(response)
+    }
+
     static func disablesleepCommand(_ on: Bool) -> String {
-        on ? "lease_disablesleep 1" : "set_disablesleep 0"
+        on ? "lease_sleep 1" : "release_sleep"
     }
 
     @discardableResult
     static func setDisablesleep(_ on: Bool, request: (String) -> Result<String, HelperError> = call) -> Result<Void, HelperError> {
         let result = request(disablesleepCommand(on))
-        if on, case .failure(let error) = result, error.message == "err unknown-command" {
+        if case .failure(let error) = result, error.message == "err unknown-command" {
             let upgrade = "Installed helper is outdated. Remove and install it again in Settings."
-            // An old app may have left an unbounded ON behind. Compatibility
-            // rejection must also clear that inherited state through safe OFF.
-            if case .failure(let resetError) = request(disablesleepCommand(false)) {
-                return .failure(HelperError(message: upgrade + " Sleep reset failed: " + resetError.message))
-            }
             return .failure(HelperError(message: upgrade))
         }
         return result.map { _ in () }
@@ -258,6 +267,7 @@ enum HelperManager {
         }
         let reply = line.trimmingCharacters(in: .whitespacesAndNewlines)
         if command == "capabilities", HelperCapabilities.parse(reply) != nil { return .success(reply) }
+        if command == "lid_state", parseLidState(reply) != nil { return .success(reply) }
         return parseReply(reply).map { _ in reply }
     }
 
@@ -313,7 +323,6 @@ enum HelperManager {
 
     static let uninstallationScript = """
     set -eu
-    /usr/bin/pmset -a disablesleep 0
     if /bin/launchctl bootout system/\(label); then
         :
     else
@@ -325,7 +334,9 @@ enum HelperManager {
             [ "$coddle_print_status" -eq 113 ] || exit "$coddle_bootout_status"
         fi
     fi
-    /usr/bin/pmset -a disablesleep 0
+    if [ -e /var/db/com.coddle.helper.sleep-state ] || [ -L /var/db/com.coddle.helper.sleep-state ]; then
+        \(shellQuote(installedBinary)) --restore-sleep
+    fi
     /bin/rm -f \(shellQuote(installedPlist)) \(shellQuote(installedBinary)) \(shellQuote(socketPath))
     """
 
