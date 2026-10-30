@@ -1,15 +1,15 @@
 {
   "product": "Coddle",
-  "version": "0.2.1",
-  "build": "3",
+  "version": "0.2.2",
+  "build": "4",
   "architecture": "universal",
   "minimumMacOS": "13.0",
-  "download": "https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg",
-  "checksum": "https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg.sha256",
-  "bytes": 5115592,
-  "sha256": "9da52027fb92829c9f7b49ff44abfe799147594b018ecefc0e58d1df9ab43f47",
+  "download": "https://github.com/mreasonyang/coddle/releases/download/v0.2.2/Coddle-0.2.2-universal.dmg",
+  "checksum": "https://github.com/mreasonyang/coddle/releases/download/v0.2.2/Coddle-0.2.2-universal.dmg.sha256",
+  "bytes": 5137331,
+  "sha256": "0a319837fbcf76ed26a5a842b474b9edfd2430b00c93abde2927d45c4ae4f8ef",
   "signing": "ad-hoc",
   "developerIdSigned": false,
   "appleNotarized": false,
-  "workflow": "https://github.com/mreasonyang/coddle/actions/runs/40488995345"
+  "workflow": "https://github.com/mreasonyang/coddle/actions/runs/41037108377"
 }

@@ -26,7 +26,7 @@
       faqFiveQ: '智能充电会使用云端 AI 或上传数据吗？', faqFiveA: '它通过本机按小时记录的插电样本和简单规则工作，不使用在线 AI 模型。需要积累足够记录才能识别习惯，预测并非保证。配置和充电习惯均保存在你的 Mac 上。',
       faqSixQ: 'Coddle 开源吗？', faqSixA: '是的。Coddle 采用 MIT 许可证。你可以在 GitHub 查看此版本对应的源码，了解实现或自行构建。', sourceLink: '获取源码 ↗',
       downloadEyebrow: '准备好开始了吗？', downloadTitle: '给你的 Mac，', downloadEm: '更合适的节奏', downloadDescription: '试用免费开源的预览版，管理充电上限、本地智能充电与长任务防休眠。',
-      downloadButton: '下载 DMG 预览版', downloadMeta: 'v0.2.1 预览版 · Universal（Apple Silicon / Intel）· 最低构建目标 macOS 13', downloadCaveat: '采用 ad-hoc 临时签名，未经 Apple 公证，macOS 可能阻止打开；请先阅读安装指引。限充支持因机型和系统而异。',
+      downloadButton: '下载 DMG 预览版', downloadMeta: 'v0.2.2 预览版 · Universal（Apple Silicon / Intel）· 最低构建目标 macOS 13', downloadCaveat: '采用 ad-hoc 临时签名，未经 Apple 公证，macOS 可能阻止打开；请先阅读安装指引。限充支持因机型和系统而异。',
       installLink: '安装指引 ↗', sourceShort: '源代码 ↗', checksumLink: 'SHA-256 校验值 ↗', footerNote: '给你的 Mac，一点点照顾', privacyLink: '隐私说明', footerSource: '开放源代码 ↗'
     }
   };

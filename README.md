@@ -6,10 +6,10 @@
 
 日常插电办公时自定义充电上限，外出前一键临时充满；挂机下载、代码编译、模型渲染或运行自动化任务时，无需让屏幕常亮耗电。充电作息严格在本地学习，尊重隐私与硬件边界。
 
-[GitHub 源码](https://github.com/MrEasonYang/coddle) · [官网](https://coddle.kyun.si/) · [下载 macOS DMG 预览版 (Universal)](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg) · [安装说明](https://coddle.kyun.si/install.html)
+[GitHub 源码](https://github.com/MrEasonYang/coddle) · [官网](https://coddle.kyun.si/) · [下载 macOS DMG 预览版 (Universal)](https://github.com/mreasonyang/coddle/releases/download/v0.2.2/Coddle-0.2.2-universal.dmg) · [安装说明](https://coddle.kyun.si/install.html)
 
 > [!NOTE]
-> **0.2.1 早期预览版**，支持 Apple Silicon 与 Intel 架构（macOS 13.0+ 部署目标）。采用临时签名（ad-hoc），**未进行 Developer ID 签名与 Apple 公证**。系统原生充电上限依赖 Apple Silicon 及较新 macOS，各项能力在运行时由硬件与系统实际检测决定；首次启动请参考[安装说明](https://coddle.kyun.si/install.html)。
+> **0.2.2 早期预览版**，支持 Apple Silicon 与 Intel 架构（macOS 13.0+ 部署目标）。采用临时签名（ad-hoc），**未进行 Developer ID 签名与 Apple 公证**。系统原生充电上限依赖 Apple Silicon 及较新 macOS，各项能力在运行时由硬件与系统实际检测决定；首次启动请参考[安装说明](https://coddle.kyun.si/install.html)。
 
 <img src="site/public/assets/coddle-panel.png" width="340" alt="Coddle 界面：电池状态、功率流向、手动限充、智能充电、电源模式与防止休眠">
 
@@ -37,11 +37,11 @@
 
 ## 安装与快速上手
 
-1. **下载应用**：从 [GitHub 下载 Universal DMG](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg)，打开镜像，将左侧 `Coddle` 拖入右侧「应用程序」（`/Applications`）快捷方式。
+1. **下载应用**：从 [GitHub 下载 Universal DMG](https://github.com/mreasonyang/coddle/releases/download/v0.2.2/Coddle-0.2.2-universal.dmg)，打开镜像，将左侧 `Coddle` 拖入右侧「应用程序」（`/Applications`）快捷方式。
 2. **首次启动**：由于当前预览版未经 Apple 公证，直接打开可能会受到 macOS 安全拦截，详细操作请查阅[安装说明](https://coddle.kyun.si/install.html)。
 3. **设置向导**：初次启动会展示配置向导，协助你选择充电模式、长任务运行方案以及按需授权。向导完成后即可从菜单栏日常使用。
 
-- **完整性校验**：每个 [GitHub Release](https://github.com/MrEasonYang/coddle/releases) 附带 `SHA256SUMS.txt`，用于核对自动更新 ZIP。手动安装的 DMG 使用[同名校验文件](https://github.com/mreasonyang/coddle/releases/download/v0.2.1/Coddle-0.2.1-universal.dmg.sha256)核对 SHA-256。应用内更新还会验证 Sparkle 的 Ed25519 签名。
+- **完整性校验**：每个 [GitHub Release](https://github.com/MrEasonYang/coddle/releases) 附带 `SHA256SUMS.txt`，用于核对自动更新 ZIP。手动安装的 DMG 使用[同名校验文件](https://github.com/mreasonyang/coddle/releases/download/v0.2.2/Coddle-0.2.2-universal.dmg.sha256)核对 SHA-256。应用内更新还会验证 Sparkle 的 Ed25519 签名。
 - **软件更新**：0.2.0 起，在「设置 → 通用 → 软件更新」中点击「检查更新…」，或开启「自动检查更新」。还可主动开启「自动下载并安装更新」，安装通常在退出 Coddle 时完成。0.1.0 没有更新器，需先手动安装一次 0.2.0 或更高版本。
 - **源码与旧版下载**：当前源码位于 [GitHub 仓库](https://github.com/MrEasonYang/coddle)，每个 Release 也提供源码归档。官网原有的 0.1.0 应用与源码下载属于旧版快照，不随 GitHub Release 自动更新。
 
@@ -109,10 +109,10 @@
 
 - **持续集成**：[CI 工作流](.github/workflows/ci.yml) 在 `main` 推送和 Pull Request 时执行构建、测试与双架构打包，产出带 SHA-256 的 Universal ZIP。CI artifact 用于构建检查；应用更新读取正式 GitHub Release。
 - **发布前准备**：`Info.plist` 中的 `SUPublicEDKey` 必须与仓库 Actions secret `SPARKLE_PRIVATE_KEY` 配对。维护者应安全保存该发布密钥，不要写入仓库、构建产物或日志，也不要在每次发布时更换。缺少密钥或签名不匹配会阻止发布。
-- **发布版本**：更新 `platforms/macos/Coddle/Info.plist` 的 `CFBundleShortVersionString`（例如 `0.2.1`）和严格递增的整数 `CFBundleVersion`（例如 `3`），提交至 `main`，再推送对应标签：
+- **发布版本**：更新 `platforms/macos/Coddle/Info.plist` 的 `CFBundleShortVersionString`（例如 `0.2.2`）和严格递增的整数 `CFBundleVersion`（例如 `4`），提交至 `main`，再推送对应标签：
   ```bash
-  git tag v0.2.1
-  git push origin v0.2.1
+  git tag v0.2.2
+  git push origin v0.2.2
   ```
   标签必须与应用版本完全一致，且版本号和构建号均高于当前已发布版本。
 - **发布过程**：[Release 工作流](.github/workflows/release.yml) 在 macOS runner 上构建、测试并打包，使用 Sparkle 生成和验证签名更新源，制作带 Finder 拖拽窗口的 DMG，然后上传 `Coddle-VERSION-universal.dmg`、同名 `.dmg.sha256`、自动更新 ZIP、`appcast.xml` 和 `SHA256SUMS.txt`。先创建草稿并下载核对上传字节，全部通过后才发布为 Latest。上传失败的草稿需维护者检查并删除后再重试，不覆盖已发布版本。
